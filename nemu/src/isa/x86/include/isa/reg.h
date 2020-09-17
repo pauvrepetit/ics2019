@@ -33,7 +33,7 @@ typedef struct {
   // vaddr_t pc;
 
   union {
-    struct {
+    union {
       uint32_t _32;
       uint16_t _16;
       uint8_t _8[2];
@@ -44,32 +44,32 @@ typedef struct {
         uint32_t eax;
         uint16_t ax;
         struct {
-          uint8_t ah;
           uint8_t al;
+          uint8_t ah;
         };
       };
       union {
         uint32_t ecx;
         uint16_t cx;
         struct {
-          uint8_t ch;
           uint8_t cl;
+          uint8_t ch;
         };
       };
       union {
         uint32_t edx;
         uint16_t dx;
         struct {
-          uint8_t dh;
           uint8_t dl;
+          uint8_t dh;
         };
       };
       union {
         uint32_t ebx;
         uint16_t bx;
         struct {
-          uint8_t bh;
           uint8_t bl;
+          uint8_t bh;
         };
       };
       rtlreg_t esp, ebp, esi, edi;
