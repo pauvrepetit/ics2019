@@ -8,6 +8,9 @@
 #include <readline/history.h>
 
 void cpu_exec(uint64_t);
+// 这里需要添加函数声明来避免编译过程中出现的warning
+vaddr_t exec_once(void);
+void isa_reg_display();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -74,7 +77,7 @@ static int cmd_x(char *args) {
   sscanf(args, "%d%x", &n, &addr);
   for(int i = 0; i < n; i++) {
     if (i % 4 == 0) {
-      printf("0x%08x:\t", addr);
+      printf("0x%08x:\t", addr+16*i);
     }
     if (i % 4 != 3) {
       printf("%02x%02x%02x%02x\t", pmem[addr+4*i], pmem[addr+1+4*i], pmem[addr+2+4*i], pmem[addr+3+4*i]);
