@@ -40,7 +40,14 @@ void reg_test() {
   assert(pc_sample == cpu.pc);
 }
 
+/* 针对特定的指令集，需要使用不同的方式输出寄存器信息 */
 void isa_reg_display() {
+  printf("EAX\t\t%08x\t\t%10d\t\t\t\tEBX\t\t%08x\t\t%10d\n", cpu.eax, cpu.eax, cpu.ebx, cpu.ebx);
+  printf("ECX\t\t%08x\t\t%10d\t\t\t\tEDX\t\t%08x\t\t%10d\n", cpu.ecx, cpu.ecx, cpu.edx, cpu.edx);
+  printf("ESP\t\t%08x\t\t%10d\t\t\t\tEBP\t\t%08x\t\t%10d\n", cpu.esp, cpu.esp, cpu.ebp, cpu.ebp);
+  printf("ESI\t\t%08x\t\t%10d\t\t\t\tEDI\t\t%08x\t\t%10d\n", cpu.esi, cpu.esi, cpu.edi, cpu.edi);
+  printf("EIP\t\t%08x\n", cpu.pc);
+  return;
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {

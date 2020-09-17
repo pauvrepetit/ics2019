@@ -38,6 +38,54 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+/* 单步执行，参数中可能存在一个数字，表示执行的步数 */
+static int cmd_si(char *args) {
+  int steps;
+  if (args == NULL) {
+    exec_once();
+  } else {
+    steps = atoi(args);
+    for (int i = 0; i < steps; i++) {
+      exec_once();
+    }
+  }
+  return 0;
+}
+
+/* 打印程序信息，参数中必定存在一个字母，r or w，分别表示寄存器信息和监视点信息 */
+static int cmd_info(char *args) {
+  if(args == NULL) {
+    printf("Error: info need an argument, r or w\n");
+  } else if (args[0] == 'r') {
+    // 打印寄存器信息
+    isa_reg_display();
+  } else if (args[0] == 'w') {
+    // 打印监视点信息
+    printf("Have Not Finished\n");
+    // todo: print watchpoint infomation
+  } else {
+    printf("Error: info's argument can only be r or w\n");
+  }
+  return 0;
+}
+
+static int cmd_x(char *args) {
+  int n, addr;
+  sscanf(args, "%d%x", &n, &addr);
+  for(int i = 0; i < n; i++) {
+    if (i % 4 == 0) {
+      printf("0x%08x:\t", addr);
+    }
+    if (i % 4 != 3) {
+      printf("%02x%02x%02x%02x\t", pmem[addr+4*i], pmem[addr+1+4*i], pmem[addr+2+4*i], pmem[addr+3+4*i]);
+    } else {
+      printf("%02x%02x%02x%02x\n", pmem[addr+4*i], pmem[addr+1+4*i], pmem[addr+2+4*i], pmem[addr+3+4*i]);
+    }
+  }
+  putchar('\n');
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -48,6 +96,9 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
+  { "si", "Step N instructions, default one instruction", cmd_si },
+  { "info", "Print program status. 'r' for register, 'w' for watchpoint", cmd_info },
+  { "x", "Scan memory. Use 'x N EXPR' to print 4*N bytes from addr EXPR", cmd_x },
 
 };
 
