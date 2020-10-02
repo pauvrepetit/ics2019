@@ -216,6 +216,11 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
     }
   }
 
+  if (top == 0) {
+    *success = false;
+    printf("unexpected %c at position %d\n%s\n%*.s^\n", e[0].type, e[0].loc, e_str, e[0].loc, "");
+  }
+
   if (!*success) {
     free(tokenStack);
     return 0;
