@@ -89,6 +89,17 @@ static int cmd_x(char *args) {
   return 0;
 }
 
+static int cmd_p(char *args) {
+  bool success;
+  int res = expr(args, &success);
+  if (success) {
+    printf("%d\n", res);
+  } else {
+    printf("expr error\n");
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -102,7 +113,7 @@ static struct {
   { "si", "Step N instructions, default one instruction", cmd_si },
   { "info", "Print program status. 'r' for register, 'w' for watchpoint", cmd_info },
   { "x", "Scan memory. Use 'x N EXPR' to print 4*N bytes from addr EXPR", cmd_x },
-
+  { "p", "Calculate expr.", cmd_p},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
