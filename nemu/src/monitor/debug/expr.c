@@ -264,6 +264,12 @@ uint32_t cal_expr(int l, int r, bool *success, char *e) {
         end++;
       }
 
+      if (start == end) {
+        // 不允许空括号
+        *success = false;
+        printf("NULL brackets is not allowed at position %d\n%s\n%*.s^\n", tokens[end-1].loc, e, tokens[end-1].loc, "");
+        return 0;
+      }
       bool s;
       int result = cal_expr(start, end, &s, e);
       if (!s) {
