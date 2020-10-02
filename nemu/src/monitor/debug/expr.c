@@ -204,7 +204,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
     } else if (t.type == '*' || t.type == '/') {
       if (calFlag) {
         *success = false;
-        printf("unexpected %c at position %d\n%s\n%*.s^\n", t.loc, e_str, t.loc, "");
+        printf("unexpected %c at position %d\n%s\n%*.s^\n", t.type, t.loc, e_str, t.loc, "");
         break;
       } else {
         tokenStack[top++].type = t.type;
