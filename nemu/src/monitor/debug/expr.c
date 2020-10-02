@@ -59,6 +59,7 @@ void init_regex() {
 typedef struct token {
   int type;
   char str[32];
+  int loc;
 } Token;
 
 static Token tokens[32] __attribute__((used)) = {};
@@ -113,6 +114,7 @@ static bool make_token(char *e) {
             }
             tokens[nr_token].type = TK_NUM;
             memcpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].loc = position - substr_len;
             nr_token++;
             break;
           case TK_NOTYPE:
@@ -121,6 +123,7 @@ static bool make_token(char *e) {
           default:
             tokens[nr_token].type = rules[i].token_type;
             memset(tokens[nr_token].str, 0, sizeof(char) * 32);
+            tokens[nr_token].loc = position - substr_len;
             nr_token++;
             break;
         }
@@ -141,9 +144,10 @@ static bool make_token(char *e) {
 typedef struct numToken {
   int type;
   int num;
+  int loc;
 } numToken;
 
-uint32_t basic_cal_expr(numToken *e, int len, bool *success) {
+uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
   numToken *tokenStack = (numToken *)malloc(sizeof(numToken) * len);
   int top = 0;
 
@@ -185,6 +189,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success) {
         continue;
       } else {
         tokenStack[top++].type = '+';
+        tokenStack[top++].loc = t.loc;
         calFlag = true;
       }
     } else if (t.type == '-') {
@@ -193,14 +198,17 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success) {
         continue;
       } else {
         tokenStack[top++].type = '-';
+        tokenStack[top++].loc = t.loc;
         calFlag = true;
       }
     } else if (t.type == '*' || t.type == '/') {
       if (calFlag) {
         *success = false;
+        printf("unexpected %c at position %d\n%s\n%*.s^\n", t.loc, e_str, t.loc, "");
         break;
       } else {
         tokenStack[top++].type = t.type;
+        tokenStack[top++].loc = t.loc;
         calFlag = true;
       }
     } else {
@@ -227,7 +235,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success) {
 }
 
 
-uint32_t cal_expr(int l, int r, bool *success) {
+uint32_t cal_expr(int l, int r, bool *success, char *e) {
   numToken tokenStack[32];
   int top = 0;
   for(int i = l; i < r; i++) {
@@ -240,6 +248,7 @@ uint32_t cal_expr(int l, int r, bool *success) {
         if (end == r) {
           // 括号不匹配
           *success = false;
+          printf("no matching right bracket at position %d\n%s\n%*.s^\n", newToken.loc, e, newToken.loc, "");
           return 0;
         }
         // 找到匹配的右括号
@@ -256,7 +265,7 @@ uint32_t cal_expr(int l, int r, bool *success) {
       }
 
       bool s;
-      int result = cal_expr(start, end, &s);
+      int result = cal_expr(start, end, &s, e);
       if (!s) {
         *success = false;
         return 0;
@@ -269,9 +278,11 @@ uint32_t cal_expr(int l, int r, bool *success) {
 
     } else if(newToken.type == ')') {
       *success = false;
+      printf("unexpected right bracket at position %d\n%s\n%*.s^\n", newToken.loc, e, newToken.loc, "");
       return 0;
     } else {
       tokenStack[top].type = newToken.type;
+      tokenStack[top].loc = newToken.loc;
       if (newToken.type == TK_NUM) {
         tokenStack[top].num = atoi(newToken.str);
       }
@@ -280,7 +291,7 @@ uint32_t cal_expr(int l, int r, bool *success) {
   }
 
   // 至此，tokenStack中仅包含加减乘除和数字 去除了所有的括号
-  return basic_cal_expr(tokenStack, top, success);
+  return basic_cal_expr(tokenStack, top, success, e);
 }
 
 uint32_t expr(char *e, bool *success) {
@@ -292,5 +303,5 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   /* 在tokens数组中保存了表达式中所有的token，下面通过处理这些token进行计算 */
   // TODO();
-  return cal_expr(0, nr_token, success);
+  return cal_expr(0, nr_token, success, e);
 }
