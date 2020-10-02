@@ -161,6 +161,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
     if (t.type == TK_NUM) {
       if (calFlag == false) {
         *success = false;
+        printf("need a math operator at position %d\n%s\n%*.s^\n", t.loc, e_str, t.loc, "");
         break;
       }
       tokenStack[top].type = TK_NUM;
