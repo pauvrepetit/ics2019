@@ -166,6 +166,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
       }
       tokenStack[top].type = TK_NUM;
       tokenStack[top].num = negFlag * t.num;
+      tokenStack[top].loc = t.loc;
       top++;
       calFlag = false;
       negFlag = 1;
@@ -284,6 +285,7 @@ uint32_t cal_expr(int l, int r, bool *success, char *e) {
       } else {
         tokenStack[top].type = TK_NUM;
         tokenStack[top].num = result;
+        tokenStack[top].loc = tokens[start-1].loc;
         top++;
         i = end;
       }
