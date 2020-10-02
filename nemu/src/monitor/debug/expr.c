@@ -188,7 +188,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
       if (calFlag) {
         continue;
       } else {
-        tokenStack[top++].type = '+';
+        tokenStack[top].type = '+';
         tokenStack[top++].loc = t.loc;
         calFlag = true;
       }
@@ -197,7 +197,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
         negFlag = -negFlag;
         continue;
       } else {
-        tokenStack[top++].type = '-';
+        tokenStack[top].type = '-';
         tokenStack[top++].loc = t.loc;
         calFlag = true;
       }
@@ -207,7 +207,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
         printf("unexpected %c at position %d\n%s\n%*.s^\n", t.type, t.loc, e_str, t.loc, "");
         break;
       } else {
-        tokenStack[top++].type = t.type;
+        tokenStack[top].type = t.type;
         tokenStack[top++].loc = t.loc;
         calFlag = true;
       }
