@@ -79,7 +79,7 @@ static bool make_token(char *e) {
     /* Try all rules one by one. */
     /* 当字符串e还没有到终止符的时候，我们逐个尝试所有的正则表达式模式，当匹配成功时，我们保存该token，将e指针移动到下一个待匹配的位置 */
     for (i = 0; i < NR_REGEX; i ++) {
-      printf("try rule %d on \"%s\"\n", i, e+position);
+      // printf("try rule %d on \"%s\"\n", i, e+position);
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
