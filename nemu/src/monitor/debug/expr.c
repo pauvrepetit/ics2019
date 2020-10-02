@@ -32,7 +32,7 @@ static struct rule {
   {"/", '/'},
   {"\\(", '('},
   {"\\)", ')'},
-  {"\d+", TK_NUM}
+  {"\\d+", TK_NUM}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -238,7 +238,7 @@ uint32_t cal_expr(int l, int r, bool *success) {
       while (true) {
         if (end == r) {
           // 括号不匹配
-          *success == false;
+          *success = false;
           return 0;
         }
         // 找到匹配的右括号
@@ -257,7 +257,7 @@ uint32_t cal_expr(int l, int r, bool *success) {
       bool s;
       int result = cal_expr(start, end, &s);
       if (!s) {
-        *success == false;
+        *success = false;
         return 0;
       } else {
         tokenStack[top].type = TK_NUM;
