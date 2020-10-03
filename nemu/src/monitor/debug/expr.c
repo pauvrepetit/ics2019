@@ -454,27 +454,8 @@ uint32_t cal_expr(int l, int r, bool *success, char *e) {
         tokenStack[top].num = strtol(newToken.str, NULL, 16);
       } else if (newToken.type == TK_REG) {
         // 在这里读出寄存器的内容，将TK_REG直接转换成TK_NUM
-        tokenStack[top].type = TK_NUM;
-        if (strcmp(newToken.str, "$EAX") == 0) {
-          tokenStack[top].num = cpu.eax;
-        } else if (strcmp(newToken.str, "$EBX") == 0) {
-          tokenStack[top].num = cpu.ebx;
-        } else if (strcmp(newToken.str, "$ECX") == 0) {
-          tokenStack[top].num = cpu.ecx;
-        } else if (strcmp(newToken.str, "$EDX") == 0) {
-          tokenStack[top].num = cpu.edx;
-        } else if (strcmp(newToken.str, "$ESI") == 0) {
-          tokenStack[top].num = cpu.esi;
-        } else if (strcmp(newToken.str, "$EDI") == 0) {
-          tokenStack[top].num = cpu.edi;
-        } else if (strcmp(newToken.str, "$ESP") == 0) {
-          tokenStack[top].num = cpu.esp;
-        } else if (strcmp(newToken.str, "$EBP") == 0) {
-          tokenStack[top].num = cpu.ebp;
-        } else if (strcmp(newToken.str, "$EPC") == 0) {
-          tokenStack[top].num = cpu.pc;
-        } else {
-          *success = false;
+        tokenStack[top].num = isa_reg_str2val(newToken.str, success);
+        if (!*success) {
           printf("unknown register at position %d\n%s\n%*.s^\n", newToken.loc, e, newToken.loc, "");
           return 0;
         }
