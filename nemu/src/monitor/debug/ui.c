@@ -104,7 +104,8 @@ static int cmd_w(char *args) {
   uint32_t res = expr(args, &success);
   if (success) {
     WP *w = new_wp();
-    w->expr = args;
+    // w->expr = args;
+    strcpy(w->expr, args);
     w->exprValue = res;
     printf("watchpoint %d: %s\n", w->NO, args);
   } else {
