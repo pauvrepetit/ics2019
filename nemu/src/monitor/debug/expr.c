@@ -66,7 +66,9 @@ typedef struct token {
   int loc;
 } Token;
 
-static Token tokens[32] __attribute__((used)) = {};
+#define TOKENS_LIMIT 64
+// const static int TOKENS_LIMIT = 64;
+static Token tokens[TOKENS_LIMIT] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -77,7 +79,7 @@ static bool make_token(char *e) {
   nr_token = 0;
 
   while (e[position] != '\0') {
-    if (nr_token == 32) {
+    if (nr_token == TOKENS_LIMIT) {
       printf("Error, too many tokens in the expr\n");
       return false;
     }
@@ -391,7 +393,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
 
 
 uint32_t cal_expr(int l, int r, bool *success, char *e) {
-  numToken tokenStack[32];
+  numToken tokenStack[TOKENS_LIMIT];
   int top = 0;
   for(int i = l; i < r; i++) {
     Token newToken = tokens[i];
