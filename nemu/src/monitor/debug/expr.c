@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_NEQ, TK_AND, TK_REG
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_HEX_NUM, TK_NEQ, TK_AND, TK_REG
 
   /* TODO: Add more token types */
 
@@ -33,6 +33,7 @@ static struct rule {
   {"\\(", '('},
   {"\\)", ')'},
   {"[0-9]+", TK_NUM},
+  {"0x[0-9a-fA-F]+", TK_HEX_NUM},
   {"!=", TK_NEQ},
   {"&&", TK_AND},
   {"\\$...", TK_REG}
@@ -455,6 +456,9 @@ uint32_t cal_expr(int l, int r, bool *success, char *e) {
       tokenStack[top].loc = newToken.loc;
       if (newToken.type == TK_NUM) {
         tokenStack[top].num = atoi(newToken.str);
+      } else if (newToken.type == TK_HEX_NUM) {
+        tokenStack[top].type = TK_NUM;
+        tokenStack[top].num = strtol(newToken.str, NULL, 16);
       } else if (newToken.type == TK_REG) {
         // 在这里读出寄存器的内容，将TK_REG直接转换成TK_NUM
         tokenStack[top].type = TK_NUM;
