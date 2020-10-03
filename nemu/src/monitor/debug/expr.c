@@ -32,8 +32,8 @@ static struct rule {
   {"/", '/'},
   {"\\(", '('},
   {"\\)", ')'},
-  {"[0-9]+", TK_NUM},
   {"0x[0-9a-fA-F]+", TK_HEX_NUM},
+  {"[0-9]+", TK_NUM},
   {"!=", TK_NEQ},
   {"&&", TK_AND},
   {"\\$...", TK_REG}
