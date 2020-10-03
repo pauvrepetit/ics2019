@@ -68,6 +68,8 @@ void cpu_exec(uint64_t n) {
   if(wp != NULL) {
     nemu_state.state = NEMU_STOP;
     printf("watchpoint %d: %s\n", wp->NO, wp->expr);
+    bool s;
+    printf("$EPC: %08x\n", isa_reg_str2val("$EPC", &s));
   }
 
 #endif

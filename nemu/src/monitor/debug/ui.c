@@ -52,6 +52,8 @@ static int cmd_si(char *args) {
       exec_once();
     }
   }
+  bool s;
+  printf("$EPC: %08x\n", isa_reg_str2val("$EPC", &s));
   return 0;
 }
 
