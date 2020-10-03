@@ -457,6 +457,7 @@ uint32_t cal_expr(int l, int r, bool *success, char *e) {
       } else if (newToken.type == TK_REG) {
         // 在这里读出寄存器的内容，将TK_REG直接转换成TK_NUM
         tokenStack[top].num = isa_reg_str2val(newToken.str, success);
+        tokenStack[top].type = TK_NUM;
         if (!*success) {
           printf("unknown register at position %d\n%s\n%*.s^\n", newToken.loc, e, newToken.loc, "");
           return 0;
