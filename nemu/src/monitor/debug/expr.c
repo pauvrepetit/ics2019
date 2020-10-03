@@ -100,23 +100,14 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           case TK_NUM:
-            if (substr_len > 32) {
-              printf("number is too large\n");
-              printf("%s\n", e);
-              for(int i = 0; i < position - substr_len; i++) {
-                putchar(' ');
-              }
-              putchar('^');
-              putchar('\n');
-
-              for(int i = 0; i < position - substr_len; i++) {
-                putchar(' ');
-              }
-              putchar('|');
-              putchar('\n');
-              return false;
-            }
             tokens[nr_token].type = TK_NUM;
+            memset(tokens[nr_token].str, 0, sizeof(char) * 32);
+            memcpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].loc = position - substr_len;
+            nr_token++;
+            break;
+          case TK_HEX_NUM:
+            tokens[nr_token].type = TK_HEX_NUM;
             memset(tokens[nr_token].str, 0, sizeof(char) * 32);
             memcpy(tokens[nr_token].str, substr_start, substr_len);
             tokens[nr_token].loc = position - substr_len;
