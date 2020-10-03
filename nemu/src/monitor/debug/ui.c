@@ -55,7 +55,6 @@ static int cmd_si(char *args) {
   return 0;
 }
 
-extern WP *head;
 /* 打印程序信息，参数中必定存在一个字母，r or w，分别表示寄存器信息和监视点信息 */
 static int cmd_info(char *args) {
   if(args == NULL) {
@@ -65,14 +64,7 @@ static int cmd_info(char *args) {
     isa_reg_display();
   } else if (args[0] == 'w') {
     // 打印监视点信息
-    WP *t = head;
-    if (t == NULL) {
-      printf("No watchpoint\n");
-    }
-    while (t != NULL) {
-      printf("watchpoint %d: %s\n", t->NO, t->expr);
-      t = t->next;
-    }
+    showWatchpoint();
   } else {
     printf("Error: info's argument can only be r or w\n");
   }

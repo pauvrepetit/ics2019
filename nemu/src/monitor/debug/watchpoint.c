@@ -53,3 +53,29 @@ void free_wp(int wp_no) {
     }
   }
 }
+
+void showWatchpoint(void) {
+  WP *t = head;
+  if (t == NULL) {
+    printf("No watchpoint\n");
+  }
+  while (t != NULL) {
+    printf("watchpoint %d: %s\n", t->NO, t->expr);
+    t = t->next;
+  }
+}
+
+WP* checkWatchpoint(void) {
+  WP *t = head;
+  uint32_t value;
+  while (t != NULL) {
+    bool success;
+    value = expr(t->expr, &success);
+    if (value != t->exprValue) {
+      t->exprValue = value;
+      return t;
+    }
+    t = t->next;
+  }
+  return NULL;
+}
