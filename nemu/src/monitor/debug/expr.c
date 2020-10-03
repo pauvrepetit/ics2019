@@ -478,7 +478,9 @@ uint32_t cal_expr(int l, int r, bool *success, char *e) {
         } else if (strcmp(newToken.str, "$EPC") == 0) {
           tokenStack[top].num = cpu.pc;
         } else {
+          *success = false;
           printf("unknown register at position %d\n%s\n%*.s^\n", newToken.loc, e, newToken.loc, "");
+          return 0;
         }
       }
       top++;
