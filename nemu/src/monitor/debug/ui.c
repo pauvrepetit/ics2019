@@ -55,6 +55,7 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+extern WP *head;
 /* 打印程序信息，参数中必定存在一个字母，r or w，分别表示寄存器信息和监视点信息 */
 static int cmd_info(char *args) {
   if(args == NULL) {
@@ -64,8 +65,14 @@ static int cmd_info(char *args) {
     isa_reg_display();
   } else if (args[0] == 'w') {
     // 打印监视点信息
-    printf("Have Not Finished\n");
-    // todo: print watchpoint infomation
+    WP *t = head;
+    if (t == NULL) {
+      printf("No watchpoint\n");
+    }
+    while (t != NULL) {
+      printf("watchpoint %d: %s\n", t->NO, t->expr);
+      t = t->next;
+    }
   } else {
     printf("Error: info's argument can only be r or w\n");
   }
@@ -100,6 +107,30 @@ static int cmd_p(char *args) {
   return 0;
 }
 
+static int cmd_w(char *args) {
+  bool success;
+  uint32_t res = expr(args, &success);
+  if (success) {
+    WP *w = new_wp();
+    w->expr = args;
+    w->exprValue = res;
+    printf("watchpoint %d: %s\n", w->NO, args);
+  } else {
+    printf("expr error, watchpoint not added\n");
+  }
+  return 0;
+}
+
+static int cmd_d(char *args) {
+  int wp_no = atoi(args);
+  if (args[0] != '0' && wp_no == '0') {
+    printf("argument error\n");
+  } else {
+    free_wp(wp_no);
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -114,6 +145,8 @@ static struct {
   { "info", "Print program status. 'r' for register, 'w' for watchpoint", cmd_info },
   { "x", "Scan memory. Use 'x N EXPR' to print 4*N bytes from addr EXPR", cmd_x },
   { "p", "Calculate expr.", cmd_p},
+  { "w", "Add a watchpoint.", cmd_w},
+  { "d", "Delete a watchpoint.", cmd_d},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
