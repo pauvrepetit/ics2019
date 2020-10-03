@@ -223,8 +223,6 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
         } else if (tokenStack[top-2].type == '/') {
           tokenStack[top-3].num = tokenStack[top-3].num / tokenStack[top-1].num;
           top -= 2;
-        } else {
-          continue;
         }
       }
     } else {
