@@ -230,6 +230,7 @@ uint32_t basic_cal_expr(numToken *e, int len, bool *success, char *e_str) {
     } else {
       tokenStack[top].type = getOp(e, len, success, &offset, e_str);
       tokenStack[top].loc = e->loc;
+      top++;
     }
     if (!*success) {
       free(tokenStack);
