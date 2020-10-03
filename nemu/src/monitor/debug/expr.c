@@ -35,7 +35,7 @@ static struct rule {
   {"[0-9]+", TK_NUM},
   {"!=", TK_NEQ},
   {"&&", TK_AND},
-  {"$...", TK_REG}
+  {"\\$...", TK_REG}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
