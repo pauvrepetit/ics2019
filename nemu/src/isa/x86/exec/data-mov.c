@@ -6,7 +6,10 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-  TODO();
+  // TODO();
+  id_dest->val -= 4;
+  operand_write(id_dest, &id_src->val);
+  rtl_sr(R_ESP, &id_dest->val, 4);
 
   print_asm_template1(push);
 }

@@ -79,5 +79,6 @@ make_DHelper(out_a2I);
 make_DHelper(out_a2dx);
 
 make_DHelper(call_rel32);
+make_DHelper(push_r32);
 
 #endif

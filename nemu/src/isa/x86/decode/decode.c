@@ -313,3 +313,8 @@ make_DHelper(call_rel32) {
   decinfo_set_jmp(true);
   decinfo.jmp_pc = id_src->imm + *pc;
 }
+
+make_DHelper(push_r32) {
+  decode_op_r(pc, id_src, true);
+  rtl_lr(&id_dest->val, R_ESP, 4);
+}
