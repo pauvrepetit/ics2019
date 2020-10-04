@@ -78,4 +78,6 @@ make_DHelper(in_dx2a);
 make_DHelper(out_a2I);
 make_DHelper(out_a2dx);
 
+make_DHelper(call_rel32);
+
 #endif

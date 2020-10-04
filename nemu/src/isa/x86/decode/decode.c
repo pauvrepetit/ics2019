@@ -305,3 +305,11 @@ void operand_write(Operand *op, rtlreg_t* src) {
   else if (op->type == OP_TYPE_MEM) { rtl_sm(&op->addr, src, op->width); }
   else { assert(0); }
 }
+
+
+make_DHelper(call_rel32) {
+  id_src->width = 4;
+  decode_op_I(pc, id_src, true);
+  id_src2->type = OP_TYPE_IMM;
+  id_src2->reg = pc;
+}
