@@ -332,5 +332,9 @@ make_DHelper(push_imm32) {
 }
 
 make_DHelper(sub) {
-  printf("hit here\n");
+  printf("hit here sub\n");
+}
+
+make_DHelper(xor) {
+  printf("hit here xor\n");
 }
