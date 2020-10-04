@@ -330,3 +330,7 @@ make_DHelper(push_imm32) {
   decode_op_I(pc, id_src, true);
   rtl_lr(&id_dest->val, R_ESP, 4);
 }
+
+make_DHelper(sub) {
+  printf("hit here\n");
+}
