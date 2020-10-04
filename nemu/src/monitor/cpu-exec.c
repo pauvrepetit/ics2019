@@ -4,6 +4,8 @@
 
 #include "monitor/expr.h"
 
+uint32_t isa_reg_str2val(const char *s, bool *success);
+
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.

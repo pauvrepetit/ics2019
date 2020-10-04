@@ -11,6 +11,7 @@ void cpu_exec(uint64_t);
 // 这里需要添加函数声明来避免编译过程中出现的warning
 vaddr_t exec_once(void);
 void isa_reg_display();
+uint32_t isa_reg_str2val(const char *s, bool *success);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
