@@ -29,7 +29,8 @@ make_EHelper(call) {
   // TODO();
   rtl_lr(&id_dest->addr, R_ESP, 4);
   rtl_subi(&id_dest->addr, &id_dest->addr, 4);
-  operand_write(id_dest, &decinfo.jmp_pc);
+  rtl_sm(&id_dest->addr, &decinfo.jmp_pc, 4);
+  // operand_write(id_dest, &decinfo.jmp_pc);
   rtl_j(decinfo.jmp_pc);
 
   print_asm("call %x", decinfo.jmp_pc);
