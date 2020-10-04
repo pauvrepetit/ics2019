@@ -337,8 +337,8 @@ make_DHelper(sub) {
 
 make_DHelper(xor) {
   // printf("hit here xor\n");
-  decode_op_rm(pc, id_dest, true, NULL, false);
-  decode_op_rm(pc, id_src, true, NULL, false);
+  decode_op_rm(pc, id_dest, true, id_src, true);
+  // decode_op_rm(pc, id_src, true, NULL, false);
   // decode_op_r(pc, id_dest, true);
   // decode_op_r(pc, id_src, true);
 }
