@@ -37,8 +37,8 @@ make_EHelper(call) {
 
 make_EHelper(ret) {
   // TODO();
-  rtl_lr(t0, R_ESP, 4);
-  rtl_lm(t0, t0, 4);
+  rtl_lr(&t0, R_ESP, 4);
+  rtl_lm(&t0, &t0, 4);
   decinfo_set_jmp(true);
   decinfo.jmp_pc = t0;
   rtl_j(decinfo.jmp_pc);
