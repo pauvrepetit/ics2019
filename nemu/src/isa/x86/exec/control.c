@@ -29,7 +29,7 @@ make_EHelper(call) {
   // TODO();
   rtl_lr(&t0, R_ESP, 4);
   rtl_subi(&t0, &t0, 4);
-  rtl_sm(&t0, &decinfo.jmp_pc, 4);
+  rtl_sm(&t0, pc, 4);
   rtl_sr(R_ESP, &t0, 4);
   // operand_write(id_dest, &decinfo.jmp_pc);
   rtl_j(decinfo.jmp_pc);
