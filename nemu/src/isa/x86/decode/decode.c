@@ -33,9 +33,9 @@ static inline make_DopHelper(SI) {
    */
   // TODO();
   op->simm = instr_fetch(pc, op->width);
-  if (op->width == 1 && (op->simm >= (1 << 4))) {
+  if (op->width == 1 && (op->simm >= (1 << 7))) {
       op->simm |= 0xffffff00;
-  } else if (op->width == 2 && op->simm >= (1 << 8)) {
+  } else if (op->width == 2 && op->simm >= (1 << 15)) {
     op->simm |= 0xffff0000;
   }
 
