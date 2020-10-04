@@ -83,5 +83,6 @@ make_DHelper(push_r32);
 make_DHelper(push_imm32);
 make_DHelper(sub);
 make_DHelper(xor);
+make_DHelper(ret);
 
 #endif
