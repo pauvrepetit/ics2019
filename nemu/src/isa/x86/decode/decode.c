@@ -311,5 +311,5 @@ make_DHelper(call_rel32) {
   id_src->width = 4;
   decode_op_I(pc, id_src, true);
   decinfo_set_jmp(true);
-  decinfo.jmp_pc = id_src->imm + (uint32_t)pc;
+  decinfo.jmp_pc = id_src->imm + *pc;
 }
