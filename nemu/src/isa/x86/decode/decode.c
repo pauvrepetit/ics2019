@@ -310,6 +310,6 @@ void operand_write(Operand *op, rtlreg_t* src) {
 make_DHelper(call_rel32) {
   id_src->width = 4;
   decode_op_I(pc, id_src, true);
-  id_src2->type = OP_TYPE_IMM;
-  id_src2->reg = pc;
+  decinfo_set_jmp(true);
+  decinfo.jmp_pc = id_src->imm + (uint32_t)pc;
 }
