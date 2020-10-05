@@ -349,3 +349,7 @@ make_DHelper(xor) {
 make_DHelper(ret) {
   printf("hit here ret\n");
 }
+
+make_DHelper(lea) {
+  decode_op_rm(pc, id_dest, false, id_src, true);
+}
