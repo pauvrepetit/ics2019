@@ -126,6 +126,8 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
     break;
   case 4:
     t0 = *result == 0 ? 1 : 0;
+    printf("updateZF, t0 is %d\n", t0);
+    break;
   default:
     break;
   }
