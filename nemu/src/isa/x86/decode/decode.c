@@ -361,3 +361,7 @@ make_DHelper(and) {
 make_DHelper(push_m) {
   printf("hit here push_m\n");
 }
+
+make_DHelper(add_01) {
+  decode_op_rm(pc, id_src, true, id_dest, true);
+}
