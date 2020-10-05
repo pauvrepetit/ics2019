@@ -9,6 +9,7 @@ make_EHelper(test) {
   t0 = 0;
   rtl_set_CF(&t0);
   rtl_set_OF(&t0);
+  printf("finish test, now ZF is %d\n", cpu.eflags.ZF);
 
   print_asm_template2(test);
 }
