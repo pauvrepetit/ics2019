@@ -40,7 +40,12 @@ make_EHelper(leave) {
   printf("now t0 is %x\n", t0);
   printf("now ESP is %x\n", cpu.esp);
   rtl_pop(&t0);
+  printf("now t0 is %x\n", t0);
+  printf("now ESP is %x\n", cpu.esp);
   rtl_sr(R_EBP, &t0, 4);
+  printf("now t0 is %x\n", t0);
+  printf("now EBP is %x\n", cpu.ebp);
+  printf("now ESP is %x\n", cpu.esp);
 
   print_asm("leave");
 }
