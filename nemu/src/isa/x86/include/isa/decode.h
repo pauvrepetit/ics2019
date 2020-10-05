@@ -84,7 +84,7 @@ make_DHelper(push_imm32);
 make_DHelper(sub);
 make_DHelper(xor);
 make_DHelper(ret);
-make_DHelper(lea);
+// make_DHelper(lea);
 make_DHelper(and);
 make_DHelper(push_m);
 
