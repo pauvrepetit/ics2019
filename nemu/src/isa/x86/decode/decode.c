@@ -381,3 +381,7 @@ make_DHelper(jcc) {
   id_dest->val += *pc;
   decinfo.jmp_pc = id_dest->val;
 }
+
+make_DHelper(leave) {
+  printf("hit here leave\n");
+}
