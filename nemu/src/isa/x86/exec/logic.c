@@ -6,8 +6,10 @@ make_EHelper(test) {
   rtl_and(&t0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t0);
   rtl_update_ZFSF(&t0, id_dest->width);
+  printf("finish updateZFSF, now ZF is %d\n", cpu.eflags.ZF);
   t0 = 0;
   rtl_set_CF(&t0);
+  printf("finish setCF, now ZF is %d\n", cpu.eflags.ZF);
   rtl_set_OF(&t0);
   printf("finish test, now ZF is %d\n", cpu.eflags.ZF);
 
