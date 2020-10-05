@@ -61,7 +61,7 @@ static inline void rtl_is_sub_overflow(rtlreg_t* dest,
     default:
     break;
   }
-  TODO();
+  // TODO();
 }
 
 static inline void rtl_is_sub_carry(rtlreg_t* dest,
