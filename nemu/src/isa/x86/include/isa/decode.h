@@ -88,5 +88,5 @@ make_DHelper(ret);
 make_DHelper(and);
 make_DHelper(push_m);
 make_DHelper(add_01);
-
+make_DHelper(cmp_3b);
 #endif

@@ -10,14 +10,22 @@ make_EHelper(add) {
 
 make_EHelper(sub) {
   // TODO();
-  rtl_sub(&id_dest->val, &id_dest->val, &id_src->val);
-  operand_write(id_dest, &id_dest->val);
+  rtl_sub(&t1, &id_dest->val, &id_src->val);
+
+  rtl_update_ZFSF(&t1, id_dest->width);
+  rtl_is_sub_carry(&t0, &id_dest->val, &id_src->val);
+  rtl_set_CF(&t0);
+  rtl_is_sub_overflow(&t0, &t1, &id_dest->val, &id_src->val, id_dest->width);
+  rtl_set_OF(&t0);
+
+  operand_write(id_dest, &t1);
 
   print_asm_template2(sub);
 }
 
 make_EHelper(cmp) {
   TODO();
+  
 
   print_asm_template2(cmp);
 }
