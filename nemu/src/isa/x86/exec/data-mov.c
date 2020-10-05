@@ -33,8 +33,12 @@ make_EHelper(popa) {
 make_EHelper(leave) {
   // TODO();
   // rtl_pop(&t0);
+  printf("now EBP is %x\n", cpu.ebp);
   rtl_lr(&t0, R_EBP, 4);
+  printf("now t0 is %x\n", t0);
   rtl_sr(R_ESP, &t0, 4);
+  printf("now t0 is %x\n", t0);
+  printf("now ESP is %x\n", cpu.esp);
   rtl_pop(&t0);
   rtl_sr(R_EBP, &t0, 4);
 
