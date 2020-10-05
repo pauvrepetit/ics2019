@@ -77,7 +77,7 @@ typedef struct {
   };
 
   vaddr_t pc;
-  union {
+  struct {
     uint8_t CF      :1;
     uint8_t pad1    :5;
     uint8_t ZF      :1;
