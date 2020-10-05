@@ -11,10 +11,10 @@ make_EHelper(push) {
   // // operand_write(id_dest, &id_src->val);
   // rtl_sm(&id_dest->val, &id_src->val, 4);
   // rtl_sr(R_ESP, &id_dest->val, 4);
-  rtl_lr(t0, R_ESP, 4);
-  rtl_subi(t0, t0, 4);
-  rtl_sm(t0, &id_dest->val, 4);
-  rtl_sr(R_ESP, t0, 4);
+  rtl_lr(&t0, R_ESP, 4);
+  rtl_subi(&t0, &t0, 4);
+  rtl_sm(&t0, &id_dest->val, 4);
+  rtl_sr(R_ESP, &t0, 4);
 
   print_asm_template1(push);
 }
