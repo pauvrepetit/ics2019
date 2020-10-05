@@ -50,7 +50,7 @@ static inline void rtl_is_sub_overflow(rtlreg_t* dest,
   // dest <- is_overflow(src1 - src2)
   switch (width) {
     case 1:
-      *dest = *dest = ((*src1 & 0x80) == 0 && (*src2 & 0x80) != 0 && (*res & 0x80) != 0) || ((*src1 & 0x80) != 0 && (*src2 & 0x80) == 0 && (*res & 0x80) == 0) ? 1 : 0;
+      *dest = ((*src1 & 0x80) == 0 && (*src2 & 0x80) != 0 && (*res & 0x80) != 0) || ((*src1 & 0x80) != 0 && (*src2 & 0x80) == 0 && (*res & 0x80) == 0) ? 1 : 0;
       break;
     case 2:
       *dest = ((*src1 & 0x8000) == 0 && (*src2 & 0x8000) != 0 && (*res & 0x8000) != 0) || ((*src1 & 0x8000) != 0 && (*src2 & 0x8000) == 0 && (*res & 0x8000) == 0) ? 1 : 0;
@@ -107,7 +107,7 @@ static inline void rtl_is_add_carry(rtlreg_t* dest,
     cpu.eflags.f = *src; \
   } \
   static inline void concat(rtl_get_, f) (rtlreg_t* dest) { \
-    return cpu.eflags.f; \
+    *dest = cpu.eflags.f; \
   }
 
 make_rtl_setget_eflags(CF)
