@@ -126,19 +126,16 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
     break;
   case 4:
     t0 = *result == 0 ? 1 : 0;
-    printf("updateZF, t0 is %d\n", t0);
     break;
   default:
     break;
   }
   rtl_set_ZF(&t0);
-  printf("set ZF finish, now ZF is %d\n", cpu.eflags.ZF);
   // TODO();
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
-  printf("start to set SF, now ZF is %d\n", cpu.eflags.ZF);
   switch(width) {
   case 1:
     t0 = (*result & 0x80) != 0 ? 1 : 0;
@@ -152,17 +149,13 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   default:
     break;
   }
-  printf("start to set SF, now ZF is %d\n", cpu.eflags.ZF);
   rtl_set_SF(&t0);
-  printf("start SF down, now ZF is %d\n", cpu.eflags.ZF);
   // TODO();
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
   rtl_update_ZF(result, width);
-  printf("set ZF finish, now ZF is %d\n", cpu.eflags.ZF);
   rtl_update_SF(result, width);
-  printf("set SF finish, now ZF is %d\n", cpu.eflags.ZF);
 }
 
 #endif
