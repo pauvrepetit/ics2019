@@ -77,7 +77,20 @@ typedef struct {
   };
 
   vaddr_t pc;
-  rtlreg_t eflags;
+  union {
+    uint8_t CF      :1;
+    uint8_t pad1    :5;
+    uint8_t ZF      :1;
+    uint8_t SF      :1;
+    uint8_t pad2    :1;
+    uint8_t IF      :1;
+    uint8_t pad3    :1;
+    uint8_t OF      :1;
+    uint32_t pad4   :20;
+
+  } eflags;
+  
+  // rtlreg_t eflags;
 
 } CPU_state;
 
