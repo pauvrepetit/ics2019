@@ -370,6 +370,7 @@ make_DHelper(cmp_3b) {
   decode_op_rm(pc, id_src, true, id_src2, true);
 }
 
-// make_DHelper(sete) {
-//   decode_op_rm(pc, id_dest, false, NULL, false);
-// }
+make_DHelper(movzb) {
+  id_src->width = 1;
+  decode_op_rm(pc, id_dest, false, id_src, true);
+}
