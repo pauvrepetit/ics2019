@@ -132,6 +132,7 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
     break;
   }
   rtl_set_ZF(&t0);
+  printf("set ZF finish, now ZF is %d\n", cpu.eflags.ZF);
   // TODO();
 }
 
