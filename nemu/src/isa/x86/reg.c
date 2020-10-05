@@ -47,7 +47,7 @@ void isa_reg_display() {
   printf("ESP\t\t%08x\t\t%10d\t\t\t\tEBP\t\t%08x\t\t%10d\n", cpu.esp, cpu.esp, cpu.ebp, cpu.ebp);
   printf("ESI\t\t%08x\t\t%10d\t\t\t\tEDI\t\t%08x\t\t%10d\n", cpu.esi, cpu.esi, cpu.edi, cpu.edi);
   printf("EIP\t\t%08x\n", cpu.pc);
-  printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF%d\n", cpu.eflags.CF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.IF, cpu.eflags.OF);
+  printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n", cpu.eflags.CF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.IF, cpu.eflags.OF);
   return;
 }
 
