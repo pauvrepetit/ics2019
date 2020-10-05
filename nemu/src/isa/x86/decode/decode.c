@@ -357,3 +357,7 @@ make_DHelper(lea) {
 make_DHelper(and) {
   printf("hit here and\n");
 }
+
+make_DHelper(push_m) {
+  printf("hit here push_m\n");
+}
