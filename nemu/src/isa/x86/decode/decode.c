@@ -351,5 +351,9 @@ make_DHelper(ret) {
 }
 
 make_DHelper(lea) {
-  decode_op_rm(pc, id_dest, false, id_src, true);
+  decode_op_rm(pc, id_src, true, id_dest, false);
+}
+
+make_DHelper(and) {
+  printf("hit here and\n");
 }

@@ -85,5 +85,6 @@ make_DHelper(sub);
 make_DHelper(xor);
 make_DHelper(ret);
 make_DHelper(lea);
+make_DHelper(and);
 
 #endif
