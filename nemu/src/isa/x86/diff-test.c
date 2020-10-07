@@ -1,6 +1,8 @@
 #include "nemu.h"
 #include "monitor/diff-test.h"
 
+void isa_reg_display_diff(CPU_state cpu);
+
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   // return false;
   ref_r->eflagsReg &= 0b101011000001;
