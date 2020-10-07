@@ -32,7 +32,7 @@ make_group(gp2,
 /* 0xf6, 0xf7 */
 make_group(gp3,
     EMPTY, EMPTY, IDEX(nop, not), EMPTY,
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    EMPTY, EMPTY, EMPTY, IDEX(nop, idiv))
 
 /* 0xfe */
 make_group(gp4,
