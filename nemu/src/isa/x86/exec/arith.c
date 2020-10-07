@@ -2,8 +2,9 @@
 
 make_EHelper(add) {
   // TODO();
+  printf("add src1 is %08x, src2 is %08x\n", id_src->val, id_dest->val);
   rtl_add(&t0, &id_dest->val, &id_src->val);
-  operand_write(id_dest, &t0);
+  printf("add dest is %08x\n", t0);
   rtl_update_ZFSF(&t0, id_dest->width);
   rtl_is_add_carry(&t1, &t0, &id_dest->val);
   rtl_set_CF(&t1);
@@ -11,6 +12,8 @@ make_EHelper(add) {
   rtl_is_add_overflow(&t1, &t0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&t1);
   printf(" OF == %d\n", t1);
+
+  operand_write(id_dest, &t0);
 
   print_asm_template2(add);
 }
