@@ -407,3 +407,7 @@ make_DHelper(push_imm8) {
 make_DHelper(inc_rm) {
   printf("hit here inc_rm\n");
 }
+
+make_DHelper(pop) {
+  decode_op_r(pc, id_dest, true);
+}
