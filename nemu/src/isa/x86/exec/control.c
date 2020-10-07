@@ -51,6 +51,7 @@ make_EHelper(ret_imm) {
 
 make_EHelper(call_rm) {
   // TODO();
+  printf("call_rm, now pc is %08x\n", *pc);
   printf("call_rm, id_dest is %08x, %s\n", id_dest->val, id_dest->str);
   rtl_lm(&t0, &id_dest->val, id_dest->width);
   printf("* is %08x\n", t0);
