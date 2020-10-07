@@ -42,7 +42,7 @@ make_group(gp4,
 /* 0xff */
 make_group(gp5,
     IDEX(inc_rm, inc), EMPTY, IDEX(nop, call_rm), EMPTY,
-    EMPTY, EMPTY, IDEX(push_m, push), EMPTY)
+    IDEX(nop, jmp_rm), EMPTY, IDEX(push_m, push), EMPTY)
 
 /* 0x0f 0x01*/
 make_group(gp7,
