@@ -178,13 +178,10 @@ make_EHelper(imul1) {
 
 // imul with two operands
 make_EHelper(imul2) {
-  printf("imul src is %08x, dest is %08x\n", id_src->val, id_dest->val);
-  printf("imul src is %s, dest is %s\n", id_src->str, id_dest->str);
   rtl_sext(&s0, &id_src->val, id_src->width);
   rtl_sext(&s1, &id_dest->val, id_dest->width);
 
   rtl_imul_lo(&s0, &s1, &s0);
-  printf("imul res is %08x\n", s0);
   operand_write(id_dest, &s0);
 
   print_asm_template2(imul);
