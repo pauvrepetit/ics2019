@@ -423,3 +423,11 @@ make_DHelper(add_03) {
 make_DHelper(adc_13) {
   decode_op_rm(pc, id_src, true, id_dest, true);
 }
+
+make_DHelper(jmp_imm8) {
+  id_dest->width = 1;
+  decode_op_I(pc, id_dest, true);
+  id_dest->val += *pc;
+  decinfo.jmp_pc = id_dest->val;
+  decinfo_set_jmp(true);
+}
