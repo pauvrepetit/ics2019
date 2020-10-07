@@ -377,6 +377,7 @@ make_DHelper(movzb) {
 
 make_DHelper(jcc) {
   id_dest->width = 1;
+  id_dest->type = OP_TYPE_IMM;
   decode_op_rm(pc, id_dest, false, NULL, false);
   id_dest->val += *pc;
   decinfo.jmp_pc = id_dest->val;
