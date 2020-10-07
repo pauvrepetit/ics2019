@@ -379,6 +379,7 @@ make_DHelper(jcc) {
   id_dest->width = 1;
   id_dest->type = OP_TYPE_IMM;
   decode_op_rm(pc, id_dest, false, NULL, false);
+  printf("jcc id_dest.val == %d, pc == %d\n", id_dest->val, *pc);
   id_dest->val += *pc;
   decinfo.jmp_pc = id_dest->val;
 }
