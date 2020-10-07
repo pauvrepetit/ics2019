@@ -93,4 +93,5 @@ make_DHelper(cmp_3b);
 make_DHelper(movzb);
 make_DHelper(jcc);
 make_DHelper(leave);
+make_DHelper(add_ib_r);
 #endif
