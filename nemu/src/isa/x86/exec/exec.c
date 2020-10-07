@@ -41,7 +41,7 @@ make_group(gp4,
 
 /* 0xff */
 make_group(gp5,
-    IDEX(inc_rm, inc), EMPTY, IDEX(call_ptr, call), IDEX(call_ptr, call),
+    IDEX(inc_rm, inc), EMPTY, IDEX(I, call_rm), EMPTY,
     EMPTY, EMPTY, IDEX(push_m, push), EMPTY)
 
 /* 0x0f 0x01*/

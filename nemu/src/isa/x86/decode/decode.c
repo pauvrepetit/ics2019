@@ -430,9 +430,9 @@ make_DHelper(jmp_imm8) {
   decinfo_set_jmp(true);
 }
 
-make_DHelper(call_ptr) {
-  rtl_lm(&t0, &id_dest->val, id_dest->width);
-  id_dest->val = t0;
-  decinfo.jmp_pc = id_dest->val;
-  decinfo_set_jmp(true);
-}
+// make_DHelper(call_rm) {
+//   rtl_lm(&t0, &id_dest->val, id_dest->width);
+//   id_dest->val = t0;
+//   decinfo.jmp_pc = id_dest->val;
+//   decinfo_set_jmp(true);
+// }

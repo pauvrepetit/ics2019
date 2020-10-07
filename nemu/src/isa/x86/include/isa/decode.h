@@ -103,5 +103,5 @@ make_DHelper(nop);
 make_DHelper(add_03);
 make_DHelper(adc_13);
 make_DHelper(jmp_imm8);
-make_DHelper(call_ptr);
+// make_DHelper(call_rm);
 #endif

@@ -50,7 +50,13 @@ make_EHelper(ret_imm) {
 }
 
 make_EHelper(call_rm) {
-  TODO();
+  // TODO();
+  printf("call_rm, id_dest is %08x, %s\n", id_dest->val, id_dest->str);
+  rtl_lm(&t0, &id_dest->val, id_dest->width);
+  printf("* is %08x\n", t0);
+  decinfo_set_jmp(true);
+  decinfo.jmp_pc = t0;
+  rtl_j(decinfo.jmp_pc);
 
   print_asm("call *%s", id_dest->str);
 }
