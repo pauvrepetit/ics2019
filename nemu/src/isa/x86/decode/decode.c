@@ -405,5 +405,7 @@ make_DHelper(push_imm8) {
 }
 
 make_DHelper(inc_rm) {
+  printf("begin decode inc_rm\n");
   decode_op_rm(pc, id_dest, true, NULL, false);
+  printf("finish decode inc_rm, id_dest == %s\n", id_dest->str);
 }
