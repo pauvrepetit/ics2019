@@ -95,9 +95,11 @@ static inline void rtl_is_add_overflow(rtlreg_t* dest,
 static inline void rtl_is_add_carry(rtlreg_t* dest,
     const rtlreg_t* res, const rtlreg_t* src1) {
   // dest <- is_carry(src1 + src2)
+  printf("*res == %d, *src1 == %d\n", *res, *src1);
   rtlreg_t src2 = *res - *src1;
   uint64_t r = (uint64_t)*src1 + (uint64_t)src2;
   *dest = (r != (uint64_t)*res) ? 1 : 0;
+  printf("*dest == %d\n", *dest);
   
   // TODO();
 }
