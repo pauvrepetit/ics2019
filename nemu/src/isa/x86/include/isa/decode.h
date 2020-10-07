@@ -102,6 +102,4 @@ make_DHelper(pop);
 make_DHelper(nop);
 make_DHelper(add_03);
 make_DHelper(adc_13);
-make_DHelper(or_09);
-make_DHelper(or_0a);
 #endif
