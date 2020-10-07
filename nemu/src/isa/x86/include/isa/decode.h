@@ -78,7 +78,7 @@ make_DHelper(in_dx2a);
 make_DHelper(out_a2I);
 make_DHelper(out_a2dx);
 
-make_DHelper(call_rel32);
+make_DHelper(call_rel);
 make_DHelper(push_r32);
 make_DHelper(push_imm32);
 make_DHelper(sub);
@@ -103,4 +103,5 @@ make_DHelper(nop);
 make_DHelper(add_03);
 make_DHelper(adc_13);
 make_DHelper(jmp_imm8);
+make_DHelper(call_ptr);
 #endif

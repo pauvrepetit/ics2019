@@ -315,8 +315,7 @@ void operand_write(Operand *op, rtlreg_t* src) {
 }
 
 
-make_DHelper(call_rel32) {
-  id_src->width = 4;
+make_DHelper(call_rel) {
   decode_op_I(pc, id_src, true);
   decinfo_set_jmp(true);
   decinfo.jmp_pc = id_src->imm + *pc;
@@ -427,6 +426,13 @@ make_DHelper(jmp_imm8) {
   id_dest->width = 1;
   decode_op_SI(pc, id_dest, true);
   id_dest->val += *pc;
+  decinfo.jmp_pc = id_dest->val;
+  decinfo_set_jmp(true);
+}
+
+make_DHelper(call_ptr) {
+  rtl_lm(&t0, &id_dest->val, id_dest->width);
+  id_dest->val = t0;
   decinfo.jmp_pc = id_dest->val;
   decinfo_set_jmp(true);
 }
