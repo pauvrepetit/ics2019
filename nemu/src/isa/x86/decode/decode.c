@@ -178,7 +178,7 @@ make_DHelper(E) {
   decode_op_rm(pc, id_dest, true, NULL, false);
 }
 
-make_DHelper(setcc_E) {
+make_DHelper(setcc) {
   decode_op_rm(pc, id_dest, false, NULL, false);
 }
 
