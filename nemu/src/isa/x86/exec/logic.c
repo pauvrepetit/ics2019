@@ -71,6 +71,7 @@ make_EHelper(shr) {
 make_EHelper(setcc) {
   uint32_t cc = decinfo.opcode & 0xf;
 
+  printf("setcc ZF == %d\n", cpu.eflags.ZF);
   rtl_setcc(&s0, cc);
   operand_write(id_dest, &s0);
 
