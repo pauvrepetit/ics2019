@@ -321,114 +321,15 @@ make_DHelper(call_rel) {
   decinfo.jmp_pc = id_src->imm + *pc;
 }
 
-make_DHelper(push_r32) {
-  // decode_op_r(pc, id_src, true);
-  // rtl_lr(&id_dest->val, R_ESP, 4);
-  decode_op_r(pc, id_dest, true);
-}
-
-make_DHelper(push_imm32) {
-  // id_src->width = 4;
-  // decode_op_I(pc, id_src, true);
-  // rtl_lr(&id_dest->val, R_ESP, 4);
-  id_dest->width = 4;
-  decode_op_I(pc, id_dest, true);
-}
-
-make_DHelper(sub) {
-  // printf("hit here sub\n");
-}
-
-make_DHelper(xor) {
-  // printf("hit here xor\n");
-  decode_op_rm(pc, id_dest, true, id_src, true);
-  // decode_op_rm(pc, id_src, true, NULL, false);
-  // decode_op_r(pc, id_dest, true);
-  // decode_op_r(pc, id_src, true);
-}
-
-make_DHelper(ret) {
-  // printf("hit here ret\n");
-}
-
-make_DHelper(lea) {
-  decode_op_rm(pc, id_src, true, id_dest, false);
-}
-
-make_DHelper(and) {
-  // printf("hit here and\n");
-}
-
-make_DHelper(push_m) {
-  // printf("hit here push_m\n");
-}
-
-make_DHelper(add_01) {
-  decode_op_rm(pc, id_dest, true, id_src, true);
-}
-
-make_DHelper(movzb) {
-  id_src->width = 1;
-  decode_op_rm(pc, id_dest, false, id_src, true);
-}
-
 make_DHelper(jcc) {
   decode_op_SI(pc, id_dest, true);
   id_dest->val += *pc;
   decinfo.jmp_pc = id_dest->val;
 }
 
-make_DHelper(leave) {
-  // printf("hit here leave\n");
-}
-
-make_DHelper(add) {
-  // printf("hit here add\n");
-}
-
-make_DHelper(inc) {
-  decode_op_r(pc, id_dest, true);
-}
-
-make_DHelper(cmp_83) {
-  // printf("hit here cmp_83\n");
-}
-
-make_DHelper(push_imm8) {
-  id_dest->width = 1;
-  decode_op_SI(pc, id_dest, true);
-}
-
-make_DHelper(inc_rm) {
-  // printf("hit here inc_rm\n");
-}
-
-make_DHelper(pop) {
-  decode_op_r(pc, id_dest, true);
-}
-
-make_DHelper(nop) {
-}
-
-make_DHelper(add_03) {
-  decode_op_rm(pc, id_src, true, id_dest, true);
-}
-
-make_DHelper(adc_13) {
-  decode_op_rm(pc, id_src, true, id_dest, true);
-}
-
-make_DHelper(jmp_imm8) {
-  id_dest->width = 1;
+make_DHelper(jmp_imm) {
   decode_op_SI(pc, id_dest, true);
   id_dest->val += *pc;
   decinfo.jmp_pc = id_dest->val;
   decinfo_set_jmp(true);
 }
-
-// make_DHelper(call_rm) {
-//   rtl_lm(&t0, &id_dest->val, id_dest->width);
-//   id_dest->val = t0;
-//   decinfo.jmp_pc = id_dest->val;
-//   decinfo_set_jmp(true);
-// }
