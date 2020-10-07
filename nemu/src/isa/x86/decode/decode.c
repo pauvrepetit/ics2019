@@ -99,7 +99,7 @@ static inline make_DopHelper(O) {
 
 /* Eb <- Gb
  * Ev <- Gv
- * r, r/m
+ * r/m, r
  */
 make_DHelper(G2E) {
   decode_op_rm(pc, id_dest, true, id_src, true);
@@ -111,7 +111,7 @@ make_DHelper(mov_G2E) {
 
 /* Gb <- Eb
  * Gv <- Ev
- * r/m, r
+ * r, r/m
  */
 make_DHelper(E2G) {
   decode_op_rm(pc, id_src, true, id_dest, true);
