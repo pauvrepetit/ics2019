@@ -386,7 +386,7 @@ make_DHelper(leave) {
   printf("hit here leave\n");
 }
 
-make_DHelper(add_ib_r) {
-  id_src->width = 1;
+make_DHelper(add) {
+  // id_src->width = 1;
   decode_op_rm(pc, id_src, true, id_dest, true);
 }
