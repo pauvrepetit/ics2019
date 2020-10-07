@@ -411,3 +411,6 @@ make_DHelper(inc_rm) {
 make_DHelper(pop) {
   decode_op_r(pc, id_dest, true);
 }
+
+make_DHelper(nop) {
+}
