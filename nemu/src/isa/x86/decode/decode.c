@@ -377,7 +377,7 @@ make_DHelper(movzb) {
 
 make_DHelper(jcc) {
   id_dest->width = 1;
-  decode_op_I(pc, id_dest, true);
+  decode_op_SI(pc, id_dest, true);
   // printf("jcc id_dest.val == %d, pc == %d\n", id_dest->val, *pc);
   id_dest->val += *pc;
   decinfo.jmp_pc = id_dest->val;
