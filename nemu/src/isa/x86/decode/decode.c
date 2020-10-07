@@ -414,3 +414,11 @@ make_DHelper(pop) {
 
 make_DHelper(nop) {
 }
+
+make_DHelper(add_03) {
+  decode_op_rm(pc, id_src, true, id_dest, true);
+}
+
+make_DHelper(adc_13) {
+  decode_op_rm(pc, id_src, true, id_dest, true);
+}

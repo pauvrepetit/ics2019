@@ -100,4 +100,6 @@ make_DHelper(push_imm8);
 make_DHelper(inc_rm);
 make_DHelper(pop);
 make_DHelper(nop);
+make_DHelper(add_03);
+make_DHelper(adc_13);
 #endif
