@@ -389,6 +389,6 @@ make_DHelper(leave) {
 make_DHelper(add) {
   // id_src->width = 1;
   printf("decode_add\n");
-  decode_op_rm(pc, id_src, true, id_dest, true);
+  decode_op_rm(pc, id_dest, true, id_src, true);
   printf("decode_finish\n");
 }
