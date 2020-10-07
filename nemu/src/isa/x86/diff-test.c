@@ -5,7 +5,8 @@ void isa_reg_display_diff(CPU_state cpu);
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   // return false;
-  ref_r->eflagsReg &= 0b101011000001;
+  // ref_r->eflagsReg &= 0b101011000001;
+  printf("isa_difftest_checkregs, ref_r->eflags == %08x\n", ref_r->eflagsReg);
   if (memcmp((void *)ref_r, (void *)&cpu, sizeof(CPU_state)) != 0) {
     printf("qemu regs:\n");
     isa_reg_display_diff(*ref_r);
