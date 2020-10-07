@@ -7,8 +7,10 @@ make_EHelper(add) {
   rtl_update_ZFSF(&t0, id_dest->width);
   rtl_is_add_carry(&t1, &t0, &id_dest->val);
   rtl_set_CF(&t1);
+  printf("PC: %08x\tCF == %d,", *pc, t1);
   rtl_is_add_overflow(&t1, &t0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&t1);
+  printf(" OF == %d\n", t1);
 
   print_asm_template2(add);
 }
