@@ -37,7 +37,9 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  TODO();
+  // TODO();
+  rtl_subi(&id_dest->val, &id_dest->val, 1);
+  operand_write(id_dest, &id_dest->val);
 
   print_asm_template1(inc);
 }

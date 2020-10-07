@@ -389,3 +389,7 @@ make_DHelper(leave) {
 make_DHelper(add) {
   printf("hit here add\n");
 }
+
+make_DHelper(inc) {
+  decode_op_r(pc, id_dest, true);
+}
