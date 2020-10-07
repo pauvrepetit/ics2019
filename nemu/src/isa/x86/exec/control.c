@@ -53,7 +53,7 @@ make_EHelper(call_rm) {
   // TODO();
   decinfo_set_jmp(true);
   decinfo.jmp_pc = id_dest->val;
-  rtl_j(decinfo.jmp_pc);
+  exec_call(pc);
 
   print_asm("call *%s", id_dest->str);
 }
