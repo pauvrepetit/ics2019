@@ -335,7 +335,7 @@ make_DHelper(push_imm32) {
 }
 
 make_DHelper(sub) {
-  printf("hit here sub\n");
+  // printf("hit here sub\n");
 }
 
 make_DHelper(xor) {
@@ -347,7 +347,7 @@ make_DHelper(xor) {
 }
 
 make_DHelper(ret) {
-  printf("hit here ret\n");
+  // printf("hit here ret\n");
 }
 
 make_DHelper(lea) {
@@ -355,11 +355,11 @@ make_DHelper(lea) {
 }
 
 make_DHelper(and) {
-  printf("hit here and\n");
+  // printf("hit here and\n");
 }
 
 make_DHelper(push_m) {
-  printf("hit here push_m\n");
+  // printf("hit here push_m\n");
 }
 
 make_DHelper(add_01) {
@@ -384,11 +384,11 @@ make_DHelper(jcc) {
 }
 
 make_DHelper(leave) {
-  printf("hit here leave\n");
+  // printf("hit here leave\n");
 }
 
 make_DHelper(add) {
-  printf("hit here add\n");
+  // printf("hit here add\n");
 }
 
 make_DHelper(inc) {
@@ -396,7 +396,7 @@ make_DHelper(inc) {
 }
 
 make_DHelper(cmp_83) {
-  printf("hit here cmp_83\n");
+  // printf("hit here cmp_83\n");
 }
 
 make_DHelper(push_imm8) {
@@ -405,7 +405,7 @@ make_DHelper(push_imm8) {
 }
 
 make_DHelper(inc_rm) {
-  printf("hit here inc_rm\n");
+  // printf("hit here inc_rm\n");
 }
 
 make_DHelper(pop) {
