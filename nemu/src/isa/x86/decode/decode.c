@@ -393,3 +393,7 @@ make_DHelper(add) {
 make_DHelper(inc) {
   decode_op_r(pc, id_dest, true);
 }
+
+make_DHelper(cmp_83) {
+  printf("hit here cmp_83\n");
+}

@@ -95,4 +95,5 @@ make_DHelper(jcc);
 make_DHelper(leave);
 make_DHelper(add);
 make_DHelper(inc);
+make_DHelper(cmp_83);
 #endif
