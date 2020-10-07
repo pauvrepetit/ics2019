@@ -6,8 +6,8 @@ void isa_reg_display_diff(CPU_state cpu);
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   // return false;
   // ref_r->eflagsReg &= 0b101011000001;
-  printf("isa_difftest_checkregs, ref_r->eflags == %08x\n", ref_r->eflagsReg);
-  if (memcmp((void *)ref_r, (void *)&cpu, sizeof(CPU_state)) != 0) {
+  // printf("isa_difftest_checkregs, ref_r->eflags == %08x\n", ref_r->eflagsReg);
+  if (memcmp((void *)ref_r, (void *)&cpu, DIFFTEST_REG_SIZE) != 0) {
     printf("qemu regs:\n");
     isa_reg_display_diff(*ref_r);
     return false;
@@ -24,6 +24,6 @@ void isa_reg_display_diff(CPU_state cpu) {
   printf("ESP\t\t%08x\t\t%10d\t\t\t\tEBP\t\t%08x\t\t%10d\n", cpu.esp, cpu.esp, cpu.ebp, cpu.ebp);
   printf("ESI\t\t%08x\t\t%10d\t\t\t\tEDI\t\t%08x\t\t%10d\n", cpu.esi, cpu.esi, cpu.edi, cpu.edi);
   printf("EIP\t\t%08x\n", cpu.pc);
-  printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n", cpu.eflags.CF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.IF, cpu.eflags.OF);
+  // printf("CF:%d\tZF:%d\tSF:%d\tIF:%d\tOF:%d\n", cpu.eflags.CF, cpu.eflags.ZF, cpu.eflags.SF, cpu.eflags.IF, cpu.eflags.OF);
   return;
 }
