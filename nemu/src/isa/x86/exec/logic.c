@@ -5,7 +5,7 @@ make_EHelper(test) {
   // TODO();
   printf("test id_src.val is %08x, id_dest.val is %08x\n", id_src->val, id_dest->val);
   rtl_and(&t0, &id_dest->val, &id_src->val);
-  operand_write(id_dest, &t0);
+  // operand_write(id_dest, &t0);
   rtl_update_ZFSF(&t0, id_dest->width);
   t0 = 0;
   rtl_set_CF(&t0);
