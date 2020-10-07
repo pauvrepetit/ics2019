@@ -387,7 +387,8 @@ make_DHelper(leave) {
 }
 
 make_DHelper(add) {
+  id_src->type = OP_TYPE_IMM;
   if (decinfo.opcode == 0x80 || decinfo.opcode == 0x83)
     id_src->width = 1;
-  decode_op_rm(pc, id_dest, true, id_src, false);
+  decode_op_rm(pc, id_src, false, id_dest, true);
 }
