@@ -77,20 +77,21 @@ typedef struct {
   };
 
   vaddr_t pc;
-  struct {
-    uint8_t CF      :1;
-    uint8_t pad1    :5;
-    uint8_t ZF      :1;
-    uint8_t SF      :1;
-    uint8_t pad2    :1;
-    uint8_t IF      :1;
-    uint8_t pad3    :1;
-    uint8_t OF      :1;
-    uint32_t pad4   :20;
+  union {
+    struct {
+      uint8_t CF      :1;
+      uint8_t pad1    :5;
+      uint8_t ZF      :1;
+      uint8_t SF      :1;
+      uint8_t pad2    :1;
+      uint8_t IF      :1;
+      uint8_t pad3    :1;
+      uint8_t OF      :1;
+      uint32_t pad4   :20;
+    } eflags;
 
-  } eflags;
-  
-  // rtlreg_t eflags;
+    uint32_t eflagsReg;
+  };
 
 } CPU_state;
 
