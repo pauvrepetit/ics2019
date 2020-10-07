@@ -398,3 +398,8 @@ make_DHelper(inc) {
 make_DHelper(cmp_83) {
   printf("hit here cmp_83\n");
 }
+
+make_DHelper(push_imm8) {
+  id_dest->width = 1;
+  decode_op_SI(pc, id_dest, true);
+}
