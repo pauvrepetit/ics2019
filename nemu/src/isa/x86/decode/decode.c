@@ -422,3 +422,7 @@ make_DHelper(add_03) {
 make_DHelper(adc_13) {
   decode_op_rm(pc, id_src, true, id_dest, true);
 }
+
+make_DHelper(or_09) {
+  decode_op_rm(pc, id_src, true, id_dest, true);
+}
