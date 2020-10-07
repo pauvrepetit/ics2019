@@ -35,3 +35,4 @@ make_EHelper(cltd);
 make_EHelper(idiv);
 make_EHelper(jmp);
 make_EHelper(movsx);
+make_EHelper(imul1);
