@@ -378,7 +378,6 @@ make_DHelper(movzb) {
 }
 
 make_DHelper(jcc) {
-  // id_dest->width = 1;
   decode_op_SI(pc, id_dest, true);
   id_dest->val += *pc;
   decinfo.jmp_pc = id_dest->val;
