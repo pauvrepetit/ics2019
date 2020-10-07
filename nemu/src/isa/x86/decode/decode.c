@@ -367,7 +367,7 @@ make_DHelper(add_01) {
 }
 
 make_DHelper(cmp_3b) {
-  decode_op_rm(pc, id_src, true, id_src2, true);
+  decode_op_rm(pc, id_src, true, id_dest, true);
 }
 
 make_DHelper(movzb) {
