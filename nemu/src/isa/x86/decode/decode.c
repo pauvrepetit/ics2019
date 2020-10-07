@@ -403,3 +403,7 @@ make_DHelper(push_imm8) {
   id_dest->width = 1;
   decode_op_SI(pc, id_dest, true);
 }
+
+make_DHelper(inc_rm) {
+  decode_op_rm(pc, id_dest, true, NULL, false);
+}

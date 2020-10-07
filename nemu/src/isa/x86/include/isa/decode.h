@@ -97,4 +97,5 @@ make_DHelper(add);
 make_DHelper(inc);
 make_DHelper(cmp_83);
 make_DHelper(push_imm8);
+make_DHelper(inc_rm);
 #endif
