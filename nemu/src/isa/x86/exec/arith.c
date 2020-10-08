@@ -1,7 +1,6 @@
 #include "cpu/exec.h"
 
 make_EHelper(add) {
-  // TODO();
   rtl_add(&t0, &id_dest->val, &id_src->val);
   rtl_update_ZFSF(&t0, id_dest->width);
   rtl_is_add_carry(&t1, &t0, &id_dest->val);
@@ -14,7 +13,6 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) {
-  // TODO();
   rtl_sub(&t1, &id_dest->val, &id_src->val);
 
   rtl_update_ZFSF(&t1, id_dest->width);
@@ -29,7 +27,6 @@ make_EHelper(sub) {
 }
 
 make_EHelper(cmp) {
-  // TODO();
   rtl_sub(&t1, &id_dest->val, &id_src->val);
 
   rtl_update_ZFSF(&t1, id_dest->width);
@@ -42,7 +39,6 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  // TODO();
   rtl_addi(&t1, &id_dest->val, 1);
   rtl_update_ZFSF(&t1, id_dest->width);
   id_src->val = 1;
@@ -54,7 +50,6 @@ make_EHelper(inc) {
 }
 
 make_EHelper(dec) {
-  // TODO();
   rtl_subi(&t1, &id_dest->val, 1);
   rtl_update_ZFSF(&t1, id_dest->width);
   id_src->val = 1;
@@ -66,7 +61,8 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-  TODO();
+  id_dest->val = -id_dest->val;
+  operand_write(id_dest, &id_dest->val);
 
   print_asm_template1(neg);
 }
