@@ -600,7 +600,8 @@ void cpu_run(long cycles) {
       cpu_op_handler[op_code]();
     }
     cycles -= cpu_op_cycles[op_code] + op_cycles;
-    cpu_cycles -= cpu_op_cycles[op_code] + op_cycles;
+    // cpu_cycles -= cpu_op_cycles[op_code] + op_cycles;
+    cpu_cycles += cpu_op_cycles[op_code] + op_cycles;
     op_cycles = 0;
   }
 }
