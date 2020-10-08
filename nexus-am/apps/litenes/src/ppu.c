@@ -254,8 +254,14 @@ void ppu_cycle() {
   TIME_TYPE t0, t1, t2, t3, t4, t5;
 #endif
 
-  if (!ppu.ready && cpu_clock() > 29658)
+  if (ppu.ready) {
+    printf("ppu.ready\n");
+  } else {
+    printf("!ppu.ready\n");
+  }
+  if (!ppu.ready && cpu_clock() > 29658) {
     ppu.ready = true;
+  }
   
   printf("cpu_clock is %d\n", cpu_clock());
   if (ppu.ready) {
