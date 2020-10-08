@@ -12,6 +12,7 @@ bool candraw() { return frame_cnt % 3 == 0; }
 static uint32_t canvas[W * H];
 
 void draw(int x, int y, int idx) {
+  printf("call draw, %d, %d, %d, canvas[%d] = %d\n", x, y, idx, y * W + x, palette[idx]);
   if (x >= 0 && x < W && y >= 0 && y < H && candraw()) {
     canvas[y * W + x] = palette[idx];
   }
