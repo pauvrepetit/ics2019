@@ -262,12 +262,12 @@ void ppu_cycle() {
   // printf("%d\n", cpu_clock());
   unsigned long long ccl = cpu_clock();
   printf("%lld\n", ccl);
-  if (ccl > 30000) {
-    printf("ccl\n");
-  }
-  if (!ppu.ready) {
-    printf("!ppu.ready\n");
-  }
+  // if (ccl > 30000) {
+  //   printf("ccl\n");
+  // }
+  // if (!ppu.ready) {
+  //   printf("!ppu.ready\n");
+  // }
   if ((!ppu.ready) && (cpu_clock() > 29658)) {
     printf("???\n");
     ppu.ready = true;
