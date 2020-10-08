@@ -122,11 +122,8 @@ void fce_update_screen() {
   frame_cnt ++;
   if (!candraw()) return;
 
-  printf("frame_cnt = %d\n", frame_cnt);
   int idx = ppu_ram_read(0x3F00);
-  printf("idx = %d\n", idx);
   uint32_t bgc = palette[idx];
-  printf("bgc = %d\n", bgc);
 
   int w = screen_width();
   int h = screen_height();
@@ -138,7 +135,6 @@ void fce_update_screen() {
   int t = canvas[0];
   for(int i = 0; i < W * H; i++) {
     if (t != canvas[i]) {
-      printf("%d ", canvas[i]);
     }
   }
 
