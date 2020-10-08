@@ -132,8 +132,14 @@ void fce_update_screen() {
 
   int xpad = (w - W) / 2;
   int ypad = (h - H) / 2;
-  printf("xpad = %d, ypad = %d\n", xpad, ypad);
   assert(xpad >= 0 && ypad >= 0);
+
+  int t = canvas[0];
+  for(int i = 0; i < W * H; i++) {
+    if (t != canvas[i]) {
+      printf("%d ", canvas[i]);
+    }
+  }
 
   for (int x = 0; x < W; x ++) {
     for (int y = 0; y < H; y ++) {
