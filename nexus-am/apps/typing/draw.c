@@ -43,7 +43,6 @@ char *itoa(int n)  {
 }
 
 static inline void draw_character(char ch, int x, int y, int color) {
-  printf("draw_character\n");
   int i, j;
   char *p = font8x8_basic[(int)ch];
   uint32_t buf[8][8];
@@ -116,6 +115,7 @@ void redraw_screen() {
   const char *fps = itoa(get_fps());
   draw_string(fps, 0, 0, 0xf3f781);
   draw_string("FPS", strlen(fps) * 8, 0, 0xf3f781);
+  printf("FPS %s\n", fps);
 
 #ifdef SCREEN_STRETCH
   assert(0);
