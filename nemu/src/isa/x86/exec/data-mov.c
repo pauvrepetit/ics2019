@@ -60,7 +60,7 @@ make_EHelper(cltd) {
 make_EHelper(cwtl) {
   if (decinfo.isa.is_operand_size_16) {
     rtl_lr(&t0, R_EAX, 1);
-    if (t0 & 0x80 != 0) {
+    if ((t0 & 0x80) != 0) {
       t0 |= 0xffffff00;
     } else {
       t0 &= 0xff;
@@ -68,7 +68,7 @@ make_EHelper(cwtl) {
     rtl_sr(R_EAX, &t0, 2);
   } else {
     rtl_lr(&t0, R_EAX, 2);
-    if (t0 & 0x8000 != 0) {
+    if ((t0 & 0x8000) != 0) {
       t0 |= 0xffff0000;
     } else {
       t0 &= 0xffff;
