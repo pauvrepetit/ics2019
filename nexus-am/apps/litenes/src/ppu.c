@@ -295,9 +295,7 @@ void ppu_cycle() {
     ppu_set_in_vblank(false);
 
     time_read(t0);
-    printf("begin to update screen\n");
     fce_update_screen();
-    printf("update finish\n");
     time_read(t1);
 
 #ifdef PROFILE

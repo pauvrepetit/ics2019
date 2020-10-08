@@ -7,7 +7,7 @@
 #include <amdev.h>
 
 static int frame_cnt;
-bool candraw() { return true; return frame_cnt % 3 == 0; }
+bool candraw() { return frame_cnt % 3 == 0; }
 
 static uint32_t canvas[W * H];
 
