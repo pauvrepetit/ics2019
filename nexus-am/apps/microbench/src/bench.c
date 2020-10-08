@@ -61,6 +61,7 @@ static unsigned long score(Benchmark *b, unsigned long tsc, unsigned long msec) 
 
 int main(const char *args) {
   const char *setting_name = args;
+  printf("start: args == '%s'\n", args);
   if (args == NULL || strcmp(args, "") == 0) {
     printf("Empty mainargs. Use \"ref\" by default\n");
     setting_name = "ref";
