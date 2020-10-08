@@ -133,7 +133,9 @@ void fce_update_screen() {
 
   for (int x = 0; x < W; x ++) {
     for (int y = 0; y < H; y ++) {
+      printf("call draw_rect, %d, %d\n", xpad+x, ypad+y);
       draw_rect(&canvas[y * W + x], xpad + x, ypad + y, 1, 1);
+      printf("return\n");
     }
   }
 
