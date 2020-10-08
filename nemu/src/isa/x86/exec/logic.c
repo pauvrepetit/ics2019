@@ -88,3 +88,27 @@ make_EHelper(not) {
 
   print_asm_template1(not);
 }
+
+make_EHelper(rol) {
+  t0 = id_src->val;
+  t1 = id_dest->val;
+  switch (id_dest->width) {
+    case 1:
+      t0 %= 8;
+      t1 = (t1 >> (8 - t0)) | (t1 << t0);
+      break;
+    case 2:
+      t0 %= 16;
+      t1 = (t1 >> (16 - t0)) | (t1 << t0);
+      break;
+    case 4:
+      t0 %= 32;
+      t1 = (t1 >> (32 - t0)) | (t1 << t0);
+      break;
+    default:
+      break;
+  }
+  operand_write(id_dest, &t1);
+
+  print_asm_template2(rol);
+}
