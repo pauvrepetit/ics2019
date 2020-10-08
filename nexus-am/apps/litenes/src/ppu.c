@@ -256,13 +256,16 @@ void ppu_cycle() {
 
   if (!ppu.ready && cpu_clock() > 29658)
     ppu.ready = true;
+  
+  if (ppu.ready) {
+    printf("ppu.ready\n");
+  }
 
   time_read(t0);
   cpu_run(256);
   time_read(t1);
 
   ppu.scanline++;
-  printf("scanline %d\n", ppu.scanline);
 
   if (ppu.scanline < H && ppu_shows_background()) {
     printf("here1\n");
