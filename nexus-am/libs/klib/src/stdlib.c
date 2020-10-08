@@ -10,7 +10,7 @@ void srand(unsigned int seed) {
   next = seed;
 }
 
-char *itoa(int num, char *s, int len) {
+char *my_itoa(int num, char *s, int len) {
   // todo
   int neg = 0;
   if (num < 0) {
@@ -30,7 +30,7 @@ char *itoa(int num, char *s, int len) {
   return s+len;
 }
 
-int atoi(const char* nptr) {
+int my_atoi(const char* nptr) {
   int neg = 1;
   int loc = 0;
   int num = 0;

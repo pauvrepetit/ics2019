@@ -56,12 +56,12 @@ char *strstr(const char *, const char *);
 const char *strchr(const char *s, int c);
 
 // stdlib.h
-int atoi(const char* nptr);
+int my_atoi(const char* nptr);
 int abs(int x);
 unsigned long time();
 void srand(unsigned int seed);
 int rand();
-char *itoa(int num, char *s, int len);
+char *my_itoa(int num, char *s, int len);
 
 // stdio.h
 int printf(const char* fmt, ...);

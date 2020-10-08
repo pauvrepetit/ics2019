@@ -32,7 +32,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           // %d 十进制输出数字
           char numStr[20];
           int num = va_arg(ap, int);
-          char *ns = itoa(num, numStr, 20);
+          char *ns = my_itoa(num, numStr, 20);
           strcpy(out+o, ns);
           o += strlen(ns);
           i ++;
@@ -46,7 +46,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           // %0 数字 d
           i++;
           if (fmt[i+1] > '0' && fmt[i+1] <= '9') {
-            int numLen = atoi(fmt+i+1); // 这个数字表示输出的长度
+            int numLen = my_atoi(fmt+i+1); // 这个数字表示输出的长度
             while (fmt[i] <= '9' && fmt[i] >= '0') {
               i++;
             }
@@ -54,7 +54,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             if (fmt[i] == 'd') {
               char numStr[20];
               int num = va_arg(ap, int);
-              char *ns = itoa(num, numStr, 20);
+              char *ns = my_itoa(num, numStr, 20);
               int numRealLen = strlen(ns);
               for (int j = 0; j < numLen - numRealLen; j++) {
                 out[o++] = '0';
