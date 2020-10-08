@@ -6,7 +6,7 @@ int main() {
 	sprintf(buf, "%s", "Hello world!\n");
 	nemu_assert(strlen("Hello world!\n") == 13);
 	nemu_assert(strlen(buf) == 13);
-	nemu_assert(buf[0] == 'H');
+	nemu_assert(buf[1] == 'e');
 	// nemu_assert(strcmp(buf, "Hello world!\n") == 0);
 
 	sprintf(buf, "%d + %d = %d\n", 1, 1, 2);
