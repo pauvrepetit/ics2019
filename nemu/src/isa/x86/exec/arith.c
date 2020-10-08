@@ -48,7 +48,7 @@ make_EHelper(inc) {
   id_src->val = 1;
   rtl_is_add_overflow(&t0, &t1, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&t0);
-  operand_write(id_dest, &id_dest->val);
+  operand_write(id_dest, &t1);
 
   print_asm_template1(inc);
 }
