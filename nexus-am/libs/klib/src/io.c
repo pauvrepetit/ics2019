@@ -1,6 +1,8 @@
 #include <klib.h>
 #include <amdev.h>
 
+#include <nemu.h>
+
 uint32_t uptime() {
   _DEV_TIMER_UPTIME_t uptime;
   _io_read(_DEV_TIMER, _DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
@@ -30,9 +32,14 @@ void draw_rect(uint32_t *pixels, int x, int y, int w, int h) {
 
 void draw_sync() {
   _DEV_VIDEO_FBCTL_t ctl;
-  ctl.pixels = NULL;
-  ctl.x = ctl.y = ctl.w = ctl.h = 0;
-  ctl.sync = 1;
+  ctl.pixels = (uint32_t *)(uintptr_t)FB_ADDR;
+  ctl.x = 0;
+  ctl.y = 0;
+  ctl.w = screen_width();
+  ctl.h = screen_height();
+  // ctl.pixels = NULL;
+  // ctl.x = ctl.y = ctl.w = ctl.h = 0;
+  // ctl.sync = 1;
   _io_write(_DEV_VIDEO, _DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));
 }
 
