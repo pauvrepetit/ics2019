@@ -4,12 +4,16 @@
 
 #include <klib.h>
 
+#define SCREEN_PORT 0x100
+#define SYNC_PORT 0x104
+
 size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_INFO: {
       _DEV_VIDEO_INFO_t *info = (_DEV_VIDEO_INFO_t *)buf;
-      info->width = 0;
-      info->height = 0;
+      uint32_t wh = inl(SCREEN_PORT);
+      info->width = (wh >> 16) & 0xffff;
+      info->height = wh & 0xffff;
       return sizeof(_DEV_VIDEO_INFO_t);
     }
   }
@@ -22,7 +26,8 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
       _DEV_VIDEO_FBCTL_t *ctl = (_DEV_VIDEO_FBCTL_t *)buf;
 
       if (ctl->sync) {
-        outl(SYNC_ADDR, 0);
+        // outl(SYNC_ADDR, 0);
+        outl(SYNC_PORT, ctl->sync);
       }
       return size;
     }
