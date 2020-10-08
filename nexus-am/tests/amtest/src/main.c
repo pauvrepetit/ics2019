@@ -15,7 +15,6 @@ static const char *tests[256] = {
 };
 
 int main(const char *args) {
-  void rtc_test(); entry = rtc_test; ({ _ioe_init(); }); rtc_test();
   switch (args[0]) {
     CASE('h', hello);
     CASE('i', hello_intr, IOE, CTE(simple_trap));
