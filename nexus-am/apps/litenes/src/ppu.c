@@ -262,6 +262,7 @@ void ppu_cycle() {
   time_read(t1);
 
   ppu.scanline++;
+  printf("scanline %d\n", ppu.scanline);
 
   if (ppu.scanline < H && ppu_shows_background()) {
     printf("here1\n");
