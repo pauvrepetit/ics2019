@@ -46,7 +46,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           // %0 数字 d
           i++;
           if (fmt[i+1] > '0' && fmt[i+1] <= '9') {
-            int numLen = atoi(fmt+1); // 这个数字表示输出的长度
+            int numLen = atoi(fmt+i+1); // 这个数字表示输出的长度
             while (fmt[i] > '9' || fmt[i] < '0') {
               i++;
             }
