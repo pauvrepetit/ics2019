@@ -63,7 +63,7 @@ int main(const char *args) {
   const char *setting_name = args;
   printf("start: args == '%s'\n", args);
   printf("%d\n", strcmp(args, ""));
-  if (strcmp(args, "") == 0) {
+  if (args == NULL) {
     printf("Hello world\n");
   }
   if (args == NULL || strcmp(args, "") == 0) {
