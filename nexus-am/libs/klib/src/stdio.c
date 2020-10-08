@@ -5,10 +5,10 @@
 
 int printf(const char *fmt, ...) {
   char buf[1024];
-  // va_list args;
-  // va_start(args, fmt);
+  va_list args;
+  va_start(args, fmt);
   sprintf(buf, fmt);
-  // va_end(args);
+  va_end(args);
   size_t i = 0;
   while (buf[i] != '\0') {
     _putc(buf[i++]);
