@@ -3,6 +3,8 @@
 
 #include <nemu.h>
 
+#define MIN(a,b)	((a)<(b)?(a):(b))
+
 uint32_t uptime() {
   _DEV_TIMER_UPTIME_t uptime;
   _io_read(_DEV_TIMER, _DEVREG_TIMER_UPTIME, &uptime, sizeof(uptime));
@@ -27,7 +29,13 @@ void draw_rect(uint32_t *pixels, int x, int y, int w, int h) {
     .x = x, .y = y, .w = w, .h = h,
     .sync = 0,
   };
-  memcpy((void *)(uintptr_t)FB_ADDR, (void *)pixels, sizeof(uint32_t) * w * h);
+  // memcpy((void *)(uintptr_t)FB_ADDR, (void *)pixels, sizeof(uint32_t) * w * h);
+  int width = screen_width();
+  int height = screen_height();
+  for (int i = y; i < h && i < height; i++) {
+    memcpy((uint32_t *)(uintptr_t)FB_ADDR + i * width + x, pixels, sizeof(uint32_t) * MIN(w, width-x));
+    pixels += w;
+  }
   _io_write(_DEV_VIDEO, _DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));
 }
 
