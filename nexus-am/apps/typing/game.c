@@ -43,7 +43,7 @@ int main (){
     if(redraw) {
       num_draw ++;
       set_fps(num_draw * 1000 / time);
-      printf("set_fps num_draw == %d, time == %d\n", num_draw, time);
+      // printf("set_fps num_draw == %d, time == %d\n", num_draw, time);
       redraw_screen();
     }
   }
