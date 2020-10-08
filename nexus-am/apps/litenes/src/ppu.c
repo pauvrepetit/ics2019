@@ -267,7 +267,7 @@ void ppu_cycle() {
   if (!ppu.ready) {
     printf("!ppu.ready\n");
   }
-  if (!ppu.ready && cpu_clock() > 29658) {
+  if ((!ppu.ready) && (cpu_clock() > 29658)) {
     printf("???\n");
     ppu.ready = true;
   }
