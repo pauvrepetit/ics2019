@@ -60,7 +60,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                 _putc('@');
                 _putc('@');
               }
-              if (numLen == 2) {
+              if (numLen == 1) {
                 _putc('!');
                 _putc('!');
               }
