@@ -34,8 +34,9 @@ int atoi(const char* nptr) {
   int neg = 1;
   int loc = 0;
   int num = 0;
-  if (nptr[loc++] == '-') {
+  if (nptr[loc] == '-') {
     neg = -1;
+    loc++;
   }
 
   while (nptr[loc] >= '0' && nptr[loc] <= '9') {
