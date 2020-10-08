@@ -264,6 +264,7 @@ void ppu_cycle() {
   ppu.scanline++;
 
   if (ppu.scanline < H && ppu_shows_background()) {
+    printf("here1\n");
     ppu_draw_background_scanline(false);
     ppu_draw_background_scanline(true);
   }
@@ -273,6 +274,7 @@ void ppu_cycle() {
   time_read(t3);
 
   if (ppu.scanline < H && ppu_shows_sprites()) {
+    printf("here2\n");
     ppu_draw_sprite_scanline();
   }
 
@@ -285,6 +287,7 @@ void ppu_cycle() {
   sprite_time += time_diff(t4, t3);
 
   if (ppu.scanline == 241) {
+    printf("here3\n");
     ppu_set_in_vblank(true);
     ppu_set_sprite_0_hit(false);
     cpu_interrupt();
