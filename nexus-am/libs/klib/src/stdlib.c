@@ -26,5 +26,6 @@ char *itoa(int num, char *s, int len) {
       num /= 10;
     }
   }
+  if (neg) s[--len] = '-';
   return s+len;
 }

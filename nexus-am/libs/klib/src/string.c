@@ -72,8 +72,8 @@ void* memcpy(void* out, const void* in, size_t n) {
 
 int memcmp(const void* s1, const void* s2, size_t n) {
   size_t i = 0;
-  uint8_t *m1 = s1;
-  uint8_t *m2 = s2;
+  const uint8_t *m1 = (const uint8_t *)s1;
+  const uint8_t *m2 = (const uint8_t *)s2;
   while (m1[i] == m2[i] && i < n) {
     i++;
   }
