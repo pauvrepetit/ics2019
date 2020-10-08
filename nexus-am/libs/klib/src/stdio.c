@@ -56,12 +56,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
               int num = va_arg(ap, int);
               char *ns = itoa(num, numStr, 20);
               int numRealLen = strlen(ns);
-              if (numRealLen == 0) {
-                _putc('!');
-                _putc('!');
-              } else if (numRealLen == 1) {
+              if (numRealLen == 1) {
                 _putc('@');
                 _putc('@');
+              }
+              if (numLen == 2) {
+                _putc('!');
+                _putc('!');
               }
               for (int j = 0; j < numLen - numRealLen; j++) {
                 out[o++] = '0';
