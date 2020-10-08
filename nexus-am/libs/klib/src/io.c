@@ -32,13 +32,13 @@ void draw_rect(uint32_t *pixels, int x, int y, int w, int h) {
   // memcpy((void *)(uintptr_t)FB_ADDR, (void *)pixels, sizeof(uint32_t) * w * h);
   int width = screen_width();
   int height = screen_height();
-  printf("draw x is %d, y is %d, w is %d, h is %d\n", x, y, w, h);
-  for(int i = 0; i < 0xffffff; i++);
+  // printf("draw x is %d, y is %d, w is %d, h is %d\n", x, y, w, h);
+  // for(int i = 0; i < 0xffffff; i++);
   for (int i = y; (i-y) < h && i < height; i++) {
     memcpy((uint32_t *)(uintptr_t)FB_ADDR + i * width + x, pixels, sizeof(uint32_t) * MIN(w, width-x));
     pixels += w;
   }
-  printf("drawing\n");
+  // printf("drawing\n");
   _io_write(_DEV_VIDEO, _DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));
 }
 
