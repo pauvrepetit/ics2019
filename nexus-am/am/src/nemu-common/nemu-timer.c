@@ -8,6 +8,7 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
       _DEV_TIMER_UPTIME_t *uptime = (_DEV_TIMER_UPTIME_t *)buf;
       uptime->hi = 0;
       uptime->lo = inl(0x48);
+      printf("uptime->lo is %08x\n", uptime->lo);
       return sizeof(_DEV_TIMER_UPTIME_t);
     }
     case _DEVREG_TIMER_DATE: {
