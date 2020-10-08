@@ -50,6 +50,7 @@ int sprintf(char *out, const char *fmt, ...) {
       }
     }
   }
+  out[o] = '\0';
   va_end(args);
   return 0;
 }
