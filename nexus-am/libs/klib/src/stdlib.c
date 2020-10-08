@@ -29,3 +29,18 @@ char *itoa(int num, char *s, int len) {
   if (neg) s[--len] = '-';
   return s+len;
 }
+
+int atoi(const char* nptr) {
+  int neg = 1;
+  int loc = 0;
+  int num = 0;
+  if (nptr[loc++] == '-') {
+    neg = -1;
+  }
+
+  while (nptr[loc] != '\0') {
+    num *= 10;
+    num += nptr[loc++];
+  }
+  return num;
+}
