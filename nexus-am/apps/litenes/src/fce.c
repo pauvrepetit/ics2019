@@ -137,9 +137,7 @@ void fce_update_screen() {
     }
   }
 
-  printf("call draw_sync\n");
   draw_sync();
-  printf("return\n");
 
   for (int i = 0; i < W * H; i ++) canvas[i] = bgc;
 }
