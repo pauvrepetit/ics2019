@@ -21,6 +21,7 @@ int sprintf(char *out, const char *fmt, ...) {
       out[o++] = fmt[i];
     } else {
       if (fmt[i+1] == '\0') {
+        va_end(args);
         return -1;  // error
       } else {
         if (fmt[i+1] == '%') {
@@ -43,11 +44,13 @@ int sprintf(char *out, const char *fmt, ...) {
           i ++;
 
         } else {
+          va_end(args);
           return -1;  // error
         }
       }
     }
   }
+  va_end(args);
   return 0;
 }
 
