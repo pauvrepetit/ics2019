@@ -31,7 +31,8 @@ int sprintf(char *out, const char *fmt, ...) {
           int num = va_arg(args, int);
           char *ns = itoa(num, numStr, 20);
           strcat(out+o, ns);
-          o += (numStr + 19 - ns);
+          // o += (numStr + 19 - ns);
+          o += strlen(ns);
           i ++;
 
         } else if (fmt[i+1] == 's') {
