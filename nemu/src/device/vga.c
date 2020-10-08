@@ -30,7 +30,6 @@ static inline void update_screen() {
 
 static void vga_io_handler(uint32_t offset, int len, bool is_write) {
   // TODO: call `update_screen()` when writing to the sync register
-  // TODO();
   if (offset == 0) {
     assert(is_write == 0);
     screensize_port_base[0] = ((SCREEN_W) << 16) | (SCREEN_H);

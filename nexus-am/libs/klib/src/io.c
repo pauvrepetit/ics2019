@@ -27,6 +27,7 @@ void draw_rect(uint32_t *pixels, int x, int y, int w, int h) {
     .x = x, .y = y, .w = w, .h = h,
     .sync = 0,
   };
+  memcpy((void *)(uintptr_t)FB_ADDR, (void *)pixels, sizeof(uint32_t) * w * h);
   _io_write(_DEV_VIDEO, _DEVREG_VIDEO_FBCTL, &ctl, sizeof(ctl));
 }
 
