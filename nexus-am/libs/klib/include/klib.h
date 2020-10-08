@@ -61,6 +61,7 @@ int abs(int x);
 unsigned long time();
 void srand(unsigned int seed);
 int rand();
+char *itoa(int num, char *s, int len);
 
 // stdio.h
 int printf(const char* fmt, ...);
