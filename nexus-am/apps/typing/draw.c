@@ -115,7 +115,7 @@ void redraw_screen() {
   const char *fps = itoa(get_fps());
   draw_string(fps, 0, 0, 0xf3f781);
   draw_string("FPS", strlen(fps) * 8, 0, 0xf3f781);
-  printf("FPS %s\n", fps);
+  // printf("FPS %s\n", fps);
 
 #ifdef SCREEN_STRETCH
   assert(0);
