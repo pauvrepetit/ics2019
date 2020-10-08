@@ -121,14 +121,18 @@ void fce_update_screen() {
   frame_cnt ++;
   if (!candraw()) return;
 
+  printf("frame_cnt = %d\n", frame_cnt);
   int idx = ppu_ram_read(0x3F00);
+  printf("idx = %d\n", idx);
   uint32_t bgc = palette[idx];
+  printf("bgc = %d\n", bgc);
 
   int w = screen_width();
   int h = screen_height();
 
   int xpad = (w - W) / 2;
   int ypad = (h - H) / 2;
+  printf("xpad = %d, ypad = %d\n", xpad, ypad);
   assert(xpad >= 0 && ypad >= 0);
 
   for (int x = 0; x < W; x ++) {
