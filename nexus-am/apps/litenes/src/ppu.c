@@ -261,7 +261,7 @@ void ppu_cycle() {
   // }
   // printf("%d\n", cpu_clock());
   unsigned long long ccl = cpu_clock();
-  printf("%lld\n", ccl);
+  printf("%d\n", ccl);
   // if (ccl > 30000) {
   //   printf("ccl\n");
   // }
