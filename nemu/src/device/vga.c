@@ -35,6 +35,7 @@ static void vga_io_handler(uint32_t offset, int len, bool is_write) {
   assert(offset == 4);
   if (offset == 4) {
     // read/write SCREEN_PORT
+    outl(SYNC_PORT, screensize_port_base[1]);
     update_screen();
   }
 }
