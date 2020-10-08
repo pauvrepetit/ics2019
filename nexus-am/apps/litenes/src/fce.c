@@ -7,7 +7,7 @@
 #include <amdev.h>
 
 static int frame_cnt;
-bool candraw() { return frame_cnt % 3 == 0; }
+bool candraw() { return true; return frame_cnt % 3 == 0; }
 
 static uint32_t canvas[W * H];
 
@@ -133,9 +133,7 @@ void fce_update_screen() {
 
   for (int x = 0; x < W; x ++) {
     for (int y = 0; y < H; y ++) {
-      printf("call draw_rect, %d, %d\n", xpad+x, ypad+y);
       draw_rect(&canvas[y * W + x], xpad + x, ypad + y, 1, 1);
-      printf("return\n");
     }
   }
 
