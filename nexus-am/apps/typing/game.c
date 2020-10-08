@@ -27,6 +27,7 @@ int main (){
     if (time > next_refresh) {
       redraw = true;
       next_refresh += 1000 / FPS;
+      printf("here %d\n", next_refresh);
     }
     next_frame += 1000 / HZ;
 
