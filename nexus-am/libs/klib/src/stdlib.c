@@ -42,5 +42,5 @@ int atoi(const char* nptr) {
     num *= 10;
     num += nptr[loc++] - '0';
   }
-  return num;
+  return num * neg;
 }
