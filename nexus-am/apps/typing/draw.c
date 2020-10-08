@@ -43,6 +43,7 @@ char *itoa(int n)  {
 }
 
 static inline void draw_character(char ch, int x, int y, int color) {
+  printf("draw_character\n");
   int i, j;
   char *p = font8x8_basic[(int)ch];
   uint32_t buf[8][8];
