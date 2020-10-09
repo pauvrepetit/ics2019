@@ -14,7 +14,8 @@ _Context* do_syscall(_Context *c) {
     case SYS_write: {
       // printf("call sys write\n");
       if (a[0] != 1 && a[0] != 2) {
-        return -1;
+        c->GPRx = -1;
+        break;
       }
       int count = 0;
       for (count = 0; count < a[2]; count++) {
