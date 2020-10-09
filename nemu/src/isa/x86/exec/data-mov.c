@@ -42,10 +42,13 @@ make_EHelper(pusha) {
     rtl_push(&t0);
   }
 
+  printf("pusha R_ESP is %d\n", cpu.esp);
+
   print_asm("pusha");
 }
 
 make_EHelper(popa) {
+  printf("popa R_ESP is %d\n", cpu.esp);
   if (decinfo.isa.is_operand_size_16) {
     assert(1 == 0);
   } else {
