@@ -26,10 +26,10 @@ static inline void rtl_sr(int r, const rtlreg_t* src1, int width) {
 static inline void rtl_push(const rtlreg_t* src1) {
   // esp <- esp - 4
   // M[esp] <- src1
-  rtl_lr(&t0, R_ESP, 4);
-  rtl_subi(&t0, &t0, 4);
-  rtl_sr(R_ESP, &t0, 4);
-  rtl_sm(&t0, src1, 4);
+  rtl_lr(&s0, R_ESP, 4);
+  rtl_subi(&s0, &s0, 4);
+  rtl_sr(R_ESP, &s0, 4);
+  rtl_sm(&s0, src1, 4);
 
   // TODO();
 }
@@ -37,10 +37,10 @@ static inline void rtl_push(const rtlreg_t* src1) {
 static inline void rtl_pop(rtlreg_t* dest) {
   // dest <- M[esp]
   // esp <- esp + 4
-  rtl_lr(&t0, R_ESP, 4);
-  rtl_lm(dest, &t0, 4);
-  rtl_addi(&t0, &t0, 4);
-  rtl_sr(R_ESP, &t0, 4);
+  rtl_lr(&s0, R_ESP, 4);
+  rtl_lm(dest, &s0, 4);
+  rtl_addi(&s0, &s0, 4);
+  rtl_sr(R_ESP, &s0, 4);
 
   // TODO();
 }
