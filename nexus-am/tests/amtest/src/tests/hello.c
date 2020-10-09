@@ -16,16 +16,16 @@ void hello() {
   
   bool ready = false;
   unsigned int ccl = cpu_clock();
-  if (!ready) {
-    if (ccl > 29658) {
-      printf("???\n");
-      ready = true;
-    }
-  }
-  // if ((!ppu.ready) && (cpu_clock() > 29658)) {
-  //   printf("???\n");
-  //   ppu.ready = true;
+  // if (!ready) {
+  //   if (ccl > 29658) {
+  //     printf("???\n");
+  //     ready = true;
+  //   }
   // }
+  if ((!ready) && (cpu_clock() > 29658)) {
+    printf("???\n");
+    ready = true;
+  }
   for (int i = 0; i < 10; i ++) {
     putstr("Hello, AM World @ " __ISA__ "\n");
   }
