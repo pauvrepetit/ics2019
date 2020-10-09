@@ -9,8 +9,6 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr) {
   // GateDesc *idt_entry = &data;
 
   // rtl_j((idt_entry->off_31_16 << 16) | idt_entry->off_15_0);
-
-  
 }
 
 bool isa_query_intr(void) {

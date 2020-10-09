@@ -94,6 +94,7 @@ typedef struct {
   };
 
   uint32_t cs;
+  uint32_t idtr;
 
 } CPU_state;
 

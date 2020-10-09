@@ -1,7 +1,19 @@
 #include "cpu/exec.h"
 
 make_EHelper(lidt) {
-  TODO();
+  // TODO();
+  t0 = 0;
+  switch (id_dest->width) {
+    case 2:
+      interpret_rtl_lm(&t0, &id_dest->val, 3);
+      break;
+    case 4:
+      interpret_rtl_lm(&t0, &id_dest->val, 4);
+      break;
+    default:
+      break;
+  }
+  cpu.idtr = t0;
 
   print_asm_template1(lidt);
 }
