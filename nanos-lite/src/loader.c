@@ -15,8 +15,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // TODO();
   Elf_Ehdr elf_header;
   ramdisk_read((void *)&elf_header, 0, sizeof(Elf_Ehdr));
-  printf("phoff is %d\n", elf_header.e_phoff);
-  printf("shoff is %d\n", elf_header.e_shoff);
   uint32_t phoff = elf_header.e_phoff;
   uint32_t phsize = elf_header.e_phentsize;
   uint32_t phcount = elf_header.e_phnum;
@@ -28,13 +26,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
       ramdisk_read((void *)(elf_ph_header.p_vaddr), elf_ph_header.p_offset, elf_ph_header.p_filesz);
     }
-    // printf("type %d\n", elf_ph_header.p_type);
-    // printf("offset %d\n", elf_ph_header.p_offset);
-    // printf("vaddr %d\n", elf_ph_header.p_vaddr);
-    // printf("paddr %d\n", elf_ph_header.p_paddr);
-    // printf("filesz %d\n", elf_ph_header.p_filesz);
-    // printf("memsz %d\n", elf_ph_header.p_memsz);
-    // printf("\n");
   }
   return elf_header.e_entry;
 }
