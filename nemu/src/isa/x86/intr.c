@@ -12,6 +12,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr) {
   uint32_t idt = cpu.idtr;
   uint32_t lo = vaddr_read(idt+NO*8, 4);
   uint32_t hi = vaddr_read(idt+NO*8+4, 4);
+  printf("idt is %d, lo is %d, hi is %d\n", idt, lo, hi);
   uint32_t target = (hi & 0xffff0000) | (lo & 0xffff);
   t0 = cpu.eflagsReg;
   rtl_push(&t0);
