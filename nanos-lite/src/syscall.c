@@ -22,7 +22,7 @@ _Context* do_syscall(_Context *c) {
         _putc(((char *)a[2])[count]);
       }
       c->GPRx = count;
-      printf("syscall write return %d\n", c->GPRx);
+      // printf("syscall write return %d\n", c->GPRx);
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
