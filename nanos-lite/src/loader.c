@@ -23,15 +23,20 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Phdr elf_ph_header;
   for (int i = 0; i < phcount; i++) {
     ramdisk_read((void *)&elf_ph_header, phoff + i * phsize, phsize);
-    printf("type %d\n", elf_ph_header.p_type);
-    printf("offset %d\n", elf_ph_header.p_offset);
-    printf("vaddr %d\n", elf_ph_header.p_vaddr);
-    printf("paddr %d\n", elf_ph_header.p_paddr);
-    printf("filesz %d\n", elf_ph_header.p_filesz);
-    printf("memsz %d\n", elf_ph_header.p_memsz);
-    printf("\n");
+    if (elf_ph_header.p_type == PT_LOAD) {
+      // 需要加载
+      memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
+      ramdisk_read(elf_ph_header.p_vaddr, elf_ph_header.p_offset, elf_ph_header.p_filesz);
+    }
+    // printf("type %d\n", elf_ph_header.p_type);
+    // printf("offset %d\n", elf_ph_header.p_offset);
+    // printf("vaddr %d\n", elf_ph_header.p_vaddr);
+    // printf("paddr %d\n", elf_ph_header.p_paddr);
+    // printf("filesz %d\n", elf_ph_header.p_filesz);
+    // printf("memsz %d\n", elf_ph_header.p_memsz);
+    // printf("\n");
   }
-  return 0;
+  return elf_header.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
