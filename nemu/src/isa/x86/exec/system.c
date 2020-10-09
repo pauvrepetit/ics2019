@@ -1,5 +1,7 @@
 #include "cpu/exec.h"
 
+void raise_intr(uint32_t NO, vaddr_t ret_addr);
+
 make_EHelper(lidt) {
   // TODO();
   t0 = 0;
