@@ -12,7 +12,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_exit: _halt(a[1]); break;
     case SYS_yield: _yield(); c->GPRx = 0; break;
     case SYS_write: {
-      printf("call sys write\n");
+      // printf("call sys write\n");
       if (a[0] != 1 && a[0] != 2) {
         return -1;
       }
