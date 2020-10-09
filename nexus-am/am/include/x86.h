@@ -272,7 +272,6 @@ static inline void set_idt(GateDesc *idt, int size) {
   data[0] = size - 1;
   data[1] = (uint32_t)idt;
   data[2] = (uint32_t)idt >> 16;
-  printf("set_idt data is %d\n", data);
   asm volatile ("lidt (%0)" : : "r"(data));
 }
 
