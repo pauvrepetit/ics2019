@@ -5,6 +5,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr);
 make_EHelper(lidt) {
   // TODO();
   t0 = 0;
+  id_dest->addr += 2;
   switch (id_dest->width) {
     case 2:
       interpret_rtl_lm(&t0, &id_dest->addr, 3);
