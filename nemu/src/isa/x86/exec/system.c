@@ -7,10 +7,10 @@ make_EHelper(lidt) {
   t0 = 0;
   switch (id_dest->width) {
     case 2:
-      interpret_rtl_lm(&t0, &id_dest->val, 3);
+      interpret_rtl_lm(&t0, &id_dest->addr, 3);
       break;
     case 4:
-      interpret_rtl_lm(&t0, &id_dest->val, 4);
+      interpret_rtl_lm(&t0, &id_dest->addr, 4);
       break;
     default:
       break;
