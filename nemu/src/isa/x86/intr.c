@@ -9,7 +9,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr) {
   // GateDesc *idt_entry = &data;
 
   // rtl_j((idt_entry->off_31_16 << 16) | idt_entry->off_15_0);
-  void *idt = cpu.idtr;
+  uint32_t idt = cpu.idtr;
   uint32_t lo = vaddr_read(idt+NO*8, 4);
   uint32_t hi = vaddr_read(idt+NO*8+4, 4);
   uint32_t target = (hi & 0xffff0000) | (lo & 0xffff);
