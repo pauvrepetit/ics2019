@@ -1,5 +1,6 @@
 #ifndef __X86_H__
 #define __X86_H__
+#include <stdio.h>
 
 // CPU rings
 #define DPL_KERN       0x0     // Kernel (ring 0)
@@ -271,6 +272,7 @@ static inline void set_idt(GateDesc *idt, int size) {
   data[0] = size - 1;
   data[1] = (uint32_t)idt;
   data[2] = (uint32_t)idt >> 16;
+  printf("set_idt data is %d\n", data);
   asm volatile ("lidt (%0)" : : "r"(data));
 }
 
