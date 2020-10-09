@@ -15,6 +15,7 @@ make_EHelper(lidt) {
     default:
       break;
   }
+  printf("lidt %d\n", t0);
   cpu.idtr = t0;
 
   print_asm_template1(lidt);
