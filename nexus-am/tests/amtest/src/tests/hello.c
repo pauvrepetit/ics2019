@@ -8,14 +8,20 @@ typedef int bool;
 #define false 0
 #define true  1
 
+unsigned long long clocks = 0;
+
+void cpu_run(int c) {
+  clocks += c;
+}
+
 unsigned long long cpu_clock() {
-  static unsigned long long clocks = 0;
-  clocks += 100000;
   return clocks;
 }
 
 void hello() {
-  
+  cpu_run(10000);
+  cpu_run(5000);
+  cpu_run(20000);
   bool ready = false;
   unsigned int ccl = cpu_clock();
   if (!ready) {
