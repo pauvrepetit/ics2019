@@ -45,13 +45,9 @@ make_EHelper(int) {
 
 make_EHelper(iret) {
   // TODO();
-  printf("iret ESP is %d\n", cpu.esp);
   rtl_pop(&t0);
-  printf("t0 is %d\n", t0);
   rtl_pop(&cpu.cs);
-  printf("cs is %d\n", cpu.cs);
   rtl_pop(&cpu.eflagsReg);
-  printf("eflags is %d\n", cpu.eflagsReg);
   rtl_j(t0);
 
   print_asm("iret");
