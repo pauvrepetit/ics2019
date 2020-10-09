@@ -9,8 +9,13 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
+  // TODO();
+  Elf_Ehdr elf_header;
+  ramdisk_read((void *)&elf_header, 0, sizeof(Elf_Ehdr));
+  printf("entry is %d\n", elf_header.e_entry);
   return 0;
 }
 
