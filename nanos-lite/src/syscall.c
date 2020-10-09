@@ -13,7 +13,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_yield: _yield(); c->GPRx = 0; break;
     case SYS_write: {
       printf("call sys write\n");
-      if (a[0] != 1 && a[1] != 2) {
+      if (a[0] != 1 && a[0] != 2) {
         return -1;
       }
       int count = 0;
