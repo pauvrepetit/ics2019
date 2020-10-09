@@ -14,7 +14,6 @@ _Context* do_syscall(_Context *c) {
     case SYS_write: {
       // printf("call sys write\n");
       if (a[1] != 1 && a[1] != 2) {
-        printf("???\n");
         c->GPRx = -1;
         break;
       }
@@ -23,6 +22,7 @@ _Context* do_syscall(_Context *c) {
         _putc(((char *)a[2])[count]);
       }
       c->GPRx = count;
+      printf("syscall write return %d\n", c->GPRx);
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
