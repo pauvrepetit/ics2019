@@ -3,9 +3,8 @@
 
 struct _Context {
   uintptr_t eflags, cs, eip;
-  uintptr_t eax, ecx, edx, ebx, temp, ebp, esi, edi;
   int irq;
-  uintptr_t t;
+  uintptr_t eax, ecx, edx, ebx, temp, ebp, esi, edi;
   struct _AddressSpace *as;
   uintptr_t esp;
 
