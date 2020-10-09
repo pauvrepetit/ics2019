@@ -18,6 +18,7 @@ void hello() {
   unsigned int ccl = cpu_clock();
   if (!ready) {
     if (ccl > 29658) {
+      printf("???\n");
       ready = true;
     }
   }
