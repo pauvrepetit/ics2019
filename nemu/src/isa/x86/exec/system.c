@@ -36,7 +36,6 @@ make_EHelper(mov_cr2r) {
 }
 
 make_EHelper(int) {
-  // TODO();
   raise_intr(id_dest->val, *pc);
 
   print_asm("int %s", id_dest->str);
@@ -45,7 +44,11 @@ make_EHelper(int) {
 }
 
 make_EHelper(iret) {
-  TODO();
+  // TODO();
+  rtl_pop(&t0);
+  rtl_pop(&cpu.cs);
+  rtl_pop(&cpu.eflagsReg);
+  rtl_j(t0);
 
   print_asm("iret");
 }
