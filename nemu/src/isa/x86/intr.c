@@ -14,13 +14,10 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr) {
   uint32_t hi = vaddr_read(idt+NO*8+4, 4);
   uint32_t target = (hi & 0xffff0000) | (lo & 0xffff);
   t0 = cpu.eflagsReg;
-  printf("push eflags %d\n", t0);
   rtl_push(&t0);
   t0 = cpu.cs;
-  printf("push cs %d\n", t0);
   rtl_push(&t0);
   t0 = ret_addr;
-  printf("push ret_addr %d\n", t0);
   rtl_push(&t0);
   rtl_j(target);
 }
