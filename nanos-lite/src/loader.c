@@ -15,7 +15,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // TODO();
   Elf_Ehdr elf_header;
   ramdisk_read((void *)&elf_header, 0, sizeof(Elf_Ehdr));
-  printf("entry is %d\n", elf_header.e_entry);
+  printf("phoff is %d\n", elf_header.e_phoff);
   return 0;
 }
 
