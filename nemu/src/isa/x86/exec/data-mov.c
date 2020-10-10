@@ -166,11 +166,3 @@ make_EHelper(movs) {
   else
     print_asm("movsd %ds:(%esi),%es:(%edi)");
 }
-
-make_EHelper(push_ds) {
-  t0 = 0;
-  rtl_push(&t0);
-
-  print_asm("push %ds");
-
-}

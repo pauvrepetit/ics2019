@@ -55,4 +55,3 @@ make_EHelper(popa);
 make_EHelper(iret);
 make_EHelper(movsb);
 make_EHelper(movs);
-make_EHelper(push_ds);
