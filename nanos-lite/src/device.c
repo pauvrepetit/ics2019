@@ -42,7 +42,7 @@ static char dispinfo[128] __attribute__((used)) = {};
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   _DEV_VIDEO_INFO_t video_info;
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
-  sprintf((char *)buf, "WIDTH:%d\nHEIGHT:%d\n", video_info.width, video_info.height);
+  sprintf((char *)buf, "WIDTH:%d HEIGHT:%d\n", video_info.width, video_info.height);
   return strlen((char *)buf);
 }
 
