@@ -65,12 +65,13 @@ int _write(int fd, void *buf, size_t count) {
 
 void *_sbrk(intptr_t increment) {
   extern intptr_t end;
-  intptr_t old_end = end;
+  static intptr_t program_break = &end;
+  int t = program_break;
   
-  int res = _syscall_(SYS_brk, old_end+increment, 0, 0);
+  int res = _syscall_(SYS_brk, t+increment, 0, 0);
   if (res == 0) {
-    end += increment;
-    return (void *)old_end;
+    program_break += increment;
+    return (void *)t;
   } else {
     return (void *)-1;
   }
