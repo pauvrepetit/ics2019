@@ -43,8 +43,16 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   printf("dipinfo call offset is %d, len is %d\n", offset, len);
   _DEV_VIDEO_INFO_t video_info;
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
-  sprintf((char *)buf, "WIDTH : %d\nHEIGHT : %d\n", video_info.width, video_info.height);
-  return strlen((char *)buf);
+  char temp[128];
+  sprintf(temp, "WIDTH : %d\nHEIGHT : %d\n", video_info.width, video_info.height);
+  int length = strlen(temp);
+  if (offset > length) {
+    ((char *)buf)[0] = 0;
+    return 0;
+  } else {
+    strcpy((char *)buf, temp+offset);
+    return length - offset;
+  }
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
