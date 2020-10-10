@@ -42,9 +42,8 @@ static char dispinfo[128] __attribute__((used)) = {};
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   _DEV_VIDEO_INFO_t video_info;
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
-  ((uint32_t *)buf)[0] = video_info.height;
-  ((uint32_t *)buf)[1] = video_info.width;
-  return 8;
+  sprintf((char *)buf, "WIDTH:%d\nHEIGHT:%d\n", video_info.width, video_info.height);
+  return strlen((char *)buf);
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
@@ -59,6 +58,12 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
 size_t fbsync_write(const void *buf, size_t offset, size_t len) {
   draw_sync();
   return 0;
+}
+
+uint32_t get_display_size() {
+  _DEV_VIDEO_INFO_t video_info;
+  _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
+  return video_info.height * video_info.width;
 }
 
 void init_device() {

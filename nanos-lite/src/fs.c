@@ -66,16 +66,13 @@ size_t fs_text_read(int fd, void *buf, size_t len) {
   }
   len = ramdisk_read(buf, f->disk_offset + f->open_offset, len);
   f->open_offset += len;
-  // printf("fs_text_read return %d\n", len);
   return len;
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {
-  // printf("read file %d\n", fd);
   if (file_table[fd].read) {
     return file_table[fd].read(buf, 0, len);
   } else {
-    // printf("read text file %d, len %d\n", fd, len);
     return fs_text_read(fd, buf, len);
   }
 }
@@ -100,11 +97,9 @@ size_t fs_text_write(int fd, const void *buf, size_t len) {
 }
 
 size_t fs_write(int fd, const void *buf, size_t len) {
-  // printf("write file %d\n", fd);
   if (file_table[fd].write) {
     return file_table[fd].write(buf, 0, len);
   } else {
-    // printf("write text file %d\n", fd);
     return fs_text_write(fd, buf, len);
   }
 }
@@ -142,19 +137,17 @@ int fs_close(int fd) {
   return 0;
 }
 
+uint32_t get_display_size();
+
 void init_fs() {
-  // TODO: initialize the size of /dev/fb
-  int fd = fs_open("/proc/dispinfo", 0, 0);
-  int video_info[2];
-  fs_read(fd, (void *)video_info, 8);
   int fb_fd = fs_open("/dev/fb", 0, 0);
-  file_table[fb_fd].size = video_info[0] * video_info[1];
+  file_table[fb_fd].size = get_display_size();
+
 
   int fbsync_fd = fs_open("/dev/fbsync", 0, 0);
   file_table[fbsync_fd].size = file_table[fb_fd].size;
 
 
-  fs_close(fd);
   fs_close(fb_fd);
   fs_close(fbsync_fd);
 }
