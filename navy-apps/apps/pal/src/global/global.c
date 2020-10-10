@@ -175,8 +175,13 @@ PAL_ReadGlobalGameData(
    unsigned int       i;
 
    printf("1\n");
-   LOAD_DATA(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY),
-      4, gpGlobals->f.fpSSS);
+   // LOAD_DATA(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY),
+   //    4, gpGlobals->f.fpSSS);
+   {
+      printf("buffer is %d\n", p->lprgScriptEntry);
+      PAL_MKFReadChunk((LPBYTE)(p->lprgScriptEntry), (p->nScriptEntry * sizeof(SCRIPTENTRY)), (4), (gpGlobals->f.fpSSS));
+      DO_BYTESWAP(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY));
+   }
 
 printf("2\n");
 
