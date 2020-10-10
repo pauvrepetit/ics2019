@@ -102,6 +102,7 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   if (file_table[fd].write) {
     return file_table[fd].write(buf, 0, len);
   } else {
+    printf("write text file %d\n", fd);
     return fs_text_write(fd, buf, len);
   }
 }
