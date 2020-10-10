@@ -6,6 +6,8 @@
 #include <time.h>
 #include "syscall.h"
 
+#include <stdio.h>
+
 // helper macros
 #define _concat(x, y) x ## y
 #define concat(x, y) _concat(x, y)
@@ -63,6 +65,7 @@ int _write(int fd, void *buf, size_t count) {
 
 void *_sbrk(intptr_t increment) {
   extern intptr_t end;
+  printf("now maybe called malloc, end is %d\n", end);
   intptr_t old_end = end;
   int res = _syscall_(SYS_brk, old_end+increment, 0, 0);
   if (res == 0) {
