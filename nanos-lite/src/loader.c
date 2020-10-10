@@ -1,5 +1,6 @@
 #include "proc.h"
 #include <elf.h>
+#include "fs.h"
 
 #ifdef __ISA_AM_NATIVE__
 # define Elf_Ehdr Elf64_Ehdr
@@ -12,26 +13,31 @@
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  // TODO();
+  int fd = fs_open(filename, 0, 0);
   Elf_Ehdr elf_header;
-  ramdisk_read((void *)&elf_header, 0, sizeof(Elf_Ehdr));
+  fs_read(fd, &elf_header, sizeof(Elf_Ehdr));
+
   uint32_t phoff = elf_header.e_phoff;
   uint32_t phsize = elf_header.e_phentsize;
   uint32_t phcount = elf_header.e_phnum;
   Elf_Phdr elf_ph_header;
   for (int i = 0; i < phcount; i++) {
-    ramdisk_read((void *)&elf_ph_header, phoff + i * phsize, phsize);
+    // ramdisk_read((void *)&elf_ph_header, phoff + i * phsize, phsize);
+    fs_lseek(fd, phoff + i * phsize, SEEK_SET);
+    fs_read(fd, (void *)&elf_ph_header, phsize);
     if (elf_ph_header.p_type == PT_LOAD) {
       // 需要加载
       memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
-      ramdisk_read((void *)(elf_ph_header.p_vaddr), elf_ph_header.p_offset, elf_ph_header.p_filesz);
+      // ramdisk_read((void *)(elf_ph_header.p_vaddr), elf_ph_header.p_offset, elf_ph_header.p_filesz);
+
+      fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
+      fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
     }
   }
   return elf_header.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
-  printf("naive_uload filename is %s\n", filename);
   uintptr_t entry = loader(pcb, filename);
   Log("Jump to entry = %x", entry);
   ((void(*)())entry) ();
