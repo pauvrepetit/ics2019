@@ -63,7 +63,10 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   if (f->open_offset + len >= f->size) {
     len = f->size - f->open_offset;
   }
+  _putc('?');
+  _putc('?');
   len = ramdisk_write(buf, f->disk_offset + f->open_offset, len);
+  _putc('!');
   f->open_offset += len;
   return len;
 }
