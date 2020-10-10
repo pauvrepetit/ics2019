@@ -536,7 +536,9 @@ PAL_InitGameData(
 
 --*/
 {
+   printf("PAL_InitGameData start\n");
    PAL_InitGlobalGameData();
+   printf("PAL_InitGlobalGameData finish\n");
 
    gpGlobals->bCurrentSaveSlot = (BYTE)iSaveSlot;
 
@@ -548,7 +550,9 @@ PAL_InitGameData(
       //
       // Cannot load the saved game file. Load the defaults.
       //
+      printf("LoadDefaultGame\n");
       PAL_LoadDefaultGame();
+      printf("LoadDefaultGame finish\n");
    }
 
    gpGlobals->fGameStart = TRUE;
