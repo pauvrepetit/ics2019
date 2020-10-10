@@ -51,7 +51,7 @@ int fs_open(const char *pathname, int flags, int mode) {
   assert(1 == 0);
 }
 
-size_t fs_read(int fd, void *buf, size_t len) {
+size_t fs_text_read(int fd, void *buf, size_t len) {
   Finfo *f = file_table + fd;
   if (f->open_offset + len >= f->size) {
     len = f->size - f->open_offset;
@@ -61,7 +61,15 @@ size_t fs_read(int fd, void *buf, size_t len) {
   return len;
 }
 
-size_t fs_write(int fd, const void *buf, size_t len) {
+size_t fs_read(int fd, void *buf, size_t len) {
+  if (file_table[fd].read) {
+    return file_table[fd].read(buf, 0, len);
+  } else {
+    return fs_text_read(fd, buf, len);
+  }
+}
+
+size_t fs_text_write(int fd, const void *buf, size_t len) {
   if (fd == FD_STDIN) {
     return 0;
   } else if (fd == FD_STDOUT || fd == FD_STDERR) {
@@ -78,6 +86,14 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   len = ramdisk_write(buf, f->disk_offset + f->open_offset, len);
   f->open_offset += len;
   return len;
+}
+
+size_t fs_write(int fd, const void *buf, size_t len) {
+  if (file_table[fd].write) {
+    return file_table[fd].write(buf, 0, len);
+  } else {
+    return fs_text_write(fd, buf, len);
+  }
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence) {
