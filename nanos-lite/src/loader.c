@@ -15,7 +15,7 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename, 0, 0);
   Elf_Ehdr elf_header;
-  fs_read(fd, &elf_header, sizeof(Elf_Ehdr));
+  fs_read(fd, (void *)&elf_header, sizeof(Elf_Ehdr));
 
   uint32_t phoff = elf_header.e_phoff;
   uint32_t phsize = elf_header.e_phentsize;
@@ -34,6 +34,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
     }
   }
+  printf("loader finish\n");
   return elf_header.e_entry;
 }
 
