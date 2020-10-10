@@ -32,6 +32,7 @@ void draw_rect(uint32_t *pixels, int x, int y, int w, int h) {
   int width = screen_width();
   int height = screen_height();
   for (int i = y; (i-y) < h && i < height; i++) {
+    printf("aaa\n");
     memcpy((uint32_t *)(uintptr_t)FB_ADDR + i * width + x, pixels, sizeof(uint32_t) * MIN(w, width-x));
     pixels += w;
   }
