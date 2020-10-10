@@ -70,6 +70,7 @@ size_t fs_text_read(int fd, void *buf, size_t len) {
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {
+  printf("read file %d\n", fd);
   if (file_table[fd].read) {
     return file_table[fd].read(buf, 0, len);
   } else {
@@ -97,6 +98,7 @@ size_t fs_text_write(int fd, const void *buf, size_t len) {
 }
 
 size_t fs_write(int fd, const void *buf, size_t len) {
+  printf("write file %d\n", fd);
   if (file_table[fd].write) {
     return file_table[fd].write(buf, 0, len);
   } else {
