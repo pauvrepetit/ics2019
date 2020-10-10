@@ -24,14 +24,14 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     // 没有键盘事件，那么我们返回一个时钟事件，时钟是必然存在的
     _DEV_TIMER_UPTIME_t time_event;
     _io_read(_DEV_TIMER, _DEVREG_TIMER_UPTIME, &time_event, sizeof(_DEV_TIMER_DATE_t));
-    sprintf((char *)buf + offset, "t %d\n", time_event.lo);
+    sprintf((char *)buf, "t %d\n", time_event.lo);
   } else {
     // 有键盘事件，我们输出键盘事件
     if (kbd_event.keydown == 1) {
       // 按下按键
-      sprintf((char *)buf + offset, "kd %s\n", keyname[kbd_event.keycode & 0x7fff]);
+      sprintf((char *)buf, "kd %s\n", keyname[kbd_event.keycode & 0x7fff]);
     } else {
-      sprintf((char *)buf + offset, "ku %s\n", keyname[kbd_event.keycode & 0x7fff]);
+      sprintf((char *)buf, "ku %s\n", keyname[kbd_event.keycode & 0x7fff]);
     }
   }
   return 0;
