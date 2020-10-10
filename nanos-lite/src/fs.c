@@ -65,6 +65,9 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   }
   // _putc('?');
   // _putc('?');
+  if (fd == FD_STDERR) {
+    return -1;
+  }
   printf("??? %d\n", fd);
   len = ramdisk_write(buf, f->disk_offset + f->open_offset, len);
   _putc('!');
