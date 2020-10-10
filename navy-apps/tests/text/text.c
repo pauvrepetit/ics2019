@@ -2,7 +2,7 @@
 #include <assert.h>
 
 int main() {
-  printf("here is user program text\n");
+  // printf("here is user program text\n");
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
 
@@ -35,7 +35,7 @@ int main() {
 
   fclose(fp);
 
-  printf("PASS!!!\n");
+  // printf("PASS!!!\n");
 
   return 0;
 }
