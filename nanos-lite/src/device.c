@@ -71,7 +71,7 @@ size_t fbsync_write(const void *buf, size_t offset, size_t len) {
 uint32_t get_display_size() {
   _DEV_VIDEO_INFO_t video_info;
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
-  return video_info.height * video_info.width;
+  return video_info.height * video_info.width * 16;
 }
 
 void init_device() {
