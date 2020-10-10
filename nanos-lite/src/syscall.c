@@ -18,9 +18,9 @@ _Context* do_syscall(_Context *c) {
     // case SYS_read:
     //   c->GPRx = fs_read(a[1], (void *)(a[2]), a[3]);
     //   break;
-    // case SYS_write:
-    //   c->GPRx = fs_write(a[1], (const void *)(a[2]), a[3]);
-    //   break;
+    case SYS_write:
+      c->GPRx = fs_write(a[1], (const void *)(a[2]), a[3]);
+      break;
     // case SYS_close:
     //   c->GPRx = fs_close(a[1]);
     //   break;
