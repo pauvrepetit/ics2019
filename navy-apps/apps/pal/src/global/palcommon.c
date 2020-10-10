@@ -803,6 +803,7 @@ PAL_MKFReadChunk(
 
    if (uiChunkLen != 0)
    {
+      printf("uiChunkLen is %d\n", uiChunkLen);
       fseek(fp, uiOffset, SEEK_SET);
       fread(lpBuffer, uiChunkLen, 1, fp);
    }
