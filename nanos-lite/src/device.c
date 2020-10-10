@@ -20,12 +20,13 @@ static const char *keyname[256] __attribute__((used)) = {
 size_t events_read(void *buf, size_t offset, size_t len) {
   _DEV_INPUT_KBD_t kbd_event;
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &kbd_event, sizeof(_DEV_INPUT_KBD_t));
-  // printf("call events_read ");
+  printf("call events_read ");
   if (kbd_event.keycode == _KEY_NONE) {
     // 没有键盘事件，那么我们返回一个时钟事件，时钟是必然存在的
     _DEV_TIMER_UPTIME_t time_event;
     _io_read(_DEV_TIMER, _DEVREG_TIMER_UPTIME, &time_event, sizeof(_DEV_TIMER_DATE_t));
     sprintf((char *)buf, "t %d\n", time_event.lo);
+    printf("time event ");
   } else {
     // 有键盘事件，我们输出键盘事件
     if (kbd_event.keydown == 1) {
@@ -34,7 +35,9 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     } else {
       sprintf((char *)buf, "ku %s\n", keyname[kbd_event.keycode & 0x7fff]);
     }
+    printf("kbd event ");
   }
+  printf("len is %d\n", strlen((char *)buf));
   return strlen((char *)buf);
 }
 
