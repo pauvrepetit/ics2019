@@ -9,9 +9,7 @@ int main() {
   NDL_LoadBitmap(bmp, "/share/pictures/projectn.bmp");
   assert(bmp->pixels);
   NDL_OpenDisplay(bmp->w, bmp->h);
-  printf("w is %d, h is %d\n", bmp->w, bmp->h);
   NDL_DrawRect(bmp->pixels, 0, 0, bmp->w, bmp->h);
-  printf("555\n");
   NDL_Render();
   NDL_CloseDisplay();
   while (1);
