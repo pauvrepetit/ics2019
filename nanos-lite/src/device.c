@@ -62,7 +62,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   _DEV_VIDEO_INFO_t video_info;
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
   draw_rect((uint32_t *)buf, offset % video_info.width, offset / video_info.width, MIN(video_info.width, pixels), pixels / video_info.width + 1);
-  draw_sync();
+  // draw_sync();
   return len;
 }
 
