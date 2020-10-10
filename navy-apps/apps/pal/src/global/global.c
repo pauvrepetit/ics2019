@@ -268,12 +268,18 @@ PAL_InitGlobalGameData(
    {
       PAL_DOALLOCATE(gpGlobals->f.fpSSS, 0, EVENTOBJECT, LPEVENTOBJECT,
          gpGlobals->g.lprgEventObject, gpGlobals->g.nEventObject);
+      
+      printf("g.lprgEventObject is %d\n", gpGlobals->g.lprgEventObject);
 
       PAL_DOALLOCATE(gpGlobals->f.fpSSS, 4, SCRIPTENTRY, LPSCRIPTENTRY,
          gpGlobals->g.lprgScriptEntry, gpGlobals->g.nScriptEntry);
+      
+      printf("gpGlobals->g.lprgScriptEntry is %d\n", gpGlobals->g.lprgScriptEntry);
 
       PAL_DOALLOCATE(gpGlobals->f.fpDATA, 0, STORE, LPSTORE,
          gpGlobals->g.lprgStore, gpGlobals->g.nStore);
+      
+      printf("gpGlobals->g.lprgStore is %d\n", gpGlobals->g.lprgStore);
 
       PAL_DOALLOCATE(gpGlobals->f.fpDATA, 1, ENEMY, LPENEMY,
          gpGlobals->g.lprgEnemy, gpGlobals->g.nEnemy);
