@@ -26,7 +26,7 @@ void init_proc() {
 
   // load program here
   // naive_uload(NULL, NULL);
-  naive_uload(NULL, "/bin/text");
+  naive_uload(NULL, "/bin/events");
 
 }
 
