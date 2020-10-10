@@ -89,13 +89,12 @@ size_t fs_text_write(int fd, const void *buf, size_t len) {
 }
 
 size_t fs_write(int fd, const void *buf, size_t len) {
-  // printf("fs_write fd is %d\n", fd);
-  // if (file_table[fd].write) {
-  //   return file_table[fd].write(buf, 0, len);
-  // } else {
-  //   return fs_text_write(fd, buf, len);
-  // }
-  return fs_text_write(fd, buf, len);
+  printf("fs_write fd is %d\n", fd);
+  if (file_table[fd].write) {
+    return file_table[fd].write(buf, 0, len);
+  } else {
+    return fs_text_write(fd, buf, len);
+  }
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence) {
