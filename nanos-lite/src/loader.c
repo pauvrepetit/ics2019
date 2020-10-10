@@ -32,6 +32,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
       // ramdisk_read((void *)(elf_ph_header.p_vaddr), elf_ph_header.p_offset, elf_ph_header.p_filesz);
 
+      printf("load: offset is %d, paddr is %d, filesz is %d\n", elf_ph_header.p_offset, elf_ph_header.p_paddr, elf_ph_header.p_filesz);
+
       fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
       fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
     }
