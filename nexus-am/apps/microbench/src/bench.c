@@ -84,7 +84,7 @@ int main(const char *args) {
   int pass = 1;
   uint32_t t0 = uptime();
 
-  for (int i = 7; i < ARR_SIZE(benchmarks); i ++) {
+  for (int i = 0; i < ARR_SIZE(benchmarks); i ++) {
     Benchmark *bench = &benchmarks[i];
     current = bench;
     setting = &bench->settings[setting_id];
