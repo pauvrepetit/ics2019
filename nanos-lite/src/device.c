@@ -49,7 +49,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   printf("length is %d\n", length);
   if (offset >= length) {
     ((char *)buf)[0] = 0;
-    return 0;
+    return -1;
   } else {
     strcpy((char *)buf, dispinfo+offset);
     return length - offset;
