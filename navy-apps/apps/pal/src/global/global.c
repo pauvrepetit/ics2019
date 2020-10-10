@@ -180,6 +180,7 @@ PAL_ReadGlobalGameData(
    {
       printf("buffer is %d\n", p->lprgScriptEntry);
       PAL_MKFReadChunk((LPBYTE)(p->lprgScriptEntry), (p->nScriptEntry * sizeof(SCRIPTENTRY)), (4), (gpGlobals->f.fpSSS));
+      printf("okok\n");
       DO_BYTESWAP(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY));
    }
 
