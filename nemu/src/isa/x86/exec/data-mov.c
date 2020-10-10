@@ -148,3 +148,21 @@ make_EHelper(movsb) {
 
   print_asm("movsb  %ds:(%esi),%es:(%edi)");
 }
+
+make_EHelper(movs) {
+  int len = (decinfo.isa.is_operand_size_16) ? 2 : 4;
+  rtl_lr(&t0, R_ESI, 4);
+  rtl_lm(&s0, &t0, len);
+  rtl_addi(&t0, &t0, len);
+  rtl_sr(R_ESI, &t0, 4);
+  
+  rtl_lr(&t0, R_EDI, 4);
+  rtl_sm(&t0, &s0, len);
+  rtl_addi(&t0, &t0, len);
+  rtl_sr(R_EDI, &t0, 4);
+
+  if (len == 2)
+    print_asm("movsw %ds:(%esi),%es:(%edi)");
+  else
+    print_asm("movsd %ds:(%esi),%es:(%edi)");
+}
