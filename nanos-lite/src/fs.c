@@ -49,6 +49,7 @@ int fs_open(const char *pathname, int flags, int mode) {
 
 size_t fs_read(int fd, void *buf, size_t len) {
   Finfo *f = file_table + fd;
+  printf("fs_read file %s\n", f->name);
   if (f->open_offset + len >= f->size) {
     len = f->size - f->open_offset;
   }
