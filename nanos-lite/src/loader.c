@@ -36,7 +36,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
     }
   }
-  printf("loader finish\n");
+  printf("loader finish, entry is %d\n", elf_header.e_entry);
   return elf_header.e_entry;
 }
 
