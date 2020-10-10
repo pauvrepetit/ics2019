@@ -66,7 +66,7 @@ size_t fs_text_read(int fd, void *buf, size_t len) {
   }
   len = ramdisk_read(buf, f->disk_offset + f->open_offset, len);
   f->open_offset += len;
-  printf("fs_text_read return %d\n", len);
+  // printf("fs_text_read return %d\n", len);
   return len;
 }
 
