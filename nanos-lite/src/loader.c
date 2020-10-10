@@ -33,7 +33,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   }
 
   extern intptr_t end;
-  printf("end is %d\n", &end);
+  printf("end is %d\n", end);
 
   return elf_header.e_entry;
 }
