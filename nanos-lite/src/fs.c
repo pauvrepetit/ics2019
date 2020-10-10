@@ -7,9 +7,9 @@ typedef struct {
   char *name;
   size_t size;
   size_t disk_offset;
-  size_t open_offset;
   ReadFn read;
   WriteFn write;
+  size_t open_offset;
 } Finfo;
 
 enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB};
