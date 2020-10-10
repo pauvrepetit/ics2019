@@ -137,6 +137,7 @@ static void get_display_info() {
   while (fgets(buf, 128, dispinfo)) {
     printf("buf is '%s'\n", buf);
     *(delim = strchr(buf, ':')) = '\0';
+    printf("buf is '%s'\n", buf);
     sscanf(buf, "%s", key);
     sscanf(delim + 1, "%s", value);
     if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", &screen_w);
