@@ -26,6 +26,9 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 
 size_t serial_write(const void *buf, size_t offset, size_t len);
 size_t events_read(void *buf, size_t offset, size_t len);
+size_t dispinfo_read(void *buf, size_t offset, size_t len);
+size_t fb_write(const void *buf, size_t offset, size_t len);
+size_t fbsync_write(const void *buf, size_t offset, size_t len);
 
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
@@ -33,6 +36,9 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdout", 0, 0, invalid_read, serial_write},
   {"stderr", 0, 0, invalid_read, serial_write},
   {"/dev/events", 0, 0, events_read, invalid_write},
+  {"/dev/fb", 0, 0, invalid_read, fb_write},
+  {"/proc/dispinfo", 0, 0, dispinfo_read, invalid_write},
+  {"/dev/fbsync", 0, 0, invalid_read, fbsync_write},
 #include "files.h"
 };
 
@@ -131,4 +137,17 @@ int fs_close(int fd) {
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+  int fd = fs_open("/proc/dispinfo", 0, 0);
+  int video_info[2];
+  fs_read(fd, (void *)video_info, 8);
+  int fb_fd = fs_open("/dev/fb", 0, 0);
+  file_table[fb_fd].size = video_info[0] * video_info[1];
+
+  int fbsync_fd = fs_open("/dev/fbsync", 0, 0);
+  file_table[fbsync_fd].size = file_table[fb_fd].size;
+
+
+  fs_close(fd);
+  fs_close(fb_fd);
+  fs_close(fbsync_fd);
 }

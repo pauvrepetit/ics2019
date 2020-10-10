@@ -40,14 +40,24 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 static char dispinfo[128] __attribute__((used)) = {};
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  _DEV_VIDEO_INFO_t video_info;
+  _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
+  ((uint32_t *)buf)[0] = video_info.height;
+  ((uint32_t *)buf)[1] = video_info.width;
+  return 8;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+  int32_t dispinfo[2];
+  dispinfo_read((void *)dispinfo, 0, 8);
+  int height = dispinfo[0];
+  int width = dispinfo[1];
+  draw_rect(buf, offset % width, offset / width, width, height);
   return 0;
 }
 
 size_t fbsync_write(const void *buf, size_t offset, size_t len) {
+  draw_sync();
   return 0;
 }
 
@@ -57,4 +67,7 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
+  int32_t dispinfo[2];
+  dispinfo_read((void *)dispinfo, 0, 8);
+  Log("Video Height: %d\nVideo Width:  %d\n", dispinfo[0], dispinfo[1]);
 }
