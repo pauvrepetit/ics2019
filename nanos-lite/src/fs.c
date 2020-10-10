@@ -71,7 +71,9 @@ size_t fs_text_read(int fd, void *buf, size_t len) {
 
 size_t fs_read(int fd, void *buf, size_t len) {
   if (file_table[fd].read) {
-    return file_table[fd].read(buf, 0, len);
+    int len = file_table[fd].read(buf, file_table[fd].open_offset, len);
+    file_table[fd].open_offset += len;
+    return len;
   } else {
     return fs_text_read(fd, buf, len);
   }
@@ -98,7 +100,9 @@ size_t fs_text_write(int fd, const void *buf, size_t len) {
 
 size_t fs_write(int fd, const void *buf, size_t len) {
   if (file_table[fd].write) {
-    return file_table[fd].write(buf, 0, len);
+    int len = file_table[fd].write(buf, file_table[fd].open_offset, len);
+    file_table[fd].open_offset += len;
+    return len;
   } else {
     return fs_text_write(fd, buf, len);
   }
