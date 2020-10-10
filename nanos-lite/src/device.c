@@ -69,6 +69,6 @@ void init_device() {
   // described in the Navy-apps convention
   int32_t dispinfo[2];
   dispinfo_read((void *)dispinfo, 0, 8);
-  Log("Video Height: %d\n", dispinfo[0]);
-  Log("Video Width:  %d\n", dispinfo[1]);
+  Log("Video Height: %d", dispinfo[0]);
+  Log("Video Width:  %d", dispinfo[1]);
 }
