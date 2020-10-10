@@ -14,38 +14,29 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename, 0, 0);
-  printf("load fd is %d\n", fd);
   Elf_Ehdr elf_header;
   fs_read(fd, (void *)&elf_header, sizeof(Elf_Ehdr));
-  printf("phoff is %d\n", elf_header.e_phoff);
 
   uint32_t phoff = elf_header.e_phoff;
   uint32_t phsize = elf_header.e_phentsize;
   uint32_t phcount = elf_header.e_phnum;
   Elf_Phdr elf_ph_header;
   for (int i = 0; i < phcount; i++) {
-    // ramdisk_read((void *)&elf_ph_header, phoff + i * phsize, phsize);
     fs_lseek(fd, phoff + i * phsize, SEEK_SET);
     fs_read(fd, (void *)&elf_ph_header, phsize);
     if (elf_ph_header.p_type == PT_LOAD) {
       // 需要加载
       memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
-      // ramdisk_read((void *)(elf_ph_header.p_vaddr), elf_ph_header.p_offset, elf_ph_header.p_filesz);
-
-      printf("load: offset is %d, paddr is %d, filesz is %d\n", elf_ph_header.p_offset, elf_ph_header.p_paddr, elf_ph_header.p_filesz);
-
       fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
       fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
     }
   }
-  printf("loader finish, entry is %d\n", elf_header.e_entry);
   return elf_header.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
-  printf("load finish %d\n", entry);
-  // Log("Jump to entry = %d", entry);
+  Log("Jump to entry = %d", entry);
   ((void(*)())entry) ();
 }
 
