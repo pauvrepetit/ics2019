@@ -138,8 +138,13 @@ make_EHelper(lea) {
 make_EHelper(movsb) {
   rtl_lr(&t0, R_ESI, 4);
   rtl_lm(&s0, &t0, 1);
+  rtl_addi(&t0, &t0, 1);
+  rtl_sr(&t0, R_ESI, 4);
+  
   rtl_lr(&t0, R_EDI, 4);
   rtl_sm(&t0, &s0, 1);
+  rtl_addi(&t0, &t0, 1);
+  rtl_sr(&t0, R_EDI, 4);
 
   print_asm("movsb  %ds:(%esi),%es:(%edi)");
 }
