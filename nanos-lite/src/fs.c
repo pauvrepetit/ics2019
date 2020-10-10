@@ -107,7 +107,7 @@ size_t fs_write(int fd, const void *buf, size_t len) {
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence) {
-  printf("call lseek file is %s\n", file_table[fd].name);
+  printf("call lseek file is %s, offset is %d, size is %d\n", file_table[fd].name, offset, file_table[fd].size);
   switch (whence) {
   case SEEK_SET:
     if (offset <= file_table[fd].size) {
