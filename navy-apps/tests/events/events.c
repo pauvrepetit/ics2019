@@ -9,6 +9,7 @@ int main() {
     char *p = buf, ch;
     printf("???\n");
     while ((ch = fgetc(fp)) != -1) {
+      printf("!!!\n");
       *p ++ = ch;
       if(ch == '\n') {
         *p = '\0';
