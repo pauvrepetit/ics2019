@@ -174,22 +174,49 @@ PAL_ReadGlobalGameData(
    const GAMEDATA    *p = &gpGlobals->g;
    unsigned int       i;
 
+   printf("1\n");
    LOAD_DATA(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY),
       4, gpGlobals->f.fpSSS);
 
+printf("2\n");
+
    LOAD_DATA(p->lprgStore, p->nStore * sizeof(STORE), 0, gpGlobals->f.fpDATA);
+
+printf("3\n");
+
    LOAD_DATA(p->lprgEnemy, p->nEnemy * sizeof(ENEMY), 1, gpGlobals->f.fpDATA);
+
+printf("4\n");
+
    LOAD_DATA(p->lprgEnemyTeam, p->nEnemyTeam * sizeof(ENEMYTEAM),
       2, gpGlobals->f.fpDATA);
+
+printf("5\n");
+
    LOAD_DATA(p->lprgMagic, p->nMagic * sizeof(MAGIC), 4, gpGlobals->f.fpDATA);
+
+printf("1\n");
+
    LOAD_DATA(p->lprgBattleField, p->nBattleField * sizeof(BATTLEFIELD),
       5, gpGlobals->f.fpDATA);
+
+printf("2\n");
+
    LOAD_DATA(p->lprgLevelUpMagic, p->nLevelUpMagic * sizeof(LEVELUPMAGIC_ALL),
       6, gpGlobals->f.fpDATA);
+
+printf("3\n");
+
    LOAD_DATA(p->rgwBattleEffectIndex, sizeof(p->rgwBattleEffectIndex),
       11, gpGlobals->f.fpDATA);
+
+printf("4\n");
+
    PAL_MKFReadChunk((LPBYTE)&(p->EnemyPos), sizeof(p->EnemyPos),
       13, gpGlobals->f.fpDATA);
+
+printf("5\n");
+
    DO_BYTESWAP(&(p->EnemyPos), sizeof(p->EnemyPos));
    PAL_MKFReadChunk((LPBYTE)(p->rgLevelUpExp), sizeof(p->rgLevelUpExp),
       14, gpGlobals->f.fpDATA);
@@ -257,6 +284,7 @@ PAL_InitGlobalGameData(
       PAL_DOALLOCATE(gpGlobals->f.fpDATA, 6, LEVELUPMAGIC_ALL, LPLEVELUPMAGIC_ALL,
          gpGlobals->g.lprgLevelUpMagic, gpGlobals->g.nLevelUpMagic);
 
+      printf("PAL_ReadGlobalGameData\n");
       PAL_ReadGlobalGameData();
    }
 #undef PAL_DOALLOCATE
