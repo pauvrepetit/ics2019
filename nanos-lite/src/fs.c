@@ -89,6 +89,7 @@ size_t fs_text_write(int fd, const void *buf, size_t len) {
 }
 
 size_t fs_write(int fd, const void *buf, size_t len) {
+  printf("fs_write fd is %d\n", fd);
   if (file_table[fd].write) {
     return file_table[fd].write(buf, 0, len);
   } else {
