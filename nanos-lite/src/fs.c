@@ -70,9 +70,9 @@ size_t fs_text_read(int fd, void *buf, size_t len) {
 size_t fs_read(int fd, void *buf, size_t len) {
   printf("fs_read %s, len is %d\n", file_table[fd].name, len);
   if (file_table[fd].read) {
-    int len = file_table[fd].read(buf, file_table[fd].open_offset, len);
-    file_table[fd].open_offset += len;
-    return len;
+    int length = file_table[fd].read(buf, file_table[fd].open_offset, len);
+    file_table[fd].open_offset += length;
+    return length;
   } else {
     return fs_text_read(fd, buf, len);
   }
