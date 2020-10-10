@@ -27,18 +27,18 @@ _Context* do_syscall(_Context *c) {
     // case SYS_lseek:
     //   c->GPRx = fs_lseek(a[1], a[2], a[3]);
     //   break;
-    case SYS_write: {
-      if (a[1] != 1 && a[1] != 2) {
-        c->GPRx = -1;
-        break;
-      }
-      int count = 0;
-      for (count = 0; count < a[3]; count++) {
-        _putc(((char *)a[2])[count]);
-      }
-      c->GPRx = count;
-      break;
-    }
+    // case SYS_write: {
+    //   if (a[1] != 1 && a[1] != 2) {
+    //     c->GPRx = -1;
+    //     break;
+    //   }
+    //   int count = 0;
+    //   for (count = 0; count < a[3]; count++) {
+    //     _putc(((char *)a[2])[count]);
+    //   }
+    //   c->GPRx = count;
+    //   break;
+    // }
     case SYS_brk: c->GPRx = 0; break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
