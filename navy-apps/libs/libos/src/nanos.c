@@ -56,6 +56,8 @@ void _exit(int status) {
 }
 
 int _open(const char *path, int flags, mode_t mode) {
+  extern intptr_t end;
+  printf("end is %d\n", end);
   return _syscall_(SYS_open, (intptr_t)path, flags, (intptr_t)mode);
 }
 
@@ -66,18 +68,6 @@ int _write(int fd, void *buf, size_t count) {
 void *_sbrk(intptr_t increment) {
   extern intptr_t end;
   intptr_t old_end = end;
-  if (old_end < 0x100000) {
-    return (void *)-1;
-  }
-  // _putc(old_end / 100000000 % 10 + '0');
-  // _putc(old_end / 10000000 % 10 + '0');
-  // _putc(old_end / 1000000 % 10 + '0');
-  // _putc(old_end / 100000 % 10 + '0');
-  // _putc(old_end / 10000 % 10 + '0');
-  // _putc(old_end / 1000 % 10 + '0');
-  // _putc(old_end / 100 % 10 + '0');
-  // _putc(old_end / 10 % 10 + '0');
-  // _putc(old_end % 10 + '0');
   
   int res = _syscall_(SYS_brk, old_end+increment, 0, 0);
   if (res == 0) {
