@@ -57,7 +57,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   _DEV_VIDEO_INFO_t video_info;
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
-  printf("write %d, %d, %d, %d\n", offset % video_info.width, offset / video_info.width, video_info.width, video_info.height);
+  printf("offset is %d, write %d, %d, %d, %d\n", offset, offset % video_info.width, offset / video_info.width, video_info.width, video_info.height);
   draw_rect((uint32_t *)buf, offset % video_info.width, offset / video_info.width, video_info.width, video_info.height);
   return 0;
 }
