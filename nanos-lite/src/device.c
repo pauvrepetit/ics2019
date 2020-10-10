@@ -71,8 +71,8 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
-  int32_t dispinfo[2];
-  dispinfo_read((void *)dispinfo, 0, 8);
-  Log("Video Height: %d", dispinfo[0]);
-  Log("Video Width:  %d", dispinfo[1]);
+  _DEV_VIDEO_INFO_t video_info;
+  _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, (void *)&video_info, sizeof(_DEV_VIDEO_INFO_t));
+  Log("Video Height: %d", video_info.height);
+  Log("Video Width:  %d", video_info.width);
 }
