@@ -47,7 +47,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   sprintf(temp, "WIDTH : %d\nHEIGHT : %d\n", video_info.width, video_info.height);
   int length = strlen(temp);
   printf("length is %d\n", length);
-  if (offset > length) {
+  if (offset >= length) {
     ((char *)buf)[0] = 0;
     return 0;
   } else {
