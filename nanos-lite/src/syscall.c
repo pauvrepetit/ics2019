@@ -12,7 +12,6 @@ _Context* do_syscall(_Context *c) {
     case SYS_exit: _halt(a[1]); break;
     case SYS_yield: _yield(); c->GPRx = 0; break;
     case SYS_write: {
-      Log("call SYS_write %s\n", (char *)a[2]);
       if (a[1] != 1 && a[1] != 2) {
         c->GPRx = -1;
         break;
@@ -24,7 +23,7 @@ _Context* do_syscall(_Context *c) {
       c->GPRx = count;
       break;
     }
-    case SYS_brk: c->GPRx = -1; break;
+    case SYS_brk: c->GPRx = 0; break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
