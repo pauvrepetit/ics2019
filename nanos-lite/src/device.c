@@ -52,7 +52,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   dispinfo_read((void *)dispinfo, 0, 8);
   int height = dispinfo[0];
   int width = dispinfo[1];
-  draw_rect(buf, offset % width, offset / width, width, height);
+  draw_rect((uint32_t *)buf, offset % width, offset / width, width, height);
   return 0;
 }
 
