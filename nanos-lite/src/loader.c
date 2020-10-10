@@ -17,6 +17,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   printf("load fd is %d\n", fd);
   Elf_Ehdr elf_header;
   fs_read(fd, (void *)&elf_header, sizeof(Elf_Ehdr));
+  printf("phoff is %d\n", elf_header.e_phoff);
 
   uint32_t phoff = elf_header.e_phoff;
   uint32_t phsize = elf_header.e_phentsize;
