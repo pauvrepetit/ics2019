@@ -74,6 +74,7 @@ size_t fs_read(int fd, void *buf, size_t len) {
   if (file_table[fd].read) {
     return file_table[fd].read(buf, 0, len);
   } else {
+    printf("read text file %d, len %d\n", fd, len);
     return fs_text_read(fd, buf, len);
   }
 }
