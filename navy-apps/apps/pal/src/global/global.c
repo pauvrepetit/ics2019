@@ -174,55 +174,21 @@ PAL_ReadGlobalGameData(
    const GAMEDATA    *p = &gpGlobals->g;
    unsigned int       i;
 
-   printf("1\n");
-   // LOAD_DATA(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY),
-   //    4, gpGlobals->f.fpSSS);
-   {
-      printf("buffer is %d\n", p->lprgScriptEntry);
-      PAL_MKFReadChunk((LPBYTE)(p->lprgScriptEntry), (p->nScriptEntry * sizeof(SCRIPTENTRY)), (4), (gpGlobals->f.fpSSS));
-      printf("okok\n");
-      DO_BYTESWAP(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY));
-   }
-
-printf("2\n");
-
+   LOAD_DATA(p->lprgScriptEntry, p->nScriptEntry * sizeof(SCRIPTENTRY),
+      4, gpGlobals->f.fpSSS);
    LOAD_DATA(p->lprgStore, p->nStore * sizeof(STORE), 0, gpGlobals->f.fpDATA);
-
-printf("3\n");
-
    LOAD_DATA(p->lprgEnemy, p->nEnemy * sizeof(ENEMY), 1, gpGlobals->f.fpDATA);
-
-printf("4\n");
-
    LOAD_DATA(p->lprgEnemyTeam, p->nEnemyTeam * sizeof(ENEMYTEAM),
       2, gpGlobals->f.fpDATA);
-
-printf("5\n");
-
    LOAD_DATA(p->lprgMagic, p->nMagic * sizeof(MAGIC), 4, gpGlobals->f.fpDATA);
-
-printf("1\n");
-
    LOAD_DATA(p->lprgBattleField, p->nBattleField * sizeof(BATTLEFIELD),
       5, gpGlobals->f.fpDATA);
-
-printf("2\n");
-
    LOAD_DATA(p->lprgLevelUpMagic, p->nLevelUpMagic * sizeof(LEVELUPMAGIC_ALL),
       6, gpGlobals->f.fpDATA);
-
-printf("3\n");
-
    LOAD_DATA(p->rgwBattleEffectIndex, sizeof(p->rgwBattleEffectIndex),
       11, gpGlobals->f.fpDATA);
-
-printf("4\n");
-
    PAL_MKFReadChunk((LPBYTE)&(p->EnemyPos), sizeof(p->EnemyPos),
       13, gpGlobals->f.fpDATA);
-
-printf("5\n");
-
    DO_BYTESWAP(&(p->EnemyPos), sizeof(p->EnemyPos));
    PAL_MKFReadChunk((LPBYTE)(p->rgLevelUpExp), sizeof(p->rgLevelUpExp),
       14, gpGlobals->f.fpDATA);
@@ -269,17 +235,11 @@ PAL_InitGlobalGameData(
       PAL_DOALLOCATE(gpGlobals->f.fpSSS, 0, EVENTOBJECT, LPEVENTOBJECT,
          gpGlobals->g.lprgEventObject, gpGlobals->g.nEventObject);
       
-      printf("g.lprgEventObject is %d\n", gpGlobals->g.lprgEventObject);
-
       PAL_DOALLOCATE(gpGlobals->f.fpSSS, 4, SCRIPTENTRY, LPSCRIPTENTRY,
          gpGlobals->g.lprgScriptEntry, gpGlobals->g.nScriptEntry);
-      
-      printf("gpGlobals->g.lprgScriptEntry is %d\n", gpGlobals->g.lprgScriptEntry);
 
       PAL_DOALLOCATE(gpGlobals->f.fpDATA, 0, STORE, LPSTORE,
          gpGlobals->g.lprgStore, gpGlobals->g.nStore);
-      
-      printf("gpGlobals->g.lprgStore is %d\n", gpGlobals->g.lprgStore);
 
       PAL_DOALLOCATE(gpGlobals->f.fpDATA, 1, ENEMY, LPENEMY,
          gpGlobals->g.lprgEnemy, gpGlobals->g.nEnemy);
@@ -296,7 +256,6 @@ PAL_InitGlobalGameData(
       PAL_DOALLOCATE(gpGlobals->f.fpDATA, 6, LEVELUPMAGIC_ALL, LPLEVELUPMAGIC_ALL,
          gpGlobals->g.lprgLevelUpMagic, gpGlobals->g.nLevelUpMagic);
 
-      printf("PAL_ReadGlobalGameData\n");
       PAL_ReadGlobalGameData();
    }
 #undef PAL_DOALLOCATE
@@ -576,9 +535,7 @@ PAL_InitGameData(
 
 --*/
 {
-   printf("PAL_InitGameData start\n");
    PAL_InitGlobalGameData();
-   printf("PAL_InitGlobalGameData finish\n");
 
    gpGlobals->bCurrentSaveSlot = (BYTE)iSaveSlot;
 
@@ -590,9 +547,7 @@ PAL_InitGameData(
       //
       // Cannot load the saved game file. Load the defaults.
       //
-      printf("LoadDefaultGame\n");
       PAL_LoadDefaultGame();
-      printf("LoadDefaultGame finish\n");
    }
 
    gpGlobals->fGameStart = TRUE;

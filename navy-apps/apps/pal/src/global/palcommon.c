@@ -775,21 +775,11 @@ PAL_MKFReadChunk(
    //
    // Get the offset of the chunk.
    //
-
-   printf("args: buffersize %d, uichunknum %d, fp %d\n", uiBufferSize, uiChunkNum, fp);
-
    fseek(fp, 4 * uiChunkNum, SEEK_SET);
    fread(&uiOffset, 4, 1, fp);
    fread(&uiNextOffset, 4, 1, fp);
-
-   printf("uiOffset %d\n", uiOffset);
-   printf("uiNextOffset, %d\n", uiNextOffset);
-
    uiOffset = SWAP32(uiOffset);
    uiNextOffset = SWAP32(uiNextOffset);
-
-   printf("uiOffset %d\n", uiOffset);
-   printf("uiNextOffset, %d\n", uiNextOffset);
 
    //
    // Get the length of the chunk.
@@ -803,11 +793,8 @@ PAL_MKFReadChunk(
 
    if (uiChunkLen != 0)
    {
-      printf("uiChunkLen is %d\n", uiChunkLen);
       fseek(fp, uiOffset, SEEK_SET);
-      printf("seek finish\n");
       fread(lpBuffer, uiChunkLen, 1, fp);
-      printf("finish\n");
    }
    else
    {
