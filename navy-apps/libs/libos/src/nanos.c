@@ -56,8 +56,8 @@ void _exit(int status) {
 }
 
 int _open(const char *path, int flags, mode_t mode) {
-  extern intptr_t _etext;
-  printf("etext is %d\n", _etext);
+  extern intptr_t end;
+  printf("end is %d\n", &end);
   return _syscall_(SYS_open, (intptr_t)path, flags, (intptr_t)mode);
 }
 
