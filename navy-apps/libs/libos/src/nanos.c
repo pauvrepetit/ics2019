@@ -90,6 +90,7 @@ off_t _lseek(int fd, off_t offset, int whence) {
 }
 
 int _execve(const char *fname, char * const argv[], char *const envp[]) {
+  printf("here\n");
   _exit(SYS_execve);
   return 0;
 }
