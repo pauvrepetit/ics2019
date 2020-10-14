@@ -34,8 +34,8 @@ void isa_difftest_attach(void) {
 
   ref_difftest_exec(1); // 执行一条指令
   
-  memcpy(&ref_r, &cpu, DIFFTEST_REG_SIZE);
-  ref_difftest_setregs(&ref_r); // 设置qemu的寄存器
+  // memcpy(&ref_r, &cpu, DIFFTEST_REG_SIZE);
+  ref_difftest_setregs(&cpu); // 设置qemu的寄存器
 }
 
 void isa_reg_display_diff(CPU_state cpu) {
