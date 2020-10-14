@@ -141,5 +141,6 @@ void difftest_attach() {
   ref_difftest_memcpy_from_dut(PC_START, guest_to_host(IMAGE_START), PMEM_SIZE);
   ref_difftest_setregs(&cpu);
 
+  printf("here 1\n");
   isa_difftest_attach();
 }
