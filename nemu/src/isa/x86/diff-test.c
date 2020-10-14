@@ -19,14 +19,21 @@ void isa_difftest_attach(void) {
   ref_difftest_memcpy_from_dut(0, 0, 0x7c00);
 
   CPU_state ref_r;
-  ref_difftest_getregs(&ref_r);
+  ref_r.eax = 0x7e00;
+  ref_r.pc = 0x7e40;
   uint16_t idt_data[3];
   idt_data[0] = cpu.idt_size;
   idt_data[1] = cpu.idtr;
   idt_data[2] = ((uint32_t)cpu.idtr) >> 16;
+  ref_difftest_memcpy_from_dut(0x7e00, idt_data, sizeof(uint16_t) * 3); // 把idt的数据写到0x7e00的位置 6个字节
 
-  // uint32_t lidt = 
-  uint32_t pc = ref_r.pc;
+  uint8_t lidt_instructions[3] = {0x0f, 0x01, 0x18};  // lidt (%eax)
+  ref_difftest_memcpy_from_dut(0x7e40, lidt_instructions, sizeof(uint8_t) * 3); // 把lidt指令写到0x7e40的位置
+
+  ref_difftest_exec(1); // 执行一条指令
+  
+  memcpy(&ref_r, &cpu, DIFFTEST_REG_SIZE);
+  ref_difftest_setregs(&ref_r); // 设置qemu的寄存器
 }
 
 void isa_reg_display_diff(CPU_state cpu) {
