@@ -17,6 +17,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 
 void isa_difftest_attach(void) {
   ref_difftest_memcpy_from_dut(0, 0, 0x7c00);
+  printf("here2\n");
 
   CPU_state ref_r;
   ref_r.eax = 0x7e00;
@@ -30,10 +31,16 @@ void isa_difftest_attach(void) {
   uint8_t lidt_instructions[3] = {0x0f, 0x01, 0x18};  // lidt (%eax)
   ref_difftest_memcpy_from_dut(0x7e40, lidt_instructions, sizeof(uint8_t) * 3); // 把lidt指令写到0x7e40的位置
 
+  printf("here3\n");
+
   ref_difftest_exec(1); // 执行一条指令
+
+  printf("here4\n");
   
   memcpy(&ref_r, &cpu, DIFFTEST_REG_SIZE);
   ref_difftest_setregs(&ref_r); // 设置qemu的寄存器
+
+  printf("here5\n");
 }
 
 void isa_reg_display_diff(CPU_state cpu) {
