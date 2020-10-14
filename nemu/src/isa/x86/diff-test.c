@@ -32,6 +32,7 @@ void isa_difftest_attach(void) {
   uint8_t lidt_instructions[3] = {0x0f, 0x01, 0x18};  // lidt (%eax)
   ref_difftest_memcpy_from_dut(0x7e40, lidt_instructions, sizeof(uint8_t) * 3); // 把lidt指令写到0x7e40的位置
 
+  ref_difftest_setregs(&ref_r);
   ref_difftest_exec(1); // 执行一条指令
   
   // memcpy(&ref_r, &cpu, DIFFTEST_REG_SIZE);
