@@ -25,6 +25,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     _DEV_TIMER_UPTIME_t time_event;
     _io_read(_DEV_TIMER, _DEVREG_TIMER_UPTIME, &time_event, sizeof(_DEV_TIMER_DATE_t));
     sprintf((char *)buf, "t %d\n", time_event.lo);
+    printf("hit kbd\n");
   } else {
     // 有键盘事件，我们输出键盘事件
     if (kbd_event.keydown == 1) {
