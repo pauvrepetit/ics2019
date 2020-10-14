@@ -15,9 +15,11 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   return true;
 }
 
+// bool gdb_memcpy_to_qemu(uint32_t dest, void *src, int len);
+
 void isa_difftest_attach(void) {
   printf("here1\n");
-  ref_difftest_memcpy_from_dut(0, 0, 0x7c00);
+  ref_difftest_memcpy_from_dut(0, guest_to_host(0), 0x7c00);
   printf("here2\n");
 
   CPU_state ref_r;
