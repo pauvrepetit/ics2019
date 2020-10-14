@@ -52,7 +52,7 @@ intptr_t _syscall_(intptr_t type, intptr_t a0, intptr_t a1, intptr_t a2) {
 
 void _exit(int status) {
   _syscall_(SYS_exit, status, 0, 0);
-  while (1);
+  // while (1);
 }
 
 int _open(const char *path, int flags, mode_t mode) {
@@ -65,7 +65,7 @@ int _write(int fd, void *buf, size_t count) {
 
 void *_sbrk(intptr_t increment) {
   extern intptr_t end;
-  static intptr_t program_break = &end;
+  static intptr_t program_break = (intptr_t)&end;
   int t = program_break;
   
   int res = _syscall_(SYS_brk, t+increment, 0, 0);
@@ -91,7 +91,7 @@ off_t _lseek(int fd, off_t offset, int whence) {
 
 int _execve(const char *fname, char * const argv[], char *const envp[]) {
   // _exit(SYS_execve);
-  return _syscall_(SYS_execve, fname, (intptr_t)argv, (intptr_t)envp);
+  return _syscall_(SYS_execve, (intptr_t)fname, (intptr_t)argv, (intptr_t)envp);
 }
 
 // The code below is not used by Nanos-lite.
