@@ -127,6 +127,19 @@ static int cmd_d(char *args) {
   return 0;
 }
 
+void difftest_attach();
+void difftest_detach();
+
+static int cmd_attach(char *args) {
+  difftest_attach();
+  return 0;
+}
+
+static int cmd_detach(char *args) {
+  difftest_detach();
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -143,6 +156,8 @@ static struct {
   { "p", "Calculate expr.", cmd_p},
   { "w", "Add a watchpoint.", cmd_w},
   { "d", "Delete a watchpoint.", cmd_d},
+  { "attach", "attach diff_test with qemu.", cmd_attach},
+  { "detach", "detach diff_test with qemu.", cmd_detach},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))

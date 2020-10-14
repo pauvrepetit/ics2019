@@ -3,19 +3,13 @@
 void raise_intr(uint32_t NO, vaddr_t ret_addr);
 
 make_EHelper(lidt) {
-  // TODO();
+  assert(id_dest->width == 4);
+  t0 = 0;
+  interpret_rtl_lm(&t0, &id_dest->addr, 2);
+  cpu.idt_size = t0;
   t0 = 0;
   id_dest->addr += 2;
-  switch (id_dest->width) {
-    case 2:
-      interpret_rtl_lm(&t0, &id_dest->addr, 3);
-      break;
-    case 4:
-      interpret_rtl_lm(&t0, &id_dest->addr, 4);
-      break;
-    default:
-      break;
-  }
+  interpret_rtl_lm(&t0, &id_dest->addr, 4);
   cpu.idtr = t0;
 
   print_asm_template1(lidt);
