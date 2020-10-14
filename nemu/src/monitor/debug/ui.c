@@ -140,6 +140,25 @@ static int cmd_detach(char *args) {
   return 0;
 }
 
+static int cmd_save(char *args) {
+  FILE *f = fopen(args, "w");
+  assert(f);
+
+  fwrite(&cpu, sizeof(cpu), 1, f);
+  fwrite(pmem, 1, PMEM_SIZE, f);
+  fclose(f);
+  return 0;
+}
+
+static int cmd_load(char *args) {
+  FILE *f = fopen(args, "r");
+  assert(f);
+
+  fread(&cpu, sizeof(cpu), 1, f);
+  fread(pmem, 1, PMEM_SIZE, f);
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -158,6 +177,8 @@ static struct {
   { "d", "Delete a watchpoint.", cmd_d},
   { "attach", "attach diff_test with qemu.", cmd_attach},
   { "detach", "detach diff_test with qemu.", cmd_detach},
+  { "save", "save nemu status.", cmd_save},
+  { "load", "load nemu status from file.", cmd_load},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
