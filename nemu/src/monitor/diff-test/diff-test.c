@@ -133,6 +133,8 @@ void difftest_attach() {
   return;
 #endif
 
+  if (!is_detach) return;
+
   is_detach = false;
   is_skip_ref = false;
   skip_dut_nr_instr = 0;

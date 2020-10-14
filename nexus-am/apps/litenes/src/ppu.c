@@ -272,7 +272,6 @@ void ppu_cycle() {
   ppu.scanline++;
 
   if (ppu.scanline < H && ppu_shows_background()) {
-    // printf("here1\n");
     ppu_draw_background_scanline(false);
     ppu_draw_background_scanline(true);
   }
