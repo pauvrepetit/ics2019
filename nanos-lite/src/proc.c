@@ -25,6 +25,7 @@ void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
   printf("create kernel context finished\n");
   pcb_boot = pcb[0];
+  printf("pcb_boot.eip is %d\n", pcb_boot.cp->eip);
   switch_boot_pcb();
 
   // switch_boot_pcb();
