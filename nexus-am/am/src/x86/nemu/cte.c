@@ -16,7 +16,7 @@ _Context* __am_irq_handle(_Context *c) {
     _Event ev = {0};
     switch (c->irq) {
       case 0x80: ev.event = _EVENT_SYSCALL; break;
-      case 0x81: ev.event = _EVENT_YIELD; printf("here event_yield\n"); break;
+      case 0x81: ev.event = _EVENT_YIELD; break;
       default: ev.event = _EVENT_ERROR; break;
     }
 
@@ -61,7 +61,6 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   // c->as->ptr = NULL;  // ?这个指针是指令集相关的，可是他是用来干什么的呢...
   c->cs = 8;
   c->eip = (uintptr_t)entry;
-  printf("here is kcontext, eip is %d\n", c->eip);
   return c;
 }
 
