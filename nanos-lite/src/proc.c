@@ -27,6 +27,7 @@ void init_proc() {
   pcb_boot = pcb[0];
   printf("pcb_boot.eip is %d\n", pcb_boot.cp->eip);
   switch_boot_pcb();
+  printf("hahha\n");
 
   _yield();
 
