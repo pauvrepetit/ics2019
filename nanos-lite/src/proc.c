@@ -23,10 +23,7 @@ void context_kload(PCB *pcb, void *entry);
 
 void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
-  printf("create kernel context finished\n");
-  // pcb_boot = pcb[0];
   switch_boot_pcb();
-  printf("hahha\n");
 
   _yield();
 
@@ -41,6 +38,5 @@ void init_proc() {
 _Context* schedule(_Context *prev) {
   // current->cp = prev; // ??
   current = pcb;  // current指向第0个pcb进程
-  printf("schedule\n");
   return current->cp;
 }

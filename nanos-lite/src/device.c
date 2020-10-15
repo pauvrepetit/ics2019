@@ -33,7 +33,6 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     } else {
       sprintf((char *)buf, "ku %s\n", keyname[kbd_event.keycode & 0x7fff]);
     }
-    // printf("hit kbd %s\n", keyname[kbd_event.keycode & 0x7fff]);
   }
   return strlen((char *)buf);
 }
