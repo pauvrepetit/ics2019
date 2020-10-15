@@ -28,13 +28,14 @@ void init_proc() {
   printf("pcb_boot.eip is %d\n", pcb_boot.cp->eip);
   switch_boot_pcb();
 
+  _yield();
+
   // switch_boot_pcb();
 
   // Log("Initializing processes...");
 
   // load program here
   // naive_uload(NULL, "/bin/init");
-
 }
 
 _Context* schedule(_Context *prev) {
