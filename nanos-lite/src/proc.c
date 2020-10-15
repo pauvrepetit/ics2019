@@ -19,6 +19,8 @@ void hello_fun(void *arg) {
   }
 }
 
+void context_kload(PCB *pcb, void *entry);
+
 void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
   printf("create kernel context finished\n");
