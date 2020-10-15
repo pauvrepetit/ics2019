@@ -1,6 +1,7 @@
 #include <am.h>
 #include <x86.h>
 #include "string.h"
+#include "stdlib.h"
 
 static _Context* (*user_handler)(_Event, _Context*) = NULL;
 
@@ -53,10 +54,11 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   _Context *c = (_Context *)(stack.end) - 1;
   memset(c, 0, sizeof(_Context));
-  c->as->pgsize = PGSIZE;
-  c->as->area.start = stack.start;
-  c->as->area.end = stack.end;
-  c->as->ptr = NULL;  // ?这个指针是指令集相关的，可是他是用来干什么的呢...
+  // c->as = (struct _AddressSpace *)malloc(sizeof(struct _AddressSpace));  // 没有malloc，那我分配不了内存，那这一部分先放着，后面再看
+  // c->as->pgsize = PGSIZE;
+  // c->as->area.start = stack.start;
+  // c->as->area.end = stack.end;
+  // c->as->ptr = NULL;  // ?这个指针是指令集相关的，可是他是用来干什么的呢...
   c->cs = 8;
   c->eip = (uintptr_t)entry;
   printf("here is kcontext, eip is %d\n", c->eip);
