@@ -42,5 +42,6 @@ void init_proc() {
 _Context* schedule(_Context *prev) {
   // current->cp = prev; // ??
   current = pcb;  // current指向第0个pcb进程
+  printf("schedule\n");
   return current->cp;
 }
