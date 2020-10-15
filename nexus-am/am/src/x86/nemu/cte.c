@@ -50,7 +50,15 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  return NULL;
+  _Context *c = (_Context *)(stack.end) - 1;
+  memset(c, 0, sizeof(_Context));
+  c->as->pgsize = PGSIZE;
+  c->as->area.start = stack.start;
+  c->as->area.end = stack.end;
+  c->as->ptr = NULL;  // ?这个指针是指令集相关的，可是他是用来干什么的呢...
+  c->cs = 8;
+  c->eip = entry;
+  return c;
 }
 
 void _yield() {
