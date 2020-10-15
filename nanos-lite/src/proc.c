@@ -22,6 +22,7 @@ void hello_fun(void *arg) {
 void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
   printf("create kernel context finished\n");
+  pcb_boot = pcb[0];
   switch_boot_pcb();
 
   // switch_boot_pcb();
