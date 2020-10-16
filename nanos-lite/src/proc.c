@@ -23,7 +23,9 @@ void context_kload(PCB *pcb, void *entry);
 
 void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
-  switch_boot_pcb();
+  context_uload(&pcb[1], "/bin/init");
+  // switch_boot_pcb();
+  current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 
   _yield();
 
