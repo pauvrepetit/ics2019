@@ -2,6 +2,7 @@
 #include <amdev.h>
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
+  _yield();
   int count = 0;
   for (count = 0; count < len; count++) {
     _putc(((const char *)buf)[count]);
@@ -18,6 +19,7 @@ static const char *keyname[256] __attribute__((used)) = {
 };
 
 size_t events_read(void *buf, size_t offset, size_t len) {
+  _yield();
   _DEV_INPUT_KBD_t kbd_event;
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &kbd_event, sizeof(_DEV_INPUT_KBD_t));
   if (kbd_event.keycode == _KEY_NONE) {
@@ -57,6 +59,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+  _yield();
   offset /= 4;
   int pixels = len / 4;
   _DEV_VIDEO_INFO_t video_info;

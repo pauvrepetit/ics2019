@@ -20,7 +20,7 @@ void hello_fun(void *arg) {
 }
 
 void context_kload(PCB *pcb, void *entry);
-_Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args);
+void context_uload(PCB *pcb, const char *filename);
 
 void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
