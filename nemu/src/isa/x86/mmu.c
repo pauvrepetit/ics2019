@@ -55,7 +55,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     return paddr_read(addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK)) && ((addr + len) & PAGE_MASK) != 0) {
     // 访问的数据段跨越了页
-    printf("isa_vaddr_read, addr is %d, len is %d\n", addr, len);
+    // printf("isa_vaddr_read, addr is %d, len is %d\n", addr, len);
     // if (len == 2) {
     //   uint32_t data = 0;
     //   paddr_t paddr1 = page_translate(addr);
@@ -87,7 +87,7 @@ void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
     return paddr_write(addr, data, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK)) && ((addr + len) & PAGE_MASK) != 0) {
     // 访问的数据段跨越了页
-    printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
+    // printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
     int left_len = ROUNDUP(addr, PGSIZE) - addr;
     int right_len = len - left_len;
     paddr_t paddr1 = page_translate(addr);
