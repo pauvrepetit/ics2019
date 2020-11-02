@@ -23,18 +23,18 @@ void context_kload(PCB *pcb, void *entry);
 void context_uload(PCB *pcb, const char *filename);
 
 void init_proc() {
-  // context_kload(&pcb[0], (void *)hello_fun);
-  // context_uload(&pcb[1], "/bin/init");
-  // switch_boot_pcb();
+  context_kload(&pcb[0], (void *)hello_fun);
+  context_uload(&pcb[1], "/bin/init");
+  switch_boot_pcb();
 
   // _yield();
 
-  switch_boot_pcb();
+  // switch_boot_pcb();
 
-  Log("Initializing processes...");
+  // Log("Initializing processes...");
 
   // load program here
-  naive_uload(NULL, "/bin/init");
+  // naive_uload(NULL, "/bin/init");
 }
 
 _Context* schedule(_Context *prev) {
