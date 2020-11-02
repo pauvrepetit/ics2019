@@ -39,7 +39,7 @@ make_EHelper(mov_cr2r) {
     // ...
     printf("not cr0 or cr3\n");
   }
-  operand_write(id_dest, id_dest.val);
+  operand_write(id_dest, id_dest->val);
 
   print_asm("movl %%cr%d,%%%s", id_src->reg, reg_name(id_dest->reg, 4));
 
