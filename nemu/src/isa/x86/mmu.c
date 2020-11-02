@@ -31,8 +31,8 @@ typedef uint32_t PDE;
 
 paddr_t page_translate(vaddr_t vaddr) {
   // 将虚地址转换为实地址
-  PTE* pgdir = cpu.cr3;
-  PDE* pgtable = pgdir[PDX(vaddr)];
+  uint32_t** pgdir = cpu.cr3;
+  uint32_t* pgtable = pgdir[PDX(vaddr)];
   if (!(((uint32_t)pgtable) & PTE_P)) {
     // 页不存在
     assert(0);
