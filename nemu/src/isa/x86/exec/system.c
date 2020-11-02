@@ -16,13 +16,30 @@ make_EHelper(lidt) {
 }
 
 make_EHelper(mov_r2cr) {
-  TODO();
+  // TODO();
+  if (id_dest->reg == 0) {
+    cpu.cr0 = id_src->val;
+  } else if (id_dest->reg == 3) {
+    cpu.cr3 = id_src->val;
+  } else {
+    // ...
+    printf("not cr0 or cr3\n");
+  }
 
   print_asm("movl %%%s,%%cr%d", reg_name(id_src->reg, 4), id_dest->reg);
 }
 
 make_EHelper(mov_cr2r) {
-  TODO();
+  // TODO();
+  if (id_src->reg == 0) {
+    id_dest->val = cpu.cr0;
+  } else if (id_src->reg == 3) {
+    id_dest->val = cpu.cr3;
+  } else {
+    // ...
+    printf("not cr0 or cr3\n");
+  }
+  operand_write(id_dest, id_dest.val);
 
   print_asm("movl %%cr%d,%%%s", id_src->reg, reg_name(id_dest->reg, 4));
 
@@ -38,7 +55,6 @@ make_EHelper(int) {
 }
 
 make_EHelper(iret) {
-  // TODO();
   rtl_pop(&t0);
   rtl_pop(&cpu.cs);
   rtl_pop(&cpu.eflagsReg);
