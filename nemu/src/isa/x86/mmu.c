@@ -31,15 +31,15 @@ typedef uint32_t PDE;
 
 paddr_t page_translate(vaddr_t vaddr) {
   // 将虚地址转换为实地址
-  PTE pgdir = cpu.cr3;
-  PDE pgtable = ((uint32_t*)pgdir)[PDX(vaddr)];
-  if (!(pgtable & PTE_P)) {
+  PTE* pgdir = cpu.cr3;
+  PDE* pgtable = pgdir[PDX(vaddr)];
+  if (!(((uint32_t)pgtable) & PTE_P)) {
     // 页不存在
     assert(0);
   }
   pgtable = PTE_ADDR(pgtable);
-  uint32_t pgentry = ((uint32_t*)pgtable)[PTX(vaddr)];
-  if (!(pgentry & PTE_P)) {
+  uint32_t pgentry = pgtable[PTX(vaddr)];
+  if (!(((uint32_t)pgentry) & PTE_P)) {
     assert(0);
   }
   pgentry = PTE_ADDR(pgentry);
