@@ -47,20 +47,20 @@ paddr_t page_translate(vaddr_t vaddr) {
 }
 
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
-  printf("isa_vaddr_read\n");
+  printf("isa_vaddr_read, addr is %d, len is %d\n", addr, len);
   // return paddr_read(addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK))) {
     // 访问的数据段跨越了页
     assert(0);
   } else {
     paddr_t paddr = page_translate(addr);
+    printf("paddr is %d\n", paddr);
     return paddr_read(paddr, len);
   }
 }
 
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   // paddr_write(addr, data, len);
-  printf("isa_vaddr_write\n");
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK))) {
     // 访问的数据段跨越了页
     assert(0);
