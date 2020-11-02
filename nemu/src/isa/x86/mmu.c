@@ -32,13 +32,16 @@ typedef uint32_t PDE;
 paddr_t page_translate(vaddr_t vaddr) {
   // 将虚地址转换为实地址
   uint32_t* pgdir = (uint32_t*)cpu.cr3;
+  printf("page_trans pgdir %d\n", pgdir);
   uint32_t* pgtable = (uint32_t*)(pgdir[PDX(vaddr)]);
+  printf("page_trans pgtable %d\n", pgtable);
   if (!(((uint32_t)pgtable) & PTE_P)) {
     // 页不存在
     assert(0);
   }
   pgtable = (uint32_t*)(PTE_ADDR(pgtable));
   uint32_t pgentry = pgtable[PTX(vaddr)];
+  printf("page_trans pgentry %d\n", pgentry);
   if (!(((uint32_t)pgentry) & PTE_P)) {
     assert(0);
   }
@@ -67,7 +70,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   if (!(cpu.cr0 & CR0_PG))
     return paddr_write(addr, data, len);
-    printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
+  printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK))) {
     // 访问的数据段跨越了页
     assert(0);
