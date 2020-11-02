@@ -31,13 +31,13 @@ typedef uint32_t PDE;
 
 paddr_t page_translate(vaddr_t vaddr) {
   // 将虚地址转换为实地址
-  uint32_t** pgdir = cpu.cr3;
-  uint32_t* pgtable = pgdir[PDX(vaddr)];
+  uint32_t* pgdir = (uint32_t*)cpu.cr3;
+  uint32_t* pgtable = (uint32_t*)(pgdir[PDX(vaddr)]);
   if (!(((uint32_t)pgtable) & PTE_P)) {
     // 页不存在
     assert(0);
   }
-  pgtable = PTE_ADDR(pgtable);
+  pgtable = (uint32_t*)(PTE_ADDR(pgtable));
   uint32_t pgentry = pgtable[PTX(vaddr)];
   if (!(((uint32_t)pgentry) & PTE_P)) {
     assert(0);
