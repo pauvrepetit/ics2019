@@ -207,7 +207,6 @@ static int cmd_help(char *args) {
 }
 
 void ui_mainloop(int is_batch_mode) {
-  printf("ui_mainloop %d\n", is_batch_mode);
   if (is_batch_mode) {
     cmd_c(NULL);
     return;
