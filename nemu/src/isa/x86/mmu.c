@@ -46,8 +46,12 @@ paddr_t page_translate(vaddr_t vaddr) {
   return pgentry + OFF(vaddr);
 }
 
+// Control Register flags
+#define CR0_PE         0x00000001  // Protection Enable
+#define CR0_PG         0x80000000  // Paging
+
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
-  if (cpu.cr0 == 0)
+  if (!(cpu.cr0 & CR0_PG))
     return paddr_read(addr, len);
   printf("isa_vaddr_read, addr is %d, len is %d\n", addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK))) {
@@ -61,7 +65,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
 }
 
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
-  if (cpu.cr0 == 0)
+  if (!(cpu.cr0 & CR0_PG))
     return paddr_write(addr, data, len);
     printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK))) {
