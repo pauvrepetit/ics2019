@@ -51,13 +51,31 @@ paddr_t page_translate(vaddr_t vaddr) {
 #define CR0_PG         0x80000000  // Paging
 
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
-  assert(len == 1 || len == 2 || len == 4);
   if (!(cpu.cr0 & CR0_PG))
     return paddr_read(addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK)) && ((addr + len) & PAGE_MASK) != 0) {
     // 访问的数据段跨越了页
     printf("isa_vaddr_read, addr is %d, len is %d\n", addr, len);
-    assert(0);
+    // if (len == 2) {
+    //   uint32_t data = 0;
+    //   paddr_t paddr1 = page_translate(addr);
+    //   data = paddr_read(paddr1, 1);
+    //   paddr1 = page_translate(addr + 1);
+    //   data |= (paddr_read(paddr1, 1) << 8);
+    //   return data;
+    // } else if (len == 4) {
+    //   uint32_t data = 0;
+      
+    // }
+    uint32_t data = 0;
+    int left_len = ROUNDUP(addr, PGSIZE) - addr;
+    int right_len = len - left_len;
+    paddr_t paddr1 = page_translate(addr);
+    data = paddr_read(paddr1, left_len);
+    paddr1 = page_translate(ROUNDUP(addr, PGSIZE));
+    data |= (paddr_read(paddr1, right_len) << (left_len * 8));
+    return data;
+    // assert(0);
   } else {
     paddr_t paddr = page_translate(addr);
     return paddr_read(paddr, len);
@@ -65,13 +83,19 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
 }
 
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
-  assert(len == 1 || len == 2 || len == 4);
   if (!(cpu.cr0 & CR0_PG))
     return paddr_write(addr, data, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK)) && ((addr + len) & PAGE_MASK) != 0) {
     // 访问的数据段跨越了页
     printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
-    assert(0);
+    int left_len = ROUNDUP(addr, PGSIZE) - addr;
+    int right_len = len - left_len;
+    paddr_t paddr1 = page_translate(addr);
+    paddr_write(paddr1, data & ((1 << (left_len * 8)) - 1), left_len);
+    paddr1 = page_translate(ROUNDUP(addr, PGSIZE));
+    paddr_write(paddr1, (data >> (left_len * 8)) & ((1 << (right_len * 8)) - 1), right_len);
+    return;
+    // assert(0);
   } else {
     paddr_t paddr = page_translate(addr);
     return paddr_write(paddr, data, len);
