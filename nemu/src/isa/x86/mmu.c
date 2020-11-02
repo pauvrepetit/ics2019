@@ -33,7 +33,6 @@ paddr_t page_translate(vaddr_t vaddr) {
   // 将虚地址转换为实地址
   uint32_t* pgdir = (uint32_t*)cpu.cr3;
   printf("page_trans pgdir %d\n", pgdir);
-  // uint32_t* pgtable = (uint32_t*)(pgdir[PDX(vaddr)]);
   uint32_t* pgtable = (uint32_t)paddr_read(pgdir + PDX(vaddr), 4);
   printf("page_trans pgtable %d\n", pgtable);
   if (!(((uint32_t)pgtable) & PTE_P)) {
@@ -41,7 +40,6 @@ paddr_t page_translate(vaddr_t vaddr) {
     assert(0);
   }
   pgtable = (uint32_t*)(PTE_ADDR(pgtable));
-  // uint32_t pgentry = pgtable[PTX(vaddr)];
   uint32_t pgentry = paddr_read(pgtable + PTX(vaddr), 4);
   printf("page_trans pgentry %d\n", pgentry);
   if (!(((uint32_t)pgentry) & PTE_P)) {
