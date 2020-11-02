@@ -47,7 +47,7 @@ paddr_t page_translate(vaddr_t vaddr) {
 }
 
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
-  printf("isa_vaddr_read, addr is %d, len is %d\n", addr, len);
+  // printf("isa_vaddr_read, addr is %d, len is %d\n", addr, len);
   if (cpu.cr0 == 0)
     return paddr_read(addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK))) {
@@ -55,7 +55,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     assert(0);
   } else {
     paddr_t paddr = page_translate(addr);
-    printf("paddr is %d\n", paddr);
+    // printf("paddr is %d\n", paddr);
     return paddr_read(paddr, len);
   }
 }
