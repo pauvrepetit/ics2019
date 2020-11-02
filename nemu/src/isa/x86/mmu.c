@@ -70,6 +70,7 @@ void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   // printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
   if ((addr & (~PAGE_MASK)) != ((addr + len) & (~PAGE_MASK))) {
     // 访问的数据段跨越了页
+    printf("isa_vaddr_write, addr is %d, len is %d\n", addr, len);
     assert(0);
   } else {
     paddr_t paddr = page_translate(addr);
