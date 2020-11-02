@@ -16,7 +16,6 @@ make_EHelper(lidt) {
 }
 
 make_EHelper(mov_r2cr) {
-  // TODO();
   if (id_dest->reg == 0) {
     cpu.cr0 = id_src->val;
   } else if (id_dest->reg == 3) {
@@ -30,7 +29,6 @@ make_EHelper(mov_r2cr) {
 }
 
 make_EHelper(mov_cr2r) {
-  // TODO();
   if (id_src->reg == 0) {
     id_dest->val = cpu.cr0;
   } else if (id_src->reg == 3) {
