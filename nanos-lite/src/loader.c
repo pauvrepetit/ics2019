@@ -35,15 +35,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       int j = 0;
       uint32_t *paddr;
       for(j = 0; j < block_count - 1; j++) {
-        // _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), pgalloc_usr(1), 0);
         paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
-        // printf("map\n");
+        printf("map\n");
         fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
         fs_read(fd, (void *)paddr, phsize);
       }
 
       paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
-      // printf("map\n");
+      printf("map\n");
       fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
       fs_read(fd, (void *)paddr, elf_ph_header.p_filesz - j * phsize);
 
