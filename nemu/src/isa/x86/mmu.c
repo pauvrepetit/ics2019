@@ -33,6 +33,7 @@ paddr_t page_translate(vaddr_t vaddr) {
   // 将虚地址转换为实地址
   uint32_t* pgdir = (uint32_t*)cpu.cr3;
   uint32_t* pgtable = (uint32_t)paddr_read(pgdir + PDX(vaddr), 4);
+  printf("page_translate vaddr is %d\n", vaddr);
   if (!(((uint32_t)pgtable) & PTE_P)) {
     // 页不存在
     assert(0);
