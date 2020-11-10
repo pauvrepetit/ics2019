@@ -41,6 +41,7 @@ _Context* schedule(_Context *prev) {
   current->cp = prev; // 这个操作很重要，prev是当前进程的上下文，他在栈里面一个不确定的位置，因此在进行上下文切换的时候我们需要保存当前进程上下文的位置，保存到该进程的PCB中，也就是current中，current只是一个指针，下面把这个指针指向另一个PCB就可以执行另一个进程了
   // 而下次进程调度如果调度到当前进程的话，我们就可以在栈中找到其被中断时的上下文
   current = pcb;  // current指向第0个pcb进程
+  printf("schedule\n");
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   return current->cp;
 }
