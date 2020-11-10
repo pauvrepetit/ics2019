@@ -81,6 +81,8 @@ void __am_switch(_Context *c) {
   }
 }
 
+#include <string.h>
+
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   // 将虚地址va映射到实地址pa处，实际上就是填写页表
   // 页表地址为as->ptr
@@ -88,7 +90,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   if (!(((uint32_t)pte) & PTE_P)) {
     // 页不存在 申请一页 填入一级页表中
     uint32_t *new_page = pgalloc_usr(1);
-    // memset(new_page, 0, PGSIZE);
+    memset(new_page, 0, PGSIZE);
     ((uint32_t *)(as->ptr))[PDX(va)] = ((uint32_t)new_page) | PTE_P;
   }
   uint32_t *pgentry = ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)];
