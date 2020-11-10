@@ -32,18 +32,15 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       // 加载到内存中地址p_vaddr处开始的p_memsz字节的范围内
       int block_count = elf_ph_header.p_memsz / PGSIZE;
       if (elf_ph_header.p_memsz % PGSIZE) block_count++;
-      printf("block_count is %d\n", block_count);
       int j = 0;
       uint32_t *paddr;
       for(j = 0; j < block_count - 1; j++) {
         paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * PGSIZE), 0, 0);
-        printf("map\n");
         fs_lseek(fd, elf_ph_header.p_offset + j * PGSIZE, SEEK_SET);
         fs_read(fd, (void *)paddr, PGSIZE);
       }
 
       paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * PGSIZE), 0, 0);
-      printf("map\n");
       fs_lseek(fd, elf_ph_header.p_offset + j * PGSIZE, SEEK_SET);
       fs_read(fd, (void *)paddr, elf_ph_header.p_filesz - j * PGSIZE);
 
