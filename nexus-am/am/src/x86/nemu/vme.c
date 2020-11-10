@@ -101,7 +101,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   }
   ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)] = ((uint32_t)pa) | PTE_P;
   printf("map finish, va is %d, pa is %d\n", va, pa);
-  return 0;
+  return pa;
 }
 
 #include "string.h"

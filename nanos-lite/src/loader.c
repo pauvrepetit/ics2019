@@ -33,18 +33,19 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       int block_count = elf_ph_header.p_memsz / phsize;
       if (elf_ph_header.p_memsz % PGSIZE) block_count++;
       int j = 0;
+      uint32_t *paddr;
       for(j = 0; j < block_count - 1; j++) {
         // _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), pgalloc_usr(1), 0);
-        _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
+        paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
         printf("map\n");
         fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
-        fs_read(fd, (void *)(elf_ph_header.p_vaddr + j * phsize), phsize);
+        fs_read(fd, (void *)paddr, phsize);
       }
 
-      _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
+      paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
       printf("map\n");
       fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
-      fs_read(fd, (void *)(elf_ph_header.p_vaddr + j * phsize), elf_ph_header.p_filesz - j * phsize);
+      fs_read(fd, (void *)paddr, elf_ph_header.p_filesz - j * phsize);
 
       // memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
       // fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
