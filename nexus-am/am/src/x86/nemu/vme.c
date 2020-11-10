@@ -96,7 +96,8 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   uint32_t *pgentry = ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)];
   if (!(((uint32_t)pgentry) & PTE_P)) {
     // 已经有映射了???
-    return PTE_ADDR(((uint32_t *)(PTE_ADDR(pte)))[PTX(va)]);
+    printf("_map existed, pgentry is %d\n", pgentry);
+    return PTE_ADDR(pgentry);
   }
   pa = pgalloc_usr(1);
   ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)] = ((uint32_t)pa) | PTE_P;
