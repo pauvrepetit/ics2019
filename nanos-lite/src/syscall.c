@@ -4,6 +4,7 @@
 #include "proc.h"
 
 int mm_brk(uintptr_t brk, intptr_t increment);
+void context_uload_sys(const char *filename);
 
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
@@ -38,7 +39,8 @@ _Context* do_syscall(_Context *c) {
       break;
     case SYS_brk: c->GPRx = mm_brk(a[1], a[2]); break;
     case SYS_execve:
-      naive_uload(NULL, (const char *)a[1]);
+      // naive_uload(NULL, (const char *)a[1]);
+      context_uload_sys((const char *)a[1]);
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
