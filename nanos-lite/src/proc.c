@@ -25,8 +25,8 @@ void context_uload(PCB *pcb, const char *filename);
 void init_proc() {
   // context_kload(&pcb[0], (void *)hello_fun);
   context_uload(&pcb[0], "/bin/dummy");
-  printf("here\n");
   switch_boot_pcb();
+  printf("here\n");
 
   // _yield();
 
