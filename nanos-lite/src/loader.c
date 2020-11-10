@@ -30,22 +30,22 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       // 需要加载
       // 从文件fd的p_offset处开始的p_filesz个字节的数据
       // 加载到内存中地址p_vaddr处开始的p_memsz字节的范围内
-      int block_count = elf_ph_header.p_memsz / phsize;
+      int block_count = elf_ph_header.p_memsz / PGSIZE;
       if (elf_ph_header.p_memsz % PGSIZE) block_count++;
       printf("block_count is %d\n", block_count);
       int j = 0;
       uint32_t *paddr;
       for(j = 0; j < block_count - 1; j++) {
-        paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
+        paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * PGSIZE), 0, 0);
         printf("map\n");
-        fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
-        fs_read(fd, (void *)paddr, phsize);
+        fs_lseek(fd, elf_ph_header.p_offset + j * PGSIZE, SEEK_SET);
+        fs_read(fd, (void *)paddr, PGSIZE);
       }
 
-      paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
+      paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * PGSIZE), 0, 0);
       printf("map\n");
-      fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
-      fs_read(fd, (void *)paddr, elf_ph_header.p_filesz - j * phsize);
+      fs_lseek(fd, elf_ph_header.p_offset + j * PGSIZE, SEEK_SET);
+      fs_read(fd, (void *)paddr, elf_ph_header.p_filesz - j * PGSIZE);
 
       // memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
       // fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
