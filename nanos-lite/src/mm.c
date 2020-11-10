@@ -4,7 +4,6 @@
 static void *pf = NULL;
 
 void* new_page(size_t nr_page) {
-  printf("nr_page is %d\n", nr_page);
   void *p = pf;
   pf += PGSIZE * nr_page;
   if (pf >= (void *)_heap.end) {
