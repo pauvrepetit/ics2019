@@ -43,10 +43,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       paddr = _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * PGSIZE), 0, 0);
       fs_lseek(fd, elf_ph_header.p_offset + j * PGSIZE, SEEK_SET);
       fs_read(fd, (void *)paddr, elf_ph_header.p_filesz - j * PGSIZE);
-
-      // memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
-      // fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
-      // fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
     }
   }
   return elf_header.e_entry;
@@ -65,12 +61,12 @@ void context_kload(PCB *pcb, void *entry) {
   stack.end = stack.start + sizeof(pcb->stack);
 
   pcb->cp = _kcontext(stack, entry, NULL);
+  pcb->cp->as = &pcb->as;
 }
 
 void context_uload(PCB *pcb, const char *filename) {
   _protect(&pcb->as);
   uintptr_t entry = loader(pcb, filename);
-  printf("loader finish, entry is %d\n", entry);
 
   _Area stack;
   stack.start = pcb->stack;
