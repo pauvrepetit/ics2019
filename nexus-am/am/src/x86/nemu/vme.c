@@ -82,9 +82,6 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
-  if (pa == NULL) {
-    pa = pgalloc_usr(1);
-  }
   // 将虚地址va映射到实地址pa处，实际上就是填写页表
   // 页表地址为as->ptr
   uint32_t *pte = ((uint32_t *)(as->ptr))[PDX(va)];
@@ -97,8 +94,9 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   uint32_t *pgentry = ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)];
   if (!(((uint32_t)pgentry) & PTE_P)) {
     // 已经有映射了???
-    return -1;
+    return PTE_ADDR(((uint32_t *)(PTE_ADDR(pte)))[PTX(va)]);
   }
+  pa = pgalloc_usr(1);
   ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)] = ((uint32_t)pa) | PTE_P;
   printf("map finish, va is %d, pa is %d\n", va, pa);
   return pa;
