@@ -35,7 +35,7 @@ paddr_t page_translate(vaddr_t vaddr) {
   uint32_t* pgtable = (uint32_t)paddr_read(pgdir + PDX(vaddr), 4);
   if (!(((uint32_t)pgtable) & PTE_P)) {
     // 页不存在
-    printf("page_translate vaddr is %d\n", vaddr);
+    printf("page_translate vaddr is %d, pgdir is %d, pgtable is %d\n", vaddr, pgdir, pgtable);
     assert(0);
   }
   pgtable = (uint32_t*)(PTE_ADDR(pgtable));
