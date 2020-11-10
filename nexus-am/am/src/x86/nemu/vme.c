@@ -91,6 +91,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
     uint32_t *new_page = pgalloc_usr(1);
     memset(new_page, 0, PGSIZE);
     ((uint32_t *)(as->ptr))[PDX(va)] = ((uint32_t)new_page) | PTE_P;
+    pte = ((uint32_t *)(as->ptr))[PDX(va)];
   }
   uint32_t *pgentry = ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)];
   if (((uint32_t)pgentry) & PTE_P) {
