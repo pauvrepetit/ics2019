@@ -41,6 +41,7 @@ paddr_t page_translate(vaddr_t vaddr) {
   pgtable = (uint32_t*)(PTE_ADDR(pgtable));
   uint32_t pgentry = paddr_read(pgtable + PTX(vaddr), 4);
   if (!(((uint32_t)pgentry) & PTE_P)) {
+    printf("page_translate vaddr is %d, pgdir is %d, pgtable is %d\n", vaddr, pgdir, pgtable);
     assert(0);
   }
   pgentry = PTE_ADDR(pgentry);
