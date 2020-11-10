@@ -56,6 +56,7 @@ void naive_uload(PCB *pcb, const char *filename) {
 
 void context_kload(PCB *pcb, void *entry) {
   _protect(&pcb->as);
+  pcb->exist = 1;
   _Area stack;
   stack.start = pcb->stack;
   stack.end = stack.start + sizeof(pcb->stack);
@@ -66,6 +67,7 @@ void context_kload(PCB *pcb, void *entry) {
 
 void context_uload(PCB *pcb, const char *filename) {
   _protect(&pcb->as);
+  pcb->exist = 1;
   uintptr_t entry = loader(pcb, filename);
 
   _Area stack;

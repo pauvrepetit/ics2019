@@ -13,6 +13,7 @@ typedef union {
     _AddressSpace as;
     // we do not free memory, so use `max_brk' to determine when to call _map()
     uintptr_t max_brk;
+    int exist;
   };
 } PCB;
 
