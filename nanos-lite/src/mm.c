@@ -19,6 +19,10 @@ void free_page(void *p) {
 
 /* The brk() system call handler. */
 int mm_brk(uintptr_t brk, intptr_t increment) {
+  if (current->max_brk < brk) {
+    current->max_brk = brk / PGSIZE * PGSIZE;
+    if (brk % PGSIZE) current->max_brk++;
+  }
   if (current->max_brk < brk + increment) {
     int block_count = (brk + increment - current->max_brk) / PGSIZE;
     if ((brk + increment - current->max_brk) % PGSIZE) block_count++;
