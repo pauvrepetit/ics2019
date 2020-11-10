@@ -85,7 +85,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   // 将虚地址va映射到实地址pa处，实际上就是填写页表
   // 页表地址为as->ptr
   uint32_t *pte = ((uint32_t *)(as->ptr))[PDX(va)];
-  printf("_map as->ptr is %d, pte is %d\n", as->ptr, pte);
+  // printf("_map as->ptr is %d, pte is %d\n", as->ptr, pte);
   if (!(((uint32_t)pte) & PTE_P)) {
     // 页不存在 申请一页 填入一级页表中
     uint32_t *new_page = pgalloc_usr(1);
@@ -96,12 +96,12 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   uint32_t *pgentry = ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)];
   if (((uint32_t)pgentry) & PTE_P) {
     // 已经有映射了???
-    printf("_map existed, pgentry is %d\n", pgentry);
+    // printf("_map existed, pgentry is %d\n", pgentry);
     return PTE_ADDR(pgentry);
   }
   pa = pgalloc_usr(1);
   ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)] = ((uint32_t)pa) | PTE_P;
-  printf("map finish, va is %d, pa is %d\n", va, pa);
+  // printf("map finish, va is %d, pa is %d\n", va, pa);
   return pa;
 }
 
