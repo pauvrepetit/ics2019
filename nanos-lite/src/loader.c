@@ -11,6 +11,8 @@
 #endif
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
+void __am_get_cur_as(_Context *c);
+void __am_switch(_Context *c);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename, 0, 0);
@@ -26,9 +28,25 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_read(fd, (void *)&elf_ph_header, phsize);
     if (elf_ph_header.p_type == PT_LOAD) {
       // 需要加载
-      memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
-      fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
-      fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
+      // 从文件fd的p_offset处开始的p_filesz个字节的数据
+      // 加载到内存中地址p_vaddr处开始的p_memsz字节的范围内
+      int block_count = elf_ph_header.p_memsz / phsize;
+      if (elf_ph_header.p_memsz % PGSIZE) block_count++;
+      int j = 0;
+      for(j = 0; j < block_count - 1; j++) {
+        // _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), pgalloc_usr(1), 0);
+        _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
+        fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
+        fs_read(fd, (void *)(elf_ph_header.p_vaddr + j * phsize), phsize);
+      }
+
+      _map(&pcb->as, (void *)(elf_ph_header.p_vaddr + j * phsize), 0, 0);
+      fs_lseek(fd, elf_ph_header.p_offset + j * phsize, SEEK_SET);
+      fs_read(fd, (void *)(elf_ph_header.p_vaddr + j * phsize), elf_ph_header.p_filesz - j * phsize);
+
+      // memset((void *)(elf_ph_header.p_vaddr), 0, elf_ph_header.p_memsz);
+      // fs_lseek(fd, elf_ph_header.p_offset, SEEK_SET);
+      // fs_read(fd, (void *)(elf_ph_header.p_vaddr), elf_ph_header.p_filesz);
     }
   }
   return elf_header.e_entry;

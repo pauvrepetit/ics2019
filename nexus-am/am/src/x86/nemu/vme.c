@@ -18,7 +18,7 @@ static _Area segments[] = {      // Kernel memory mappings
 #define NR_KSEG_MAP (sizeof(segments) / sizeof(segments[0]))
 
 int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
-  printf("start vme_init\n");
+  // printf("start vme_init\n");
   pgalloc_usr = pgalloc_f;
   pgfree_usr = pgfree_f;
 
@@ -82,6 +82,24 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
+  if (pa == NULL) {
+    pa = pgalloc_usr(1);
+  }
+  // 将虚地址va映射到实地址pa处，实际上就是填写页表
+  // 页表地址为as->ptr
+  uint32_t *pte = ((uint32_t *)(as->ptr))[PDX(va)];
+  if (!(((uint32_t)pte) & PTE_P)) {
+    // 页不存在 申请一页 填入一级页表中
+    uint32_t *new_page = pgalloc_usr(1);
+    // memset(new_page, 0, PGSIZE);
+    ((uint32_t *)(as->ptr))[PDX(va)] = ((uint32_t)new_page) | PTE_P;
+  }
+  uint32_t *pgentry = ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)];
+  if (!(((uint32_t)pgentry) & PTE_P)) {
+    // 已经有映射了???
+    return -1;
+  }
+  ((uint32_t *)(PTE_ADDR(pte)))[PTX(va)] = ((uint32_t)pa) | PTE_P;
   return 0;
 }
 
@@ -92,5 +110,6 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, 
   memset(c, 0, sizeof(_Context));
   c->cs = 8;
   c->eip = (uintptr_t)entry;
+  c->as = as;
   return c;
 }
