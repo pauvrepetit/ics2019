@@ -4,9 +4,11 @@
 static void *pf = NULL;
 
 void* new_page(size_t nr_page) {
-  printf("heap end at %d\n", _heap.end);
   void *p = pf;
   pf += PGSIZE * nr_page;
+  if (pf >= (void *)_heap.end) {
+    printf("pf is %d\n", pf);
+  }
   assert(pf < (void *)_heap.end);
   return p;
 }
