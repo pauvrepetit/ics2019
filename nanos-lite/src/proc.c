@@ -26,7 +26,6 @@ void init_proc() {
   // context_kload(&pcb[0], (void *)hello_fun);
   context_uload(&pcb[0], "/bin/dummy");
   switch_boot_pcb();
-  printf("here\n");
 
   // _yield();
 
