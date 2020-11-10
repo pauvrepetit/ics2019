@@ -27,7 +27,7 @@ void init_proc() {
   context_uload(&pcb[0], "/bin/dummy");
   switch_boot_pcb();
 
-  // _yield();
+  _yield();
 
   // switch_boot_pcb();
 

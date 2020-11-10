@@ -112,6 +112,6 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, 
   c->cs = 8;
   c->eip = (uintptr_t)entry;
   c->as = as;
-  printf("here is ucontext as->ptr is %d\n", as->ptr);
+  // printf("here is ucontext as->ptr is %d\n", as->ptr);
   return c;
 }
