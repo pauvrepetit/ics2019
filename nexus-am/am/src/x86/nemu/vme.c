@@ -18,7 +18,6 @@ static _Area segments[] = {      // Kernel memory mappings
 #define NR_KSEG_MAP (sizeof(segments) / sizeof(segments[0]))
 
 int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
-  // printf("start vme_init\n");
   pgalloc_usr = pgalloc_f;
   pgfree_usr = pgfree_f;
 
@@ -48,7 +47,6 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
   }
 
   set_cr3(kpdirs);
-  printf("1\n");
   set_cr0(get_cr0() | CR0_PG);
   vme_enable = 1;
 
