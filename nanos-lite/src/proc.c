@@ -37,7 +37,7 @@ void init_proc() {
 
 void context_uload_sys(const char *filename) {
   // context_uload(&pcb[1], filename);
-  context_uload(&pcb[0], filename);
+  context_uload(&pcb[1], filename);
 }
 
 _Context* schedule(_Context *prev) {
@@ -45,13 +45,18 @@ _Context* schedule(_Context *prev) {
   // 而下次进程调度如果调度到当前进程的话，我们就可以在栈中找到其被中断时的上下文
   // current = pcb;  // current指向第0个pcb进程
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
-  int current_id = current - pcb;
-  for (int i = 1; i <= MAX_NR_PROC; i++) {
-    int next_id = (i + current_id) % MAX_NR_PROC;
-    if (pcb[next_id].exist == 1) {
-      current = &pcb[next_id];
-      break;
-    }
+
+  if (pcb[1].exist) {
+    current = &pcb[1];
   }
+
+  // int current_id = current - pcb;
+  // for (int i = 1; i <= MAX_NR_PROC; i++) {
+  //   int next_id = (i + current_id) % MAX_NR_PROC;
+  //   if (pcb[next_id].exist == 1) {
+  //     current = &pcb[next_id];
+  //     break;
+  //   }
+  // }
   return current->cp;
 }
