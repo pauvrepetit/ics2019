@@ -58,5 +58,8 @@ _Context* schedule(_Context *prev) {
   //     break;
   //   }
   // }
+
+  printf("schedule, choose %d\n", current - pcb);
+
   return current->cp;
 }
