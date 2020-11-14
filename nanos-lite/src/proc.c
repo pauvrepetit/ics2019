@@ -47,7 +47,7 @@ _Context* schedule(_Context *prev) {
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 
   if (pcb[1].exist) {
-    printf("Hit\n");
+    // printf("Hit\n");
     current = &pcb[1];
   } else {
     current = pcb;
@@ -62,7 +62,7 @@ _Context* schedule(_Context *prev) {
   //   }
   // }
 
-  printf("schedule, choose %d\n", current - pcb);
+  // printf("schedule, choose %d\n", current - pcb);
 
   return current->cp;
 }
