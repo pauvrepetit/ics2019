@@ -1,6 +1,8 @@
 #include "common.h"
 #include <amdev.h>
 
+int fg_pcb = 0;
+
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   // _yield();
   int count = 0;
@@ -32,6 +34,13 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     if (kbd_event.keydown == 1) {
       // 按下按键
       sprintf((char *)buf, "kd %s\n", keyname[kbd_event.keycode & 0x7fff]);
+      if (strcmp("F1", keyname[kbd_event.keycode & 0x7fff]) == 0) {
+        fg_pcb = 2;
+      } else if (strcmp("F2", keyname[kbd_event.keycode & 0x7fff]) == 0) {
+        fg_pcb = 4;
+      } else if (strcmp("F3", keyname[kbd_event.keycode & 0x7fff]) == 0) {
+        fg_pcb = 6;
+      }
     } else {
       sprintf((char *)buf, "ku %s\n", keyname[kbd_event.keycode & 0x7fff]);
     }
