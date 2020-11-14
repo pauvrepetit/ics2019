@@ -106,3 +106,8 @@ make_EHelper(out) {
 
   print_asm_template2(out);
 }
+
+make_EHelper(sti) {
+  cpu.eflags.IF = 1;
+  print_asm("sti");
+}
