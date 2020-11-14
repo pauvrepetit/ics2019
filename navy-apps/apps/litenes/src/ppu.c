@@ -265,7 +265,7 @@ void ppu_cycle()
 {
     // if (!ppu.ready && cpu_clock() > 29658)
     //     ppu.ready = true;
-    unsigned long long ccl = cpu_clock();
+    unsigned int ccl = cpu_clock();
     if (!ppu.ready) {
         if (ccl > 29658) {
         ppu.ready = true;
