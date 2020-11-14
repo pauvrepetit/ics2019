@@ -5,6 +5,9 @@ _Context* schedule(_Context *prev);
 
 static _Context* do_event(_Event e, _Context* c) {
   switch (e.event) {
+    case _EVENT_IRQ_TIMER:
+      Log("EVENT_IRQ_TIMER ^_^");
+      _yield(); break;
     case _EVENT_SYSCALL: do_syscall(c); break;
     case _EVENT_YIELD:
       // 在接受到_EVENT_YIELD事件的时候，调用schedule进行进程调度

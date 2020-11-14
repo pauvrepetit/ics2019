@@ -91,6 +91,8 @@ typedef struct {
   uint32_t cr3;
   uint32_t cr0;
 
+  uint8_t INTR;
+
 } CPU_state;
 
 static inline int check_reg_index(int index) {

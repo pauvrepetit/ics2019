@@ -107,6 +107,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
   _Context *c = ((_Context *)ustack.end) - 1;
   memset(c, 0, sizeof(_Context));
+  c->IF = 1;  // 开中断
   c->cs = 8;
   c->eip = (uintptr_t)entry;
   c->as = as;

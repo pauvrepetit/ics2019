@@ -15,6 +15,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr) {
   uint32_t target = (hi & 0xffff0000) | (lo & 0xffff);
   t0 = cpu.eflagsReg;
   rtl_push(&t0);
+  cpu.eflags.IF = 0; // 关中断
   t0 = cpu.cs;
   rtl_push(&t0);
   t0 = ret_addr;
@@ -22,6 +23,13 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr) {
   rtl_j(target);
 }
 
+#define IRQ_TIMER 32          // for x86
+
 bool isa_query_intr(void) {
+  if (cpu.INTR) {
+    cpu.INTR = false;
+    raise_intr(IRQ_TIMER, cpu.pc);
+    return true;
+  }
   return false;
 }
