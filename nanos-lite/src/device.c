@@ -36,10 +36,13 @@ size_t events_read(void *buf, size_t offset, size_t len) {
       sprintf((char *)buf, "kd %s\n", keyname[kbd_event.keycode & 0x7fff]);
       if (strcmp("F1", keyname[kbd_event.keycode & 0x7fff]) == 0) {
         fg_pcb = 2;
+        printf("switch to screen 1\n");
       } else if (strcmp("F2", keyname[kbd_event.keycode & 0x7fff]) == 0) {
         fg_pcb = 4;
+        printf("switch to screen 2\n");
       } else if (strcmp("F3", keyname[kbd_event.keycode & 0x7fff]) == 0) {
         fg_pcb = 6;
+        printf("switch to screen 3\n");
       }
     } else {
       sprintf((char *)buf, "ku %s\n", keyname[kbd_event.keycode & 0x7fff]);
