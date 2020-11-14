@@ -46,11 +46,11 @@ _Context* schedule(_Context *prev) {
   // current = pcb;  // current指向第0个pcb进程
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 
-  if (pcb[1].exist) {
-    current = &pcb[1];
-  } else {
-    current = pcb;
-  }
+  // if (pcb[1].exist) {
+  //   current = &pcb[1];
+  // } else {
+  //   current = pcb;
+  // }
 
   // int current_id = current - pcb;
   // for (int i = 1; i <= MAX_NR_PROC; i++) {
