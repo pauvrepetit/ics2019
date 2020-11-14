@@ -1,7 +1,7 @@
 #include "common.h"
 #include <amdev.h>
 
-int fg_pcb = 0;
+int fg_pcb = 2;
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   // _yield();

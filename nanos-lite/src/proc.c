@@ -49,17 +49,18 @@ _Context* schedule(_Context *prev) {
   // current = pcb;  // current指向第0个pcb进程
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 
-  switch (fg_pcb) {
-    case 0:
-      current = pcb;
-      break;
-    default:
-      if (pcb[fg_pcb+1].exist) {
-        current = &pcb[fg_pcb+1];
-      } else {
-        current = &pcb[fg_pcb];
-      }
-      break;
+  if (current != pcb) {
+    current = pcb;
+  } else {
+    switch (fg_pcb) {
+      default:
+        if (pcb[fg_pcb+1].exist) {
+          current = &pcb[fg_pcb+1];
+        } else {
+          current = &pcb[fg_pcb];
+        }
+        break;
+    }
   }
 
   // if (pcb[1].exist) {
