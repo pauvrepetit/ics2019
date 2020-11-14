@@ -37,7 +37,7 @@ void init_proc() {
 
 void context_uload_sys(const char *filename) {
   // context_uload(&pcb[1], filename);
-  context_uload(&pcb[1], filename);
+  context_uload(current, filename);
 }
 
 _Context* schedule(_Context *prev) {
@@ -47,7 +47,6 @@ _Context* schedule(_Context *prev) {
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 
   if (pcb[1].exist) {
-    // printf("Hit\n");
     current = &pcb[1];
   } else {
     current = pcb;
