@@ -49,7 +49,6 @@ _Context* schedule(_Context *prev) {
     int next_id = (i + current_id) % MAX_NR_PROC;
     if (pcb[next_id].exist == 1) {
       current = &pcb[next_id];
-      printf("schedule, choose %d\n", next_id);
       break;
     }
   }
