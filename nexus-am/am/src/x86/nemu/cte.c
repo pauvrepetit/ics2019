@@ -14,13 +14,12 @@ _Context* __am_irq_handle(_Context *c) {
   // c是原进程的上下文
   __am_get_cur_as(c);
   _Context *next = c;
-  printf("??? irq is %d\n", c->irq);
   if (user_handler) {
     _Event ev = {0};
     switch (c->irq) {
-      case 32: ev.event = _EVENT_IRQ_TIMER; printf("irq_handle IRQ_TIMER\n"); break;
-      case 0x80: ev.event = _EVENT_SYSCALL; printf("irq_handle SYSCALL\n"); break;
-      case 0x81: ev.event = _EVENT_YIELD; printf("irq_handle YIELD\n"); break;
+      case 32: ev.event = _EVENT_IRQ_TIMER; break;
+      case 0x80: ev.event = _EVENT_SYSCALL; break;
+      case 0x81: ev.event = _EVENT_YIELD; break;
       default: ev.event = _EVENT_ERROR; break;
     }
 
@@ -29,7 +28,6 @@ _Context* __am_irq_handle(_Context *c) {
       next = c;
     }
   }
-  printf("irq_handle\n");
   __am_switch(next);
 
   return next;
