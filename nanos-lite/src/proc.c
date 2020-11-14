@@ -49,6 +49,8 @@ _Context* schedule(_Context *prev) {
   if (pcb[1].exist) {
     printf("Hit\n");
     current = &pcb[1];
+  } else {
+    current = pcb;
   }
 
   // int current_id = current - pcb;
