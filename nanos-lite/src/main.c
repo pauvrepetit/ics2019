@@ -32,6 +32,10 @@ int main() {
 
   Log("Finish initialization");
 
+  // sti();  // 开中断
+  init_sti();
+  Log("sti");
+
 #ifdef HAS_CTE
   _yield();
 #endif

@@ -75,6 +75,7 @@ void _yield();
 int _intr_read();
 void _intr_write(int enable);
 _Context *_kcontext(_Area kstack, void (*entry)(void *), void *arg);
+void _sti();
 
 // ================= Virtual Memory Extension (VME) ==================
 

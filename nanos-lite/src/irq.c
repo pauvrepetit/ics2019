@@ -23,3 +23,7 @@ void init_irq(void) {
   Log("Initializing interrupt/exception handler...");
   _cte_init(do_event);
 }
+
+void init_sti(void) {
+  _sti();
+}

@@ -54,7 +54,6 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
   // register event handler
   user_handler = handler;
 
-  sti();  // 开中断
   return 0;
 }
 
@@ -75,4 +74,8 @@ int _intr_read() {
 }
 
 void _intr_write(int enable) {
+}
+
+void _sti() {
+  sti();
 }
