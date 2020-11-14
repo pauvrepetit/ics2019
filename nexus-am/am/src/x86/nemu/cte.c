@@ -18,8 +18,8 @@ _Context* __am_irq_handle(_Context *c) {
     _Event ev = {0};
     switch (c->irq) {
       case 0x32: ev.event = _EVENT_IRQ_TIMER; printf("irq_handle IRQ_TIMER\n"); break;
-      case 0x80: ev.event = _EVENT_SYSCALL; break;
-      case 0x81: ev.event = _EVENT_YIELD; break;
+      case 0x80: ev.event = _EVENT_SYSCALL; printf("irq_handle SYSCALL\n"); break;
+      case 0x81: ev.event = _EVENT_YIELD; printf("irq_handle YIELD\n"); break;
       default: ev.event = _EVENT_ERROR; break;
     }
 
