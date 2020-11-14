@@ -46,18 +46,19 @@ _Context* schedule(_Context *prev) {
   // current = pcb;  // current指向第0个pcb进程
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 
-  // if (pcb[1].exist) {
-  //   current = &pcb[1];
-  // }
-
-  int current_id = current - pcb;
-  for (int i = 1; i <= MAX_NR_PROC; i++) {
-    int next_id = (i + current_id) % MAX_NR_PROC;
-    if (pcb[next_id].exist == 1) {
-      current = &pcb[next_id];
-      break;
-    }
+  if (pcb[1].exist) {
+    printf("Hit\n");
+    current = &pcb[1];
   }
+
+  // int current_id = current - pcb;
+  // for (int i = 1; i <= MAX_NR_PROC; i++) {
+  //   int next_id = (i + current_id) % MAX_NR_PROC;
+  //   if (pcb[next_id].exist == 1) {
+  //     current = &pcb[next_id];
+  //     break;
+  //   }
+  // }
 
   printf("schedule, choose %d\n", current - pcb);
 
