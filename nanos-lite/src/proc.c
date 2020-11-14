@@ -36,7 +36,8 @@ void init_proc() {
 }
 
 void context_uload_sys(const char *filename) {
-  context_uload(&pcb[1], filename);
+  // context_uload(&pcb[1], filename);
+  context_uload(current, filename);
 }
 
 _Context* schedule(_Context *prev) {
