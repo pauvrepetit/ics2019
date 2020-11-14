@@ -263,8 +263,14 @@ void ppu_run(int cycles)
 
 void ppu_cycle()
 {
-    if (!ppu.ready && cpu_clock() > 29658)
+    // if (!ppu.ready && cpu_clock() > 29658)
+    //     ppu.ready = true;
+    unsigned long long ccl = cpu_clock();
+    if (!ppu.ready) {
+        if (ccl > 29658) {
         ppu.ready = true;
+        }
+    }
 
     ppu.scanline++;
     if (ppu_shows_background()) {
