@@ -254,16 +254,12 @@ void ppu_cycle() {
   TIME_TYPE t0, t1, t2, t3, t4, t5;
 #endif
 
-  unsigned long long ccl = cpu_clock();
+  unsigned int ccl = cpu_clock();
   if (!ppu.ready) {
     if (ccl > 29658) {
       ppu.ready = true;
     }
   }
-  // if ((!ppu.ready) && (cpu_clock() > 29658)) {
-  //   printf("???\n");
-  //   ppu.ready = true;
-  // }
 
   time_read(t0);
   cpu_run(256);
