@@ -53,23 +53,23 @@ void isa_reg_display() {
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
   *success = true;
-  if (strcmp(s, "$EAX") == 0) {
+  if ((strcmp(s, "$EAX") == 0) || (strcmp(s, "$eax") == 0)) {
     return cpu.eax;
-  } else if (strcmp(s, "$EBX") == 0) {
+  } else if ((strcmp(s, "$EBX") == 0) || (strcmp(s, "$ebx") == 0)) {
     return cpu.ebx;
-  } else if (strcmp(s, "$ECX") == 0) {
+  } else if ((strcmp(s, "$ECX") == 0) || (strcmp(s, "$ecx") == 0)) {
     return cpu.ecx;
-  } else if (strcmp(s, "$EDX") == 0) {
+  } else if ((strcmp(s, "$EDX") == 0) || (strcmp(s, "$edx") == 0)) {
     return cpu.edx;
-  } else if (strcmp(s, "$ESI") == 0) {
+  } else if ((strcmp(s, "$ESI") == 0) || (strcmp(s, "$esi") == 0)) {
     return cpu.esi;
-  } else if (strcmp(s, "$EDI") == 0) {
+  } else if ((strcmp(s, "$EDI") == 0) || (strcmp(s, "$edi") == 0)) {
     return cpu.edi;
-  } else if (strcmp(s, "$ESP") == 0) {
+  } else if ((strcmp(s, "$ESP") == 0) || (strcmp(s, "$esp") == 0)) {
     return cpu.esp;
-  } else if (strcmp(s, "$EBP") == 0) {
+  } else if ((strcmp(s, "$EBP") == 0) || (strcmp(s, "$ebp") == 0)) {
     return cpu.ebp;
-  } else if (strcmp(s, "$EPC") == 0) {
+  } else if ((strcmp(s, "$EPC") == 0) || (strcmp(s, "$epc") == 0) || (strcmp(s, "$EIP") == 0) || (strcmp(s, "$eip") == 0)) {
     return cpu.pc;
   } else {
     *success = false;

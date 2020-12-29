@@ -34,7 +34,7 @@ static struct rule {
   {"/", '/'},
   {"\\(", '('},
   {"\\)", ')'},
-  {"0x[0-9a-fA-F]+", TK_HEX_NUM},
+  {"0[xX][0-9a-fA-F]+", TK_HEX_NUM},
   {"[0-9]+", TK_NUM},
   {"!=", TK_NEQ},
   {"&&", TK_AND},
@@ -114,6 +114,7 @@ static bool make_token(char *e) {
             tokens[nr_token].type = TK_HEX_NUM;
             memset(tokens[nr_token].str, 0, sizeof(char) * 32);
             memcpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[1] = 'x';
             tokens[nr_token].loc = position - substr_len;
             nr_token++;
             break;
